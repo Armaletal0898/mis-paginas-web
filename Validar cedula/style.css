@@ -1,0 +1,11 @@
+ body {
+    font-family: Arial, sans-serif;
+ }
+ #resultado {
+    font-weight: bold;
+    color: green;
+ }
+
+#resultado.incorrecto {
+    color: red;
+}
