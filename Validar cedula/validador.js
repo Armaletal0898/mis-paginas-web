@@ -1,37 +1,50 @@
 function validarCedula() {
-    const cedula = document.getElementById('cedula').value.trim();
-    const resultadoElement = document.getElementById('resultado');
+    // Obtener el valor de la cédula
+    const cedulaInput = document.getElementById("cedula");
+    let cedula = cedulaInput.value;
 
-    if (!cedula || cedula.length !== 11) {
-        resultadoElement.textContent = "Por favor, ingrese una cédula válida de 11 dígitos.";
-        resultadoElement.classList.remove('incorrecto');
+    // Limpiar caracteres no numéricos
+    cedula = cedula.replace(/\D/g, '');
+
+    // Verificar longitud de la cédula
+    if (cedula.length !== 11) {
+        mostrarResultado("CÉDULA ES INCORRECTA");
         return;
     }
 
-    let sumaPar = 0;
-    let sumaImpar = 0;
+    // Calcular el dígito verificador
+    const suma = calcularSuma(cedula);
+    const digitoVerificadorCalculado = calcularDigitoVerificador(suma);
+    const digitoVerificadorReal = parseInt(cedula[10]);
 
-    for (let i = 0; i < cedula.length; i++) {
-        let digito = parseInt(cedula[i]);
-
-        if ((i % 2) === 0) { // Dígitos impares en la secuencia (pares en la posición)
-            let digitoImpar = digito * 2;
-            if (digitoImpar > 9) {
-                digitoImpar -= 9;
-            }
-            sumaImpar += digitoImpar;
-        } else { // Dígitos pares en la secuencia (impares en la posición)
-            sumaPar += digito;
-        }
-    }
-
-    let verificador = (10 - ((sumaPar + sumaImpar) % 10)) % 10;
-
-    if (verificador === parseInt(cedula[cedula.length - 1])) {
-        resultadoElement.textContent = "CÉDULA ES CORRECTA";
-        resultadoElement.classList.remove('incorrecto');
+    // Comparar el dígito verificador calculado con el real
+    if (digitoVerificadorCalculado === digitoVerificadorReal) {
+        mostrarResultado("CÉDULA ES CORRECTA");
     } else {
-        resultadoElement.textContent = "CÉDULA ES INCORRECTA";
-        resultadoElement.classList.add('incorrecto');
+        mostrarResultado("CÉDULA ES INCORRECTA");
     }
+}
+
+// Función para calcular la suma de los dígitos
+function calcularSuma(cedula) {
+    let suma = 0;
+    for (let i = 0; i < 10; i++) {
+        let digito = parseInt(cedula[i]);
+        if (i % 2 === 1) { // Dígitos impares en la secuencia (pares en la posición)
+            digito *= 2;
+            if (digito > 9) digito -= 9;
+        }
+        suma += digito;
+    }
+    return suma;
+}
+
+// Función para calcular el dígito verificador
+function calcularDigitoVerificador(suma) {
+    return (10 - (suma % 10)) % 10;
+}
+
+// Función para mostrar el resultado
+function mostrarResultado(mensaje) {
+    document.getElementById("resultado").innerText = mensaje;
 }
