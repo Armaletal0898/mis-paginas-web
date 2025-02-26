@@ -45,6 +45,13 @@ function calcularDigitoVerificador(suma) {
 }
 
 // Función para mostrar el resultado
-function mostrarResultado(mensaje) {
-    document.getElementById("resultado").innerText = mensaje;
+function mostrarResultado(mensaje, esCorrecta) {
+    const resultadoElement = document.getElementById("resultado");
+    resultadoElement.innerText = mensaje;
+
+    if (esCorrecta) {
+        resultadoElement.style.color = "green";
+    } else {
+        resultadoElement.style.color = "red";
+    }
 }
