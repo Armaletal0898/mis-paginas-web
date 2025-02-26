@@ -19,9 +19,9 @@ function validarCedula() {
 
     // Comparar el dígito verificador calculado con el real
     if (digitoVerificadorCalculado === digitoVerificadorReal) {
-        mostrarResultado("CÉDULA ES CORRECTA");
+        mostrarResultado("CÉDULA ES CORRECTA" , true);
     } else {
-        mostrarResultado("CÉDULA ES INCORRECTA");
+        mostrarResultado("CÉDULA ES INCORRECTA", false);
     }
 }
 
