@@ -1,9 +1,9 @@
  body {
     font-family: Arial, sans-serif;
- }
- #resultado {
     font-weight: bold;
-    color: red;
+    text-align:center;
+    background-color: #212529; /*Gris muy oscuro*/
  }
+
 
 
