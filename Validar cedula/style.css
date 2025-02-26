@@ -3,9 +3,7 @@
  }
  #resultado {
     font-weight: bold;
-    color: green;
+    color: red;
  }
 
-#resultado.incorrecto {
-    color: red;
-}
+
