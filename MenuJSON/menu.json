@@ -1,0 +1,14 @@
+{
+  "menuJson": [
+    {"name": "Inicio",
+      "url": "/"},
+    {"name": "Servicios",
+      "url": "/about"},
+    {"name": "Contacto",
+    "url": "/contact"}
+
+
+  ]
+
+}
+
