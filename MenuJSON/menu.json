@@ -1,14 +1,33 @@
 {
   "menuJson": [
-    {"name": "Inicio",
-      "url": "/"},
-    {"name": "Servicios",
-      "url": "/about"},
-    {"name": "Contacto",
-    "url": "/contact"}
+    {
+      "name": "Inicio",
+      "url": "index.html"
+    },
+    {
+      "name": "Servicios",
+      "url": "#",
+      "submenu": [
+        {
+          "name": "Diseño Web",
+          "url": "diseno.html"
+        },
+        {
+          "name": "Desarrollo",
+          "url": "desarrollo.html"
+        }
+      ]
+    },
+    {
+      "name": "Contacto",
+      "url": "contacto.html",
+      "submenu": [
+        {
+          "name": "Opciones",
+          "url" : "opciones.html"
+        }
+      ]
 
-
+    }
   ]
-
 }
-
