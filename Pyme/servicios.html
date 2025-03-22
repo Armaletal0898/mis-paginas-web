@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Misterio de ALLSAFE - Servicios Reinventados</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/glitch.css">
+    <script src="js/efectos.js" defer></script>
+</head>
+<body>
+    <div class="noise-overlay"></div>
+    
+    <header>
+        <div class="logo glitch-container">
+            <h1 class="glitch" data-text="PYME">ALLSAFE</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Historia</a></li>
+                <li><a href="servicios.html" class="active">Servicios</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+        <button id="dark-mode-toggle" class="mode-toggle" title="Cambiar modo">
+            <span class="toggle-icon">🌓</span>
+        </button>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2 class="glitch-subtle" data-text="Servicios Reinventados">Servicios Reinventados</h2>
+            <p class="subtitle">Más allá de los límites convencionales</p>
+        </section>
+
+        <section class="services">
+            <div class="service-card" data-service="consciousness">
+                <div class="service-icon">
+                    <div class="icon-glitch"></div>
+                </div>
+                <h3>Evaluaciones de Vulnerabilidad y Auditorias</h3>
+                <p>Fusionamos la mente humana con sistemas digitales para crear una experiencia laboral sin precedentes. Los empleados nunca necesitarán descansar.</p>
+                <ul class="benefits">
+                    <li>Productividad 24/7</li>
+                    <li>Eliminación de errores humanos</li>
+                    <li>Pensamiento colectivo optimizado</li>
+                </ul>
+                <div class="warning">
+                    <p>Efectos secundarios: <span class="redacted">████████████████████</span></p>
+                </div>
+                <button class="btn-glitch">Solicitar Demostración</button>
+            </div>
+
+            <div class="service-card" data-service="reality">
+                <div class="service-icon">
+                    <div class="icon-glitch"></div>
+                </div>
+                <h3>Proteccion de Redes y Sistemas</h3>
+                <p>Alteramos la forma en que tus clientes perciben tu marca. No cambiamos tu producto, cambiamos la <span class="glitch-text" data-text="realidad">realidad</span>.</p>
+                <ul class="benefits">
+                    <li>Lealtad inquebrantable del cliente</li>
+                    <li>Percepción alterada de la competencia</li>
+                    <li>Experiencias de marca hipnóticas</li>
+                </ul>
+                <div class="warning">
+                    <p>Advertencia: <span class="redacted">██████████████████████████</span></p>
+                </div>
+                <button class="btn-glitch">Iniciar Transformación</button>
+            </div>
+
+            <div class="service-card" data-service="beyond">
+                <div class="service-icon">
+                    <div class="icon-glitch"></div>
+                </div>
+                <h3>Gestion de incidentes y Respuestas</h3>
+                <p>Establecemos canales de comunicación con <span class="redacted">██████</span> para obtener insights de negocio que ningún competidor podría imaginar.</p>
+                <ul class="benefits">
+                    <li>Predicciones de mercado 100% precisas</li>
+                    <li>Innovación más allá de lo humanamente posible</li>
+                    <li>Conexiones con <span class="redacted">██████████</span></li>
+                </ul>
+                <div class="warning">
+                    <p>Riesgo: <span class="redacted">█████████████████████████████████</span></p>
+                </div>
+                <button class="btn-glitch">Abrir Portal</button>
+            </div>
+        </section>
+
+        <section class="testimonials">
+            <h3>Testimonios de Clientes Transformados</h3>
+            
+            <div class="testimonial-slider">
+                <div class="testimonial">
+                    <blockquote>
+                        "Después de implementar los servicios de ALLSAFE, nuestra empresa alcanzó un nivel de eficiencia mas alla que cualquier otro de nuestros competidores."
+                    </blockquote>
+                    <p class="author">— CEO, <span class="redacted">████████</span> Corp.</p>
+                </div>
+                
+                <div class="testimonial">
+                    <blockquote>
+                        "Con este cambio en ALLSAFE solo siento la necesidad de trabajar. Es... liberador."
+                    </blockquote>
+                    <p class="author">— Empleado #37, <span class="redacted">████</span> Industries</p>
+                </div>
+                
+                <div class="testimonial">
+                    <blockquote>
+                        "Ayuda. No puedo... <span class="glitch-text" data-text="TRANSMISIÓN INTERRUMPIDA">TRANSMISIÓN INTERRUMPIDA</span>"
+                    </blockquote>
+                    <p class="author">— Mensaje no autorizado</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>PYME © 2023 | <span class="glitch-text" data-text="No somos responsables de las consecuencias">No somos responsables de las consecuencias</span></p>
+        <p class="hidden-message">Están en todas partes. No confíes en las pantallas. 41.3039° N, 72.9342° W</p>
+    </footer>
+
+    <script>
+        // switch para cambiar de modo oscuro
+        document.addEventListener('DOMContentLoaded', function() {
+            const darkModeToggle = document.getElementById('dark-mode-toggle');
+            const body = document.body;
+            
+            // para guardar el modo oscuro en el local storage
+            const darkMode = localStorage.getItem('darkMode');
+            
+            // si el modo oscuro fue usado antes, se aplicaria
+            if (darkMode === 'enabled') {
+                body.classList.add('dark-mode');
+            }
+            
+            // para cambiar de modo oscuro cuando se hace click en el boton
+            darkModeToggle.addEventListener('click', function() {
+                if (body.classList.contains('dark-mode')) {
+                    // Switch para modo blanco
+                    body.classList.remove('dark-mode');
+                    localStorage.setItem('darkMode', 'disabled');
+                } else {
+                    // Switch para modo oscuro
+                    body.classList.add('dark-mode');
+                    localStorage.setItem('darkMode', 'enabled');
+                }
+            });
+        });
+    </script>
+
+    <!--API del chatbot creado en BOOTPRESS: -->
+<script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+<script src="https://files.bpcontent.cloud/2025/02/19/03/20250219032116-WZF5NVRK.js"></script>
+    
+</body>
+</html>
