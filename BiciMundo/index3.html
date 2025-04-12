@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Demostración de JSON.parse y JSON.stringify</title>
+  <style>
+    body { font-family: sans-serif; margin: 2rem; }
+    pre { background: #f4f4f4; padding: 1rem; border-radius: 4px; }
+    h2 { margin-top: 1.5rem; }
+  </style>
+</head>
+<body>
+<h1>Demostración de JSON.parse y JSON.stringify</h1>
+
+<h2>1. Cadena JSON original</h2>
+<pre id="original"></pre>
+
+<h2>2. Resultado de <code>JSON.parse</code></h2>
+<pre id="parsed"></pre>
+
+<h2>3. Objeto JS modificado</h2>
+<pre id="modified"></pre>
+
+<h2>4. Resultado de <code>JSON.stringify</code></h2>
+<pre id="stringified"></pre>
+
+<script>
+  // 1. Cadena JSON válida
+  const jsonOriginal = `{
+    "nombre": "Ana",
+    "edad": 22,
+    "activo": true,
+    "hobbies": ["leer", "viajar"]
+  }`;
+
+  document.getElementById('original').textContent = jsonOriginal.trim();
+
+  // 2. Parseamos la cadena a un objeto JS
+  const obj = JSON.parse(jsonOriginal);
+  document.getElementById('parsed').textContent = JSON.stringify(obj, null, 2);
+
+  // 3. Modificamos el objeto JS
+  obj.edad = 23;
+  obj.hobbies.push("programar");
+  document.getElementById('modified').textContent = JSON.stringify(obj, null, 2);
+
+  // 4. Convertimos de nuevo a JSON
+  const jsonString = JSON.stringify(obj);
+  document.getElementById('stringified').textContent = jsonString;
+</script>
+</body>
+</html>
