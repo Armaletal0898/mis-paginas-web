@@ -34,69 +34,117 @@ function toggleSimpleInterestInputs() {
     }
 }
 
+// Add these utility functions at the beginning of your file
+function sanitizeInput(input) {
+    if (typeof input !== 'string') return input;
+    return input.replace(/[<>]/g, '');
+}
+
+function validateNumber(value, min = -1000000000, max = 1000000000) {
+    const num = parseFloat(value);
+    if (isNaN(num)) return false;
+    if (num < min || num > max) return false;
+    return num;
+}
+
+function validateDate(date) {
+    const d = new Date(date);
+    if (isNaN(d.getTime())) return false;
+    // Validate reasonable date range (e.g., between 1900 and 2100)
+    if (d.getFullYear() < 1900 || d.getFullYear() > 2100) return false;
+    return d;
+}
+
+// Update the calculateSimpleInterest function with security measures
 function calculateSimpleInterest() {
-    const calculationType = document.getElementById('si-calculation-type').value;
-    
-    if (calculationType === 'interest') {
-        calculateRegularSimpleInterest();
-    } else {
-        calculateSimpleInterestTime();
+    try {
+        const calculationType = sanitizeInput(document.getElementById('si-calculation-type').value);
+        
+        if (!['interest', 'time'].includes(calculationType)) {
+            throw new Error('Invalid calculation type');
+        }
+        
+        if (calculationType === 'interest') {
+            calculateRegularSimpleInterest();
+        } else {
+            calculateSimpleInterestTime();
+        }
+    } catch (error) {
+        console.error('Error in calculateSimpleInterest:', error);
+        alert('An error occurred while calculating. Please check your inputs.');
     }
 }
 
-function calculateSimpleInterestTime() {
-    const principal = parseFloat(document.getElementById('si-time-principal').value);
-    const interestAmount = parseFloat(document.getElementById('si-interest-amount').value);
-    const annualRate = parseFloat(document.getElementById('si-time-rate').value) / 100;
-    const yearBase = parseInt(document.getElementById('si-year-base').value);
-    
-    if (isNaN(principal) || isNaN(interestAmount) || isNaN(annualRate)) {
-        alert('Por favor, ingrese todos los valores requeridos');
-        return;
-    }
-    
-    // Calculate daily rate
-    const dailyRate = annualRate / yearBase;
-    
-    // Calculate days using the formula: n = I / (C * i)
-    const days = interestAmount / (principal * dailyRate);
-    
-    // Convert to different time units
-    const months = days / 30;
-    const years = days / yearBase;
-    
-    const result = document.getElementById('si-result');
-    result.innerHTML = `
-        <h3>Resultados del Cálculo de Tiempo:</h3>
-        <p>Tiempo en días: ${days.toFixed(2)} días</p>
-        <p>Tiempo en meses: ${months.toFixed(2)} meses</p>
-        <p>Tiempo en años: ${years.toFixed(4)} años</p>
-        <p>Base del año utilizada: ${yearBase} días</p>
-        <p>Tasa diaria: ${(dailyRate * 100).toFixed(6)}%</p>
-        <p>Interés generado: $${interestAmount.toFixed(2)}</p>
-    `;
-    result.classList.add('show');
-}
-
-// Keep the existing calculateRegularSimpleInterest function
+// Update calculateRegularSimpleInterest with security measures
 function calculateRegularSimpleInterest() {
-    const principal = parseFloat(document.getElementById('si-principal').value);
-    const rate = parseFloat(document.getElementById('si-rate').value) / 100;
-    const time = parseFloat(document.getElementById('si-time').value);
-    
-    if (isNaN(principal) || isNaN(rate) || isNaN(time)) {
-        alert('Por favor, ingrese todos los valores requeridos');
-        return;
+    try {
+        const principal = validateNumber(document.getElementById('si-principal').value, 0);
+        const rate = validateNumber(document.getElementById('si-rate').value, 0, 100);
+        const time = validateNumber(document.getElementById('si-time').value, 0, 100);
+        
+        if (!principal || !rate || !time) {
+            throw new Error('Invalid input values');
+        }
+        
+        const interest = principal * (rate / 100) * time;
+        const result = document.getElementById('si-result');
+        
+        // Sanitize output
+        result.innerHTML = `
+            <h3>Resultados:</h3>
+            <p>Interés: $${interest.toFixed(2)}</p>
+            <p>Monto Total: $${(principal + interest).toFixed(2)}</p>
+        `.replace(/[<>]/g, '');
+        
+        result.classList.add('show');
+    } catch (error) {
+        console.error('Error in calculateRegularSimpleInterest:', error);
+        alert('Por favor, verifique sus datos e intente nuevamente.');
     }
-    
-    const interest = principal * rate * time;
-    const result = document.getElementById('si-result');
-    result.innerHTML = `
-        <h3>Resultados:</h3>
-        <p>Interés: $${interest.toFixed(2)}</p>
-        <p>Monto Total: $${(principal + interest).toFixed(2)}</p>
-    `;
-    result.classList.add('show');
+}
+
+// Update addPaymentInput with security measures
+function addPaymentInput() {
+    try {
+        const container = document.getElementById('payments-container');
+        if (!container) throw new Error('Container not found');
+        
+        const newPayment = document.createElement('div');
+        newPayment.className = 'payment-input input-group';
+        
+        // Sanitize HTML template
+        const template = `
+            <div class="input-row">
+                <div>
+                    <label>Monto del Pago</label>
+                    <input type="number" class="payment-amount" placeholder="Monto" min="0" max="1000000000">
+                </div>
+                <div>
+                    <label>Fecha del Pago</label>
+                    <input type="date" class="payment-date">
+                </div>
+                <button type="button" class="remove-btn" onclick="removePaymentInput(this)">×</button>
+            </div>
+        `;
+        
+        newPayment.innerHTML = sanitizeInput(template);
+        container.appendChild(newPayment);
+    } catch (error) {
+        console.error('Error in addPaymentInput:', error);
+        alert('Error al añadir nuevo campo de pago.');
+    }
+}
+
+// Add this new function for safe removal of payment inputs
+function removePaymentInput(button) {
+    try {
+        const parentElement = button.parentElement.parentElement;
+        if (parentElement && parentElement.parentElement) {
+            parentElement.parentElement.removeChild(parentElement);
+        }
+    } catch (error) {
+        console.error('Error removing payment input:', error);
+    }
 }
 
 // Simple Amount Calculator
@@ -617,4 +665,3 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-
