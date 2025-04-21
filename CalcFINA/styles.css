@@ -327,16 +327,94 @@ h1 {
 
 /* Results styling */
 .result {
-    background-color: #f5f5f5;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    margin-top: 20px;
+    background-color: var(--form-background);
+    border: 1px solid #555;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin: 20px auto;
     display: none;
-    color: #333;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+.result.show {
+    display: block !important;
+}
+
+.result h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.result p {
+    color: white !important;
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+/* Remove all other .result styles from your CSS file to avoid conflicts */
+.result h3:first-child {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+/* All other text in white */
+.result p, 
+.result h3:not(:first-child),
+.result h4 {
+    color: var(--text-color);
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+/* Special styles for remaining payments if needed */
+.remaining-payment {
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 6px;
+    margin-top: 15px;
+    color: var(--text-color);
+}
+
+.remaining-payment.pending {
+    background-color: rgba(230, 81, 0, 0.2);
+    color: #ffa270;
+    border: 1px solid #e65100;
+}
+
+.remaining-payment.overpaid {
+    background-color: rgba(46, 125, 50, 0.2);
+    color: #81c784;
+    border: 1px solid #2e7d32;
+}
+.result.show {
+    display: block !important;
+}
+
+.result h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.result p {
+    color: var(--text-color);
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+.result h4 {
+    color: var(--primary-color);
+    margin: 12px 0;
+}
+
+/* Remove any duplicate .result styles in your CSS file */
 .result.show {
     display: block;
 }
