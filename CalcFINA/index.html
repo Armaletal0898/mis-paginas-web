@@ -28,9 +28,7 @@
                     <button class="menu-btn" data-tab="bank-discount">Descuento Bancario</button>
                     <button class="menu-btn" data-tab="promissory-notes">Pagarés</button>
                     <button class="menu-btn" data-tab="interest-rate">Tasas de Interés</button>
-                    <!-- Add new button for discount rate -->
-                    <button class="menu-btn" data-tab="discount-rate">Tasa de Descuento</button>
-                </div>
+                  </div>
             </div>
 
             <div class="calculator-content">
@@ -204,7 +202,32 @@
                     <div class="result" id="pv-result"></div>
                 </div>
 
-
+                <div class="tab-content" id="compound-interest">
+                    <h2>Cálculo de Interés Compuesto</h2>
+                    <div class="input-group">
+                        <label>Capital Inicial</label>
+                        <input type="number" id="ci-principal" placeholder="Ej: 8000">
+                    </div>
+                    <div class="input-group">
+                        <label>Tasa de Interés Anual (%)</label>
+                        <input type="number" step="0.01" id="ci-rate" placeholder="Ej: 14.4">
+                    </div>
+                    <div class="input-group">
+                        <label>Tiempo (años)</label>
+                        <input type="number" step="0.01" id="ci-time" placeholder="Ej: 1.5">
+                    </div>
+                    <div class="input-group">
+                        <label>Frecuencia de Capitalización</label>
+                        <select id="ci-frequency">
+                            <option value="monthly">Mensual</option>
+                            <option value="quarterly">Trimestral</option>
+                            <option value="semiannual">Semestral</option>
+                            <option value="annual">Anual</option>
+                        </select>
+                    </div>
+                    <button class="calc-btn" onclick="calculateCompoundInterest()">Calcular</button>
+                    <div class="result" id="ci-result"></div>
+                </div>
 
 
                 <!-- Cálculo de Tiempo -->
@@ -369,58 +392,7 @@
                 </div>
 
 
-                <!-- Add this new section -->
-                <div class="tab-content" id="discount-rate">
-                    <h2>Cálculo de Tasa de Descuento</h2>
-                    <div class="input-group">
-                        <label>Valor Nominal/Futuro (VF)</label>
-                        <input type="number" id="dr-future-value">
-                    </div>
-                    <div class="input-group">
-                        <label>Descuento (D)</label>
-                        <input type="number" id="dr-discount">
-                    </div>
-                    <div class="input-group">
-                        <label>Tiempo</label>
-                        <input type="number" id="dr-time">
-                        <select id="dr-time-unit">
-                            <option value="days">Días</option>
-                            <option value="months">Meses</option>
-                            <option value="years">Años</option>
-                        </select>
-                    </div>
-                    <button class="calc-btn" onclick="calculateDiscountRate()">Calcular</button>
-                    <div class="result" id="dr-result"></div>
-                </div>
-                <!-- Add this new section inside calculator-content div -->
-                <div class="tab-content" id="compound-interest">
-                    <h2>Cálculo de Interés Compuesto</h2>
-                    <div class="input-group">
-                        <label>Capital Inicial</label>
-                        <input type="number" id="ci-principal" placeholder="Ej: 8000">
-                    </div>
-                    <div class="input-group">
-                        <label>Tasa de Interés Anual (%)</label>
-                        <input type="number" step="0.01" id="ci-rate" placeholder="Ej: 14.4">
-                    </div>
-                    <div class="input-group">
-                        <label>Tiempo (años)</label>
-                        <input type="number" step="0.01" id="ci-time" placeholder="Ej: 1.5">
-                    </div>
-                    <div class="input-group">
-                        <label>Frecuencia de Capitalización</label>
-                        <select id="ci-frequency">
-                            <option value="monthly">Mensual</option>
-                            <option value="quarterly">Trimestral</option>
-                            <option value="semiannual">Semestral</option>
-                            <option value="annual">Anual</option>
-                        </select>
-                    </div>
-                    <button class="calc-btn" onclick="calculateCompoundInterest()">Calcular</button>
-                    <div class="result" id="ci-result"></div>
-                </div>
-                <!-- Add similar structures for other calculators -->
-                
+                            
                 
             </div>
         </div>
