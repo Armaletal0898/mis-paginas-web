@@ -212,7 +212,6 @@ function calculateValueEquation() {
     const focalDate = new Date(document.getElementById('ve-focal-date').value);
     const monthlyRate = parseFloat(document.getElementById('ve-rate').value) / 100;
     
-    // Get payments from the dynamic inputs
     const payments = [];
     const paymentInputs = document.querySelectorAll('.payment-input');
     
@@ -230,30 +229,83 @@ function calculateValueEquation() {
         return;
     }
     
-    // Calculate equivalent value at focal date
     let totalEquivalentValue = 0;
+    let paymentDetails = '';
     
-    payments.forEach(payment => {
-        // Calculate months difference
-        const monthsDiff = (focalDate.getFullYear() - payment.date.getFullYear()) * 12 + 
-                          (focalDate.getMonth() - payment.date.getMonth());
+    // Add date formatting options
+    const dateOptions = { 
+        year: 'numeric', 
+        month: '2-digit', 
+        day: '2-digit',
+        timeZone: 'UTC' // Add this to prevent timezone issues
+    };
+    
+    payments.forEach((payment, index) => {
+        // Fix date handling
+        const paymentDate = new Date(payment.date);
+        const focalDateNormalized = new Date(focalDate);
         
-        // If payment is before focal date: Future Value
-        // If payment is after focal date: Present Value
+        // Mejorar el cálculo de la diferencia de meses
+        const start = new Date(paymentDate.getFullYear(), paymentDate.getMonth(), 1);
+        const end = new Date(focalDateNormalized.getFullYear(), focalDateNormalized.getMonth(), 1);
+        
+        const monthsDiff = (end.getFullYear() - start.getFullYear()) * 12 + 
+                          (end.getMonth() - start.getMonth());
+        
         const equivalentValue = monthsDiff >= 0 
-            ? payment.amount * (1 + monthlyRate * monthsDiff)     // Future Value
-            : payment.amount * (1 - monthlyRate * Math.abs(monthsDiff));  // Present Value
+            ? payment.amount * (1 + monthlyRate * monthsDiff)
+            : payment.amount * (1 - monthlyRate * Math.abs(monthsDiff));
             
         totalEquivalentValue += equivalentValue;
+        
+        paymentDetails += `
+            <div class="payment-detail">
+                <p>Pago ${index + 1}:</p>
+                <ul>
+                    <li>Monto Original: $${payment.amount.toFixed(2)}</li>
+                    <li>Fecha: ${paymentDate.toLocaleDateString('es-ES', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        timeZone: 'UTC'
+                    })}</li>
+                    <li>Diferencia en meses: ${Math.abs(monthsDiff)} ${monthsDiff >= 0 ? 'antes' : 'después'} de la fecha focal</li>
+                    <li>Valor Equivalente: $${equivalentValue.toFixed(2)}</li>
+                    <li>Método: ${monthsDiff >= 0 ? 'Valor Futuro' : 'Valor Presente'}</li>
+                </ul>
+            </div>
+        `;
     });
     
     const result = document.getElementById('ve-result');
     result.innerHTML = `
-        <h3>Resultados:</h3>
-        <p>Pago único equivalente en la fecha focal: $${totalEquivalentValue.toFixed(2)}</p>
+        <h3>Resultados Detallados:</h3>
+        <p>Fecha Focal: ${focalDate.toLocaleDateString('es-ES', dateOptions)}</p>
         <p>Tasa mensual utilizada: ${(monthlyRate * 100).toFixed(2)}%</p>
+        
+        <h4>Detalle de Pagos:</h4>
+        ${paymentDetails}
+        
+        <h4>Resultado Final:</h4>
+        <p>Pago único equivalente en la fecha focal: $${totalEquivalentValue.toFixed(2)}</p>
     `;
     result.classList.add('show');
+}
+
+// Add validation function
+function validateValueEquation(payment, focalDate, monthlyRate) {
+    const monthsDiff = (focalDate.getFullYear() - payment.date.getFullYear()) * 12 + 
+                      (focalDate.getMonth() - payment.date.getMonth());
+    
+    let expectedValue;
+    if (monthsDiff >= 0) {
+        // Future Value validation
+        expectedValue = payment.amount * (1 + monthlyRate * monthsDiff);
+    } else {
+        // Present Value validation
+        expectedValue = payment.amount * (1 - monthlyRate * Math.abs(monthsDiff));
+    }
+    return expectedValue.toFixed(2);
 }
 
 // Function to add new payment input
@@ -330,7 +382,7 @@ function calculatePartialPayments() {
         <h4>Pagos Realizados:</h4>
         ${paymentDetails}
         <p>Total Equivalente de Pagos: $${totalEquivalentPayments.toFixed(2)}</p>
-        <p class="remaining-payment ${remainingPayment > 0 ? 'pending' : 'overpaid'}">
+        <p style="background: transparent;" class="remaining-payment ${remainingPayment > 0 ? 'pending' : 'overpaid'}">
             ${remainingPayment > 0 
               ? `Pago Restante al Vencimiento: $${remainingPayment.toFixed(2)}`
               : `Sobrepago: $${Math.abs(remainingPayment).toFixed(2)}`}
@@ -579,8 +631,10 @@ function convertInterestRate() {
     result.innerHTML = `
         <h3>Resultados de Conversión de Tasas:</h3>
         <p>Tipo de Cálculo: ${calculationType === 'discount' ? 'Tasa de Descuento' : 'Tasa de Interés'}</p>
-        <p>Tasa Original (${fromPeriod}): ${rate.toFixed(4)}%</p>
-        <p>Tasa Convertida (${toPeriod}): ${(convertedRate * 100).toFixed(4)}%</p>
+        <p>Tasa Original (${fromPeriod === 'annual' ? 'anual' : 
+                           fromPeriod === 'monthly' ? 'mensual' : 'diaria'}): ${rate.toFixed(4)}%</p>
+        <p>Tasa Convertida (${toPeriod === 'annual' ? 'anual' : 
+                            toPeriod === 'monthly' ? 'mensual' : 'diaria'}): ${(convertedRate * 100).toFixed(4)}%</p>
         <p>Tipo: ${interestType === 'simple' ? 'Simple' : 'Compuesto'}</p>
     `;
     result.classList.add('show');
@@ -618,3 +672,70 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+
+function calculateCompoundInterest() {
+    // Get input values
+    const principal = parseFloat(document.getElementById('ci-principal').value);
+    const annualRate = parseFloat(document.getElementById('ci-rate').value) / 100;
+    const years = parseFloat(document.getElementById('ci-time').value);
+    const frequency = document.getElementById('ci-frequency').value;
+
+    // Validate inputs
+    if (isNaN(principal) || isNaN(annualRate) || isNaN(years)) {
+        alert('Por favor, complete todos los campos con valores numéricos válidos.');
+        return;
+    }
+
+    // Determine number of compounding periods per year
+    let periodsPerYear;
+    switch (frequency) {
+        case 'monthly':
+            periodsPerYear = 12;
+            break;
+        case 'quarterly':
+            periodsPerYear = 4;
+            break;
+        case 'semiannual':
+            periodsPerYear = 2;
+            break;
+        case 'annual':
+            periodsPerYear = 1;
+            break;
+        default:
+            periodsPerYear = 12;
+    }
+
+    // Calculate compound interest
+    const n = periodsPerYear; // number of times interest is compounded per year
+    const r = annualRate; // annual interest rate
+    const t = years; // time in years
+    const P = principal; // principal amount
+
+    // Using the compound interest formula: A = P(1 + r/n)^(nt)
+    const amount = P * Math.pow(1 + (r/n), n * t);
+    const interest = amount - P;
+
+    // Format results
+    const formattedAmount = amount.toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
+
+    const formattedInterest = interest.toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
+
+    // Display results
+    const resultDiv = document.getElementById('ci-result');
+    resultDiv.innerHTML = `
+        <h3>Resultados:</h3>
+        <p>Interés: ${formattedInterest}</p>
+        <p>Monto Final: ${formattedAmount}</p>
+    `;
+    resultDiv.classList.add('show');
+}
