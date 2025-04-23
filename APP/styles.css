@@ -31,15 +31,57 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
-    overflow-x: auto;
-    display: block;
 }
 
 th, td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
-    min-width: 100px;
+}
+
+@media screen and (max-width: 768px) {
+    table {
+        font-size: 14px;
+        width: 100%;
+        display: table;
+        table-layout: fixed;
+    }
+
+    th, td {
+        padding: 4px;
+        min-width: auto;
+        width: auto;
+        overflow: visible;
+    }
+
+    td:nth-child(1) { width: 12%; } /* CANT. */
+    td:nth-child(2) { width: 35%; } /* DESCRIPCIÓN */
+    td:nth-child(3) { width: 15%; } /* PRECIO */
+    td:nth-child(4) { width: 15%; } /* TOTAL */
+    td:nth-child(5) { 
+        width: 23%; 
+        display: table-cell;
+    } /* Acción */
+
+    .delete-row {
+        padding: 4px;
+        font-size: 11px;
+        width: 100%;
+        min-width: auto;
+        display: inline-block;
+    }
+
+    input {
+        font-size: 12px;
+        padding: 3px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .delete-row {
+        padding: 3px 6px;
+        font-size: 11px;
+    }
 }
 
 td:last-child {
@@ -71,25 +113,46 @@ input {
     gap: 15px;
 }
 
-/* Media Queries for Mobile Devices */
 @media screen and (max-width: 768px) {
     .totals-section {
         max-width: 100%;
+        margin-top: 15px;
     }
 
     .total-row {
-        grid-template-columns: 1fr;
-        gap: 5px;
+        grid-template-columns: 2fr 1fr;
+        gap: 8px;
+        margin-bottom: 5px;
     }
 
     .total-row label {
-        text-align: left;
-        margin-bottom: 5px;
+        font-size: 14px;
     }
 
     .total-row input {
         width: 100%;
-        text-align: right;
+        padding: 4px;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .totals-section {
+        margin-top: 10px;
+    }
+
+    .total-row {
+        gap: 5px;
+        margin-bottom: 3px;
+    }
+
+    .total-row label {
+        font-size: 12px;
+    }
+
+    .total-row input {
+        padding: 3px;
+        font-size: 12px;
     }
 }
 
