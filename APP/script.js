@@ -67,30 +67,25 @@ document.addEventListener('DOMContentLoaded', function() {
             const doc = new jsPDF();
             const documentType = document.getElementById('documentType').value;
             
-            // Add NCF header with gray background
+            // Add header with styled text
             if(documentType === 'factura') {
-                doc.setFillColor(128, 128, 128);
-                doc.rect(0, 0, doc.internal.pageSize.getWidth(), 35, 'F'); // Increased height from 25 to 35
-                doc.setTextColor(255, 255, 255);
-                // Add header with styled text
-                if(documentType === 'factura') {
-                    doc.setFontSize(24);
-                    doc.setFont('helvetica', 'bold');
-                    doc.setTextColor(44, 62, 80); // Dark blue-gray color
-                    doc.text('Villar & Almonte', 105, 20, { align: 'center' });
-                    
-                    doc.setFontSize(16);
-                    doc.setFont('helvetica', 'italic');
-                    doc.text('Servicios Multiples', 105, 30, { align: 'center' });
-                    doc.setTextColor(0, 0, 0); // Reset to black
-                }
+                doc.setFontSize(24);
+                doc.setFont('helvetica', 'bold');
+                doc.setTextColor(0, 32, 96); // Dark navy blue color
+                doc.text('Villar & Almonte', 105, 20, { align: 'center' });
                 
-                // Add NCF number below header
-                if(documentType === 'factura') {
-                    const ncf = document.getElementById('ncf').value || '139';
-                    doc.setFontSize(12);
-                }
-                
+                doc.setFontSize(16);
+                doc.setFont('helvetica', 'italic');
+                doc.text('Servicios Multiples', 105, 30, { align: 'center' });
+            }
+            
+            // Reset text color to black for remaining content
+            doc.setTextColor(0, 0, 0);
+            
+            // Add NCF number below header
+            if(documentType === 'factura') {
+                const ncf = document.getElementById('ncf').value || '139';
+                doc.setFontSize(12);
             }
             
             // Add company name with styling (removed since it's now in header)
