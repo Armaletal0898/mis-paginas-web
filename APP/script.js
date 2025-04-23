@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('subtotal').value = subtotal.toFixed(2);
         
         const instalacion = parseFloat(document.getElementById('instalacion').value) || 0;
-        const itbis = (subtotal + instalacion) * 0.18;
+        const itbis = (subtotal + instalacion) * 0.18; // 18% ITBIS
         document.getElementById('itbis').value = itbis.toFixed(2);
         
         const total = subtotal + instalacion + itbis;
