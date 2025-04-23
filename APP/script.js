@@ -67,118 +67,130 @@ document.addEventListener('DOMContentLoaded', function() {
             const doc = new jsPDF();
             const documentType = document.getElementById('documentType').value;
             
-            // Add logo
-            const logoImg = new Image();
-            logoImg.src = 'logo.png';
-            
-            logoImg.onload = function() {
-                try {
-                    doc.addImage(logoImg, 'PNG', 75, 15, 60, 60);
-                    generatePDFContent();
-                } catch (error) {
-                    console.error('Error adding logo:', error);
-                    generatePDFContent();
-                }
-            };
-
-            logoImg.onerror = function() {
-                console.warn('Logo not found, generating PDF without logo');
-                generatePDFContent();
-            };
-
-            function generatePDFContent() {
-                // Add header info
-                doc.setFontSize(11);
-                doc.text('RNC-001-0941127-2', 105, 85, { align: 'center' });
-                doc.text('Telefono: 829-693-7134', 105, 92, { align: 'center' });
-            
-                // Add document title
+            // Add NCF header with gray background
+            if(documentType === 'factura') {
+                doc.setFillColor(128, 128, 128);
+                doc.rect(0, 0, doc.internal.pageSize.getWidth(), 35, 'F'); // Increased height from 25 to 35
+                doc.setTextColor(255, 255, 255);
                 doc.setFontSize(16);
-                doc.setFont('helvetica', 'bold');
-                if(documentType === 'cotizacion') {
-                    doc.text('Cotizacion', 105, 105, { align: 'center' });
-                } else {
-                    doc.text('Factura', 105, 105, { align: 'center', style: 'italic' });
-                }
-            
-                // Add client info section with borders
-                doc.setFontSize(11);
-                doc.setFont('helvetica', 'normal');
-                doc.rect(20, 115, 80, 8);
-                doc.rect(20, 123, 80, 8);
-            
-                doc.rect(140, 115, 50, 8);
-            
-                doc.text(`Señor/a: ${document.getElementById('senor').value}`, 22, 120);
-                doc.text(`RNC: ${document.getElementById('clienteRnc').value || 'N/A'}`, 22, 128);
-                doc.text(`Fecha: ${document.getElementById('fecha').value}`, 142, 120);
-            
-                // Create table
-                let yPos = 150;
-            
-                // Table headers with borders
-                doc.rect(20, yPos-5, 15, 8); // CANT
-                doc.rect(35, yPos-5, 95, 8); // DESCRIPCION
-                doc.rect(130, yPos-5, 30, 8); // PRECIO
-                doc.rect(160, yPos-5, 30, 8); // TOTAL
-            
-                doc.setFont('helvetica', 'bold');
-                doc.text('CANT.', 22, yPos);
-                doc.text('DESCRIPCIÓN', 37, yPos);
-                doc.text('PRECIO', 132, yPos);
-                doc.text('TOTAL', 162, yPos);
-            
-                // Table items
-                doc.setFont('helvetica', 'normal');
-                yPos += 10;
-            
-                const rows = itemsBody.getElementsByTagName('tr');
-                Array.from(rows).forEach(row => {
-                    const cantidad = row.querySelector('.cantidad').value;
-                    const descripcion = row.querySelector('.descripcion').value;
-                    const precio = row.querySelector('.precio').value;
-                    const total = row.querySelector('.total').textContent;
-                    
-                    doc.rect(20, yPos-5, 15, 8);
-                    doc.rect(35, yPos-5, 95, 8);
-                    doc.rect(130, yPos-5, 30, 8);
-                    doc.rect(160, yPos-5, 30, 8);
-                    
-                    doc.text(cantidad.toString(), 22, yPos);
-                    doc.text(descripcion, 37, yPos);
-                    doc.text(precio.toString(), 132, yPos);
-                    doc.text(total.toString(), 162, yPos);
-                    
-                    yPos += 8;
-                });
-            
-                // Add totals section
-                yPos += 10;
-                doc.text('SUB-TOTAL RD$', 130, yPos);
-                doc.text(document.getElementById('subtotal').value, 180, yPos, { align: 'right' });
-            
-                yPos += 7;
-                doc.text('COSTO DE INSTALACIÓN RD$', 130, yPos);
-                doc.text(document.getElementById('instalacion').value, 180, yPos, { align: 'right' });
-            
-                yPos += 7;
-                doc.text('ITBIS', 130, yPos);
-                doc.text(document.getElementById('itbis').value, 180, yPos, { align: 'right' });
-            
-                yPos += 7;
-                doc.setFont('helvetica', 'bold');
-                doc.text('TOTAL RD$', 130, yPos);
-                doc.text(document.getElementById('total').value, 180, yPos, { align: 'right' });
-            
-                // Add footer
-                yPos += 20;
-                doc.setFont('helvetica', 'normal');
-                doc.text('Danny Villar', 20, yPos);
-                doc.text('Tecnico Electricista', 20, yPos + 7);
-            
-                // Save the PDF
-                doc.save(`${documentType}_${document.getElementById('fecha').value}.pdf`);
+                doc.setFont('helvetica', 'italic');
+                doc.text('Villar & Almonte', 105, 15, { align: 'center' });
+                doc.setFontSize(14);
+                doc.text('Servicios Multiples', 105, 25, { align: 'center' }); // Adjusted position
+                doc.setTextColor(0, 0, 0);
             }
+            
+            // Add NCF number below header
+            if(documentType === 'factura') {
+                const ncf = document.getElementById('ncf').value || '139';
+                doc.setFontSize(12);
+                
+            }
+            
+            // Add company name with styling (removed since it's now in header)
+            // Add header info
+            doc.setFontSize(11);
+            doc.setFont('helvetica', 'normal');
+            doc.text('RNC-001-0941127-2', 105, 85, { align: 'center' });
+            doc.text('Telefono: 829-693-7134', 105, 92, { align: 'center' });
+            if(documentType === 'factura') {
+                const ncf = document.getElementById('ncf').value || '139';
+                doc.text(`NCF: B0${ncf}`, 105, 99, { align: 'center' });
+            }
+        
+            // Add document title with more spacing
+            doc.setFontSize(16);
+            doc.setFont('helvetica', 'bold');
+            if(documentType === 'cotizacion') {
+                doc.text('Cotizacion', 105, 115, { align: 'center' });
+            } else {
+                doc.text('Factura', 105, 115, { align: 'center', style: 'italic' });
+            }
+            
+            // Client info section
+            doc.setFontSize(11);
+            doc.setFont('helvetica', 'normal');
+            
+            // Add labels
+            doc.text('Señor/a:', 20, 130);
+            doc.text('RNC:', 20, 138);
+            doc.text('Fecha:', 140, 130);  // Moved label to the left of the box
+            
+            // Add bordered input areas
+            doc.rect(50, 125, 80, 8);   // Señor/a box
+            doc.rect(50, 133, 80, 8);   // RNC box
+            doc.rect(160, 125, 30, 8);  // Fecha box
+            
+            // Add values
+            doc.text(document.getElementById('senor').value, 52, 130);
+            doc.text(document.getElementById('clienteRnc').value || 'N/A', 52, 138);
+            doc.text(document.getElementById('fecha').value, 162, 130);
+        
+            // Create table
+            let yPos = 150;
+        
+            // Table headers with borders
+            doc.rect(20, yPos-5, 15, 8); // CANT
+            doc.rect(35, yPos-5, 95, 8); // DESCRIPCION
+            doc.rect(130, yPos-5, 30, 8); // PRECIO
+            doc.rect(160, yPos-5, 30, 8); // TOTAL
+        
+            doc.setFont('helvetica', 'bold');
+            doc.text('CANT.', 22, yPos);
+            doc.text('DESCRIPCIÓN', 37, yPos);
+            doc.text('PRECIO', 132, yPos);
+            doc.text('TOTAL', 162, yPos);
+        
+            // Table items
+            doc.setFont('helvetica', 'normal');
+            yPos += 10;
+        
+            const rows = itemsBody.getElementsByTagName('tr');
+            Array.from(rows).forEach(row => {
+                const cantidad = row.querySelector('.cantidad').value;
+                const descripcion = row.querySelector('.descripcion').value;
+                const precio = row.querySelector('.precio').value;
+                const total = row.querySelector('.total').textContent;
+                
+                doc.rect(20, yPos-5, 15, 8);
+                doc.rect(35, yPos-5, 95, 8);
+                doc.rect(130, yPos-5, 30, 8);
+                doc.rect(160, yPos-5, 30, 8);
+                
+                doc.text(cantidad.toString(), 22, yPos);
+                doc.text(descripcion, 37, yPos);
+                doc.text(precio.toString(), 132, yPos);
+                doc.text(total.toString(), 162, yPos);
+                
+                yPos += 8;
+            });
+        
+            // Add totals section
+            yPos += 10;
+            doc.text('SUB-TOTAL RD$', 130, yPos);
+            doc.text(document.getElementById('subtotal').value, 180, yPos, { align: 'right' });
+        
+            yPos += 7;
+            doc.text('COSTO DE INSTALACIÓN RD$', 130, yPos);
+            doc.text(document.getElementById('instalacion').value, 180, yPos, { align: 'right' });
+        
+            yPos += 7;
+            doc.text('ITBIS', 130, yPos);
+            doc.text(document.getElementById('itbis').value, 180, yPos, { align: 'right' });
+        
+            yPos += 7;
+            doc.setFont('helvetica', 'bold');
+            doc.text('TOTAL RD$', 130, yPos);
+            doc.text(document.getElementById('total').value, 180, yPos, { align: 'right' });
+        
+            // Add footer
+            yPos += 20;
+            doc.setFont('helvetica', 'normal');
+            doc.text('Danny Villar', 20, yPos);
+            doc.text('Tecnico Electricista', 20, yPos + 7);
+        
+            // Save the PDF
+            doc.save(`${documentType}_${document.getElementById('fecha').value}.pdf`);
         } catch (error) {
             console.error('Error generating PDF:', error);
             alert('Error al generar el PDF. Por favor, revise la consola para más detalles.');
