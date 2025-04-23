@@ -124,7 +124,15 @@ document.addEventListener('DOMContentLoaded', function() {
             // Add values
             doc.text(document.getElementById('senor').value, 52, 130);
             doc.text(document.getElementById('clienteRnc').value || 'N/A', 52, 138);
-            doc.text(document.getElementById('fecha').value, 162, 130);
+            
+            // Format date as dd/mm/yyyy
+            const dateValue = document.getElementById('fecha').value;
+            const formattedDate = new Date(dateValue).toLocaleDateString('es-ES', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            });
+            doc.text(formattedDate, 162, 130);
         
             // Create table
             let yPos = 150;
