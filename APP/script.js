@@ -67,22 +67,20 @@ document.addEventListener('DOMContentLoaded', function() {
             const doc = new jsPDF();
             const documentType = document.getElementById('documentType').value;
             
-            // Add header with styled text
-            if(documentType === 'factura') {
-                doc.setFontSize(24);
-                doc.setFont('helvetica', 'bold');
-                doc.setTextColor(0, 32, 96); // Dark navy blue color
-                doc.text('Villar & Almonte', 105, 20, { align: 'center' });
-                
-                doc.setFontSize(16);
-                doc.setFont('helvetica', 'italic');
-                doc.text('Servicios Multiples', 105, 30, { align: 'center' });
-            }
+            // Add header with styled text for both factura and cotizacion
+            doc.setFontSize(24);
+            doc.setFont('helvetica', 'bold');
+            doc.setTextColor(0, 32, 96); // Dark navy blue color
+            doc.text('Villar & Almonte', 105, 20, { align: 'center' });
+            
+            doc.setFontSize(16);
+            doc.setFont('helvetica', 'italic');
+            doc.text('Servicios Multiples', 105, 30, { align: 'center' });
             
             // Reset text color to black for remaining content
             doc.setTextColor(0, 0, 0);
             
-            // Add NCF number below header
+            // Add NCF number below header only for factura
             if(documentType === 'factura') {
                 const ncf = document.getElementById('ncf').value || '139';
                 doc.setFontSize(12);
