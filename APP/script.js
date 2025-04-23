@@ -77,19 +77,14 @@ document.addEventListener('DOMContentLoaded', function() {
             doc.setFont('helvetica', 'italic');
             doc.text('Servicios Multiples', 105, 30, { align: 'center' });
             
-            // Reset text color to black for remaining content
-            doc.setTextColor(0, 0, 0);
-            
-            // Add NCF number below header only for factura
-            if(documentType === 'factura') {
-                const ncf = document.getElementById('ncf').value || '139';
-                doc.setFontSize(12);
-            }
-            
-            // Add company name with styling (removed since it's now in header)
             // Add header info
             doc.setFontSize(11);
             doc.setFont('helvetica', 'normal');
+            doc.setTextColor(0, 0, 0);
+            doc.text('RNC-001-0941127-2', 105, 45, { align: 'center' });
+            doc.text('Telefono: 829-693-7134', 105, 52, { align: 'center' });
+
+            // Remove duplicate header info section below
             doc.text('RNC-001-0941127-2', 105, 85, { align: 'center' });
             doc.text('Telefono: 829-693-7134', 105, 92, { align: 'center' });
             if(documentType === 'factura') {
