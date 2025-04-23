@@ -81,8 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
             doc.setFontSize(11);
             doc.setFont('helvetica', 'normal');
             doc.setTextColor(0, 0, 0);
-            doc.text('RNC-001-0941127-2', 105, 45, { align: 'center' });
-            doc.text('Telefono: 829-693-7134', 105, 52, { align: 'center' });
+            
 
             // Remove duplicate header info section below
             doc.text('RNC-001-0941127-2', 105, 85, { align: 'center' });
