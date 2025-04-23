@@ -72,18 +72,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 doc.setFillColor(128, 128, 128);
                 doc.rect(0, 0, doc.internal.pageSize.getWidth(), 35, 'F'); // Increased height from 25 to 35
                 doc.setTextColor(255, 255, 255);
-                doc.setFontSize(16);
-                doc.setFont('helvetica', 'italic');
-                doc.text('Villar & Almonte', 105, 15, { align: 'center' });
-                doc.setFontSize(14);
-                doc.text('Servicios Multiples', 105, 25, { align: 'center' }); // Adjusted position
-                doc.setTextColor(0, 0, 0);
-            }
-            
-            // Add NCF number below header
-            if(documentType === 'factura') {
-                const ncf = document.getElementById('ncf').value || '139';
-                doc.setFontSize(12);
+                // Add header with styled text
+                if(documentType === 'factura') {
+                    doc.setFontSize(24);
+                    doc.setFont('helvetica', 'bold');
+                    doc.setTextColor(44, 62, 80); // Dark blue-gray color
+                    doc.text('Villar & Almonte', 105, 20, { align: 'center' });
+                    
+                    doc.setFontSize(16);
+                    doc.setFont('helvetica', 'italic');
+                    doc.text('Servicios Multiples', 105, 30, { align: 'center' });
+                    doc.setTextColor(0, 0, 0); // Reset to black
+                }
+                
+                // Add NCF number below header
+                if(documentType === 'factura') {
+                    const ncf = document.getElementById('ncf').value || '139';
+                    doc.setFontSize(12);
+                }
                 
             }
             
