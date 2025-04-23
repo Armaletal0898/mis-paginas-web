@@ -127,11 +127,8 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Format date as dd/mm/yyyy
             const dateValue = document.getElementById('fecha').value;
-            const formattedDate = new Date(dateValue).toLocaleDateString('es-ES', {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric'
-            });
+            const [year, month, day] = dateValue.split('-');
+            const formattedDate = `${day}/${month}/${year}`;
             doc.text(formattedDate, 162, 130);
         
             // Create table
