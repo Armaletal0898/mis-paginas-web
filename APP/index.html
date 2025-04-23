@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Documentos</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Generador de Documentos</h1>
+        
+        <form id="documentForm">
+            <div class="form-header">
+                <select id="documentType" required>
+                    <option value="">Seleccione tipo de documento</option>
+                    <option value="cotizacion">Cotización</option>
+                    <option value="factura">Factura</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="rnc">RNC:</label>
+                <input type="text" id="rnc" value="RNC-001-0941127-2" readonly>
+                
+                <label for="telefono">Teléfono:</label>
+                <input type="text" id="telefono" value="829-693-7134" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="senor">Señor/a:</label>
+                <input type="text" id="senor" required>
+                
+                <label for="clienteRnc">RNC Cliente:</label>
+                <input type="text" id="clienteRnc" placeholder="000-00000000-0">
+                
+                <label for="fecha">Fecha:</label>
+                <input type="date" id="fecha" required>
+            </div>
+            
+            <div class="items-section">
+                <h3>Artículos</h3>
+                <table id="itemsTable">
+                    <thead>
+                        <tr>
+                            <th>CANT.</th>
+                            <th>DESCRIPCIÓN</th>
+                            <th>PRECIO</th>
+                            <th>TOTAL</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="itemsBody">
+                        <tr>
+                            <td><input type="number" class="cantidad" min="1"></td>
+                            <td><input type="text" class="descripcion"></td>
+                            <td><input type="number" class="precio" min="0"></td>
+                            <td class="total">0.00</td>
+                            <td><button type="button" class="delete-row">Eliminar</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="button" id="addRow">Agregar Fila</button>
+            </div>
+
+            <div class="totals-section">
+                <div class="total-row">
+                    <label>SUB-TOTAL RD$:</label>
+                    <input type="number" id="subtotal" readonly>
+                </div>
+                <div class="total-row">
+                    <label>COSTO DE INSTALACIÓN RD$:</label>
+                    <input type="number" id="instalacion">
+                </div>
+                <div class="total-row">
+                    <label>ITBIS:</label>
+                    <input type="number" id="itbis" readonly>
+                </div>
+                <div class="total-row">
+                    <label>TOTAL RD$:</label>
+                    <input type="number" id="total" readonly>
+                </div>
+            </div>
+
+            <div class="form-footer">
+                <input type="text" id="tecnico" value="Danny Villar" readonly>
+                <p>Tecnico Electricista</p>
+            </div>
+
+            <button type="button" id="generatePDF">Generar PDF</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
