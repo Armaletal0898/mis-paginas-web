@@ -49,38 +49,38 @@ th, td {
 
     th, td {
         padding: 4px;
-        min-width: auto;
-        width: auto;
-        overflow: visible;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     td:nth-child(1) { width: 12%; } /* CANT. */
-    td:nth-child(2) { width: 35%; } /* DESCRIPCIÓN */
-    td:nth-child(3) { width: 15%; } /* PRECIO */
+    td:nth-child(2) { width: 28%; } /* DESCRIPCIÓN */
+    td:nth-child(3) { width: 18%; } /* PRECIO */
     td:nth-child(4) { width: 15%; } /* TOTAL */
     td:nth-child(5) { 
-        width: 23%; 
-        display: table-cell;
+        width: 27%; 
+        padding: 2px;
     } /* Acción */
 
     .delete-row {
-        padding: 4px;
+        padding: 4px 2px;
         font-size: 11px;
         width: 100%;
         min-width: auto;
-        display: inline-block;
-    }
-
-    input {
-        font-size: 12px;
-        padding: 3px;
+        white-space: nowrap;
+        overflow: hidden;
     }
 }
 
 @media screen and (max-width: 480px) {
     .delete-row {
-        padding: 3px 6px;
-        font-size: 11px;
+        font-size: 10px;
+        padding: 3px 1px;
+    }
+    
+    td:nth-child(5) {
+        padding: 1px;
     }
 }
 
