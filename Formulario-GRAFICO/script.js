@@ -1,9 +1,5 @@
-// API Keys (you'll need to replace these with your actual API keys)
-// Eliminar esta línea ya que está duplicada
-// const PAGESPEED_API_KEY = 'YOUR_PAGESPEED_API_KEY';
-// const WAPPALYZER_API_KEY = 'YOUR_WAPPALYZER_API_KEY';
 
-// Definir la API key correctamente (sin espacios)
+// Definir la API key correctamente
 const API_KEY = 'AIzaSyAVKXSPq5VzXwLviEg9sJ4cQqJN6MV1xu8';
 
 async function analyzeWebsite() {
