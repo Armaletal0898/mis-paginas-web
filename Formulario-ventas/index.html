@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Ventas Mensuales</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Registro de Ventas Mensuales</h1>
+        <div class="input-group">
+            <select id="currencySelect" class="form-input">
+                <option value="USD">USD ($)</option>
+                <option value="EUR">EUR (€)</option>
+                <option value="DOP">DOP (RD$)</option>
+            </select>
+            
+            <input type="text" id="companyNameInput" class="form-input" placeholder="Nombre de la empresa">
+            <select id="monthSelect" class="form-input">
+                <option value="" disabled selected>Seleccionar Mes</option>
+                <option value="todos">Todos los Meses</option>
+                <option value="Enero">Enero</option>
+                <option value="Febrero">Febrero</option>
+                <option value="Marzo">Marzo</option>
+                <option value="Abril">Abril</option>
+                <option value="Mayo">Mayo</option>
+                <option value="Junio">Junio</option>
+                <option value="Julio">Julio</option>
+                <option value="Agosto">Agosto</option>
+                <option value="Septiembre">Septiembre</option>
+                <option value="Octubre">Octubre</option>
+                <option value="Noviembre">Noviembre</option>
+                <option value="Diciembre">Diciembre</option>
+            </select>
+            <select id="yearSelect" class="form-input">
+                <option value="2024">2024</option>
+                <option value="2023">2023</option>
+                <option value="2022">2022</option>
+            </select>
+            <input type="number" id="salesInput" placeholder="Monto de ventas" class="form-input">
+            <button onclick="addSalesData()" class="btn-primary">Agregar</button>
+            <button id="exportPDFBtn" class="btn-danger">Exportar a PDF</button>
+        </div>
+        <!-- INICIO del área a exportar -->
+        <div id="exportSection">
+
+            
+            <!-- nombre de la empresa aquí -->
+            <div id="companyNameDisplay" style="text-align:center; font-size: 1.3em; font-weight: bold; margin-bottom: 10px;"></div>
+            <div class="chart-container">
+                <canvas id="chart"></canvas>
+            </div>
+            <div class="results-container">
+                <h2>Análisis de Resultados</h2>
+                <div class="results-grid">
+                    <div class="result-card">
+                        <h3>Venta Totales anual</h3>
+                        <p id="totalSales">0</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>Promedio Mensual</h3>
+                        <p id="averageSales">0</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>Mes con Mayor Venta</h3>
+                        <p id="highestMonth">-</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>Mes con Menor Venta</h3>
+                        <p id="lowestMonth">-</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- Sección de ayuda a la derecha -->
+     <div class="help-sidebar">
+        <h3>¿Cómo funciona?</h3>
+        <ul>
+            <li>Selecciona la moneda, mes, año y escribe el monto de ventas.</li>
+            <li>Puedes ingresar un mes a la vez si asi lo deseas.</li>
+            <li>Ingresa el nombre de la empresa si lo deseas.</li>
+            <li>Haz clic en <b>Agregar</b> para registrar la venta.</li>
+            <li>Visualiza el gráfico y el análisis de resultados.</li>
+            <li>Haz clic en <b>Exportar a PDF</b> para descargar el reporte.</li>
+        </ul>
+    </div>
+    
+
+ 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    ```
+    <script src="script.js"></script>
+    </body>
+  
+</html>
