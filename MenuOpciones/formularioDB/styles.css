@@ -1,0 +1,167 @@
+/* Estilos generales para el cuerpo de la página */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f4f6fb;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilo para el título principal */
+h1 {
+    text-align: center;
+    color: #333;
+    margin-top: 30px;
+}
+
+/* Contenedor principal que centra y da fondo a todo el contenido */
+.container {
+    max-width: 700px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    padding: 32px 24px;
+}
+
+/* Tarjeta del formulario con sombra y bordes redondeados */
+.form-card {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    background: #f9fafb;
+    border-radius: 8px;
+    padding: 24px 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+/* Grupo de campos del formulario */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* Etiquetas de los campos del formulario */
+.form-group label {
+    font-weight: 500;
+    color: #444;
+}
+
+/* Campos de entrada del formulario */
+.form-group input {
+    padding: 8px 12px;
+    border: 1px solid #cfd8dc;
+    border-radius: 5px;
+    font-size: 1rem;
+    background: #fff;
+    transition: border 0.2s;
+}
+
+/* Efecto al enfocar un campo de entrada */
+.form-group input:focus {
+    border: 1.5px solid #1976d2;
+    outline: none;
+}
+
+/* Contenedor de los botones del formulario */
+.form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+/* Estilos generales para los botones */
+button[type="submit"], button[type="button"] {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 5px;
+    background: #1976d2;
+    color: #fff;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+/* Estilo específico para el botón de cancelar */
+button[type="button"] {
+    background: #b0bec5;
+}
+
+/* Efecto hover para el botón de guardar */
+button[type="submit"]:hover {
+    background: #1565c0;
+}
+
+/* Efecto hover para el botón de cancelar */
+button[type="button"]:hover {
+    background: #78909c;
+}
+
+/* Contenedor de la tabla para hacerla desplazable horizontalmente si es necesario */
+.table-container {
+    margin-top: 32px;
+    overflow-x: auto;
+}
+
+/* Estilos generales para la tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+/* Espaciado y alineación de celdas */
+th, td {
+    padding: 12px 10px;
+    text-align: left;
+}
+
+/* Encabezado de la tabla */
+th {
+    background: #1976d2;
+    color: #fff;
+    font-weight: 600;
+}
+
+/* Color de fondo alterno para filas pares */
+tr:nth-child(even) {
+    background: #f4f6fb;
+}
+
+/* Efecto hover para filas de la tabla */
+tr:hover {
+    background: #e3f2fd;
+}
+
+/* Estilos para los botones dentro de la tabla */
+td button {
+    margin-right: 6px;
+    padding: 5px 12px;
+    border: none;
+    border-radius: 4px;
+    background: #43a047;
+    color: #fff;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+/* Estilo específico para el botón de borrar */
+td button:last-child {
+    background: #e53935;
+}
+
+/* Efecto hover para los botones de la tabla */
+td button:hover {
+    opacity: 0.85;
+}
+
+#mensaje {
+    color: red !important;
+    margin-bottom: 10px;
+    font-weight: bold;
+}

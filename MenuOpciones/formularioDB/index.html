@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario con BD</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Título principal de la página -->
+    <h1>Gestión de Registros</h1>
+    <!-- Contenedor principal que agrupa el formulario y la tabla -->
+    <div class="container">
+        <!-- Formulario para crear o editar registros -->
+        <div id="mensaje" style="color: red; margin-bottom: 10px;"></div>
+        <form id="registroForm" class="form-card">
+            <!-- Campo oculto para almacenar el ID del registro (usado al editar) -->
+            <input type="hidden" id="id" name="id">
+            <div class="form-group">
+                <label>Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            <div class="form-group">
+                <label>Apellido:</label>
+                <input type="text" id="apellido" name="apellido" required>
+            </div>
+            <div class="form-group">
+                <label>Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label>Contacto:</label>
+                <input type="text" id="contacto" name="contacto" required>
+            </div>
+            <div class="form-group">
+                <label>Fecha de nacimiento:</label>
+                <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
+            </div>
+            <div class="form-group">
+                <label>Dirección:</label>
+                <input type="text" id="direccion" name="direccion">
+            </div>
+            <div class="form-group">
+                <label>Género:</label>
+                <select id="genero" name="genero">
+                    <option value="">Seleccione</option>
+                    <option value="masculino">Masculino</option>
+                    <option value="femenino">Femenino</option>
+                    <option value="otro">Otro</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Comentarios:</label>
+                <textarea id="comentarios" name="comentarios"></textarea>
+            </div>
+            <!-- Botones para guardar o cancelar la acción -->
+            <div class="form-actions">
+                <button type="submit">Guardar</button>
+                <button type="button" id="cancelarBtn">Cancelar</button>
+            </div>
+        </form>
+        <hr>
+        <!-- Contenedor de la tabla que muestra los registros almacenados -->
+        <div class="table-container">
+            <table id="registrosTable">
+                <thead>
+                    <tr>
+                        <th>ID</th><th>Nombre</th><th>Email</th><th>Contacto</th><th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aquí se mostrarán los registros obtenidos de la base de datos -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- maneja la lógica del frontend -->
+    <script src="script.js"></script>
+</body>
+</html>

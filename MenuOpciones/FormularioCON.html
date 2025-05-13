@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario QR</title>
+    <link rel="stylesheet" href="css/stylesFormularioCON.css">
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Libreria Para usar codigo QR de prueba en la pagina web -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+    <!-- Menu from index.html -->
+    <header>
+        <nav class="menu-container">
+            <div class="logo">Menu de Interacciones</div>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active">Inicio</a></li>
+                <li><a href="biografia1.html">Biografia1</a></li>
+                <li><a href="biografia2.html">Biografia2</a></li>
+                <li><a href="etiquetas.html">Etiquetas</a></li>
+                <li><a href="MenuBanreserva.html">MenuBanreserva</a></li>
+                <li><a href="validarCedula.html">validar Cedula</a></li>
+                <li><a href="menujson.html">MenuDinamico</a></li>
+                <li><a href="multiplePG.html">Formulario con multiples paginas</a></li>
+                <li><a href="FormularioCON.html">Formulario QR</a></li>
+                <li><a href="formularioVENTAS.html">FormularioGRAFICOS</a></li>
+                <li><a href="http://formulariodb.ct.ws/index.html">Formulario DB</a></li>
+
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Formulario de contacto</h2>
+
+        <!-- Inicio del formulario de contacto -->
+        <form id="contactForm">
+            <div class="form-group">
+                <label for="name">Nombre Completo:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Telefono:</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Correo Electronico:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Direccion:</label>
+                <input type="text" id="address" name="address">
+
+                <!-- Boton de generar QR -->
+            </div>
+            <button type="submit">Generar Codigo QR</button>
+        </form>
+        <div id="qrcode"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
