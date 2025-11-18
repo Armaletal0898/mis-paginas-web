@@ -2309,6 +2309,120 @@ tbody tr:hover {
     }
 }
 
+/* =============================================================
+   @MEDIA QUERIES - Ajustes para Móviles (Dashboard - max-width: 768px)
+   ============================================================= */
+
+@media (max-width: 768px) {
+    
+    /* -------------------------------------- */
+    /* 1. Header y User Info */
+    /* -------------------------------------- */
+    .header {
+        flex-direction: column;
+        align-items: center;
+        padding: 15px 20px;
+        gap: 15px;
+    }
+
+    /* Ocultar eslogan y centrar user-info */
+    .header .logo span {
+        display: none; 
+    }
+    .user-info {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+    .user-info button {
+        width: 100%; /* Botón de cerrar sesión a ancho completo */
+        max-width: 200px;
+    }
+    
+    /* -------------------------------------- */
+    /* 2. Pestañas (Tabs) */
+    /* -------------------------------------- */
+    .tabs {
+        flex-direction: column; /* Apilar los botones de las pestañas */
+        gap: 10px;
+    }
+    .tab-btn {
+        width: 100%; /* Botones de pestaña a ancho completo */
+        font-size: 1rem;
+        padding: 12px;
+    }
+
+    /* -------------------------------------- */
+    /* 3. Formulario de Creación/Edición de Vuelos */
+    /* -------------------------------------- */
+    .form-vuelo, .form-edicion-vuelo {
+        /* Convertir de grid a una sola columna para la inserción de datos */
+        grid-template-columns: 1fr; 
+        gap: 15px;
+        padding: 15px;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+    }
+    .form-vuelo input, 
+    .form-vuelo select, 
+    .form-vuelo button {
+        padding: 12px; /* Aumentar el área táctil */
+    }
+    
+    /* -------------------------------------- */
+    /* 4. Listas/Tablas (Conversión a Cards) */
+    /* -------------------------------------- */
+    
+    /* Ocultar la fila de encabezados que no funciona en móvil */
+    .lista-vuelos-admin .header-row,
+    .lista-usuarios .header-row,
+    .lista-reservas-user .header-row {
+        display: none; 
+    }
+
+    /* Estilo de los elementos de lista como "cards" */
+    .vuelo-item-admin, 
+    .usuario-item, 
+    .reserva-item {
+        display: block; /* Convertir de grid/flex a bloque */
+        margin-bottom: 15px;
+        padding: 15px;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+    }
+
+    /* Reordenar los elementos internos del card */
+    .vuelo-item-admin > div, 
+    .usuario-item > div, 
+    .reserva-item > div {
+        display: flex;
+        flex-direction: column; /* Apilar la información verticalmente */
+        align-items: flex-start;
+        padding: 5px 0;
+        border-bottom: 1px dashed var(--border-color);
+        margin-bottom: 5px;
+        font-size: 0.95rem;
+    }
+    
+    /* Botones de acción (Editar/Eliminar/Ver) a ancho completo */
+    .vuelo-item-admin button, 
+    .usuario-item button, 
+    .reserva-item button {
+        width: 100%;
+        margin-top: 10px;
+    }
+    
+    /* -------------------------------------- */
+    /* 5. Footer (ya cubierto, pero se reitera para coherencia) */
+    /* -------------------------------------- */
+    .footer-content {
+        grid-template-columns: 1fr; 
+        gap: 30px;
+        padding: 0 15px;
+    }
+}
 
 /* ============================================================
    UTILIDADES
@@ -2431,6 +2545,7 @@ tbody tr:hover {
    FIN DEL CSS
 
    ============================================================ */
+
 
 
 
