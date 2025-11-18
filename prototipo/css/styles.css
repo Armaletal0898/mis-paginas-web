@@ -2424,6 +2424,142 @@ tbody tr:hover {
     }
 }
 
+/* =============================================================
+   @MEDIA QUERIES - Ajustes para Móviles (aplicacion.html)
+   ============================================================= */
+
+@media (max-width: 768px) {
+    
+    /* -------------------------------------- */
+    /* 1. HEADER Y NAVEGACIÓN */
+    /* -------------------------------------- */
+    .header {
+        flex-direction: column;
+        align-items: center;
+        padding: 15px 20px;
+        gap: 15px;
+    }
+
+    /* Ocultar el eslogan largo para ahorrar espacio vertical */
+    .header .logo span {
+        display: none; 
+    }
+    
+    .header .nav {
+        width: 100%;
+        justify-content: space-around;
+        gap: 5px;
+        flex-wrap: wrap; /* Permite que los botones salten de línea si hay muchos */
+    }
+    
+    .header .nav button, 
+    .header .nav .nombre-usuario {
+        padding: 8px 10px;
+        font-size: 0.85rem;
+    }
+
+    /* -------------------------------------- */
+    /* 2. SECCIÓN BÚSQUEDA */
+    /* -------------------------------------- */
+    .busqueda h2 {
+        font-size: 1.8rem;
+    }
+
+    /* Apilar los inputs de búsqueda verticalmente */
+    .form-busqueda {
+        flex-direction: column; 
+        gap: 15px;
+        padding: 20px;
+    }
+    
+    .form-busqueda input, 
+    .form-busqueda button,
+    .form-busqueda #btnMoneda {
+        width: 100%; /* Ocupar todo el ancho disponible */
+        font-size: 1rem;
+        padding: 12px;
+    }
+    
+    /* -------------------------------------- */
+    /* 3. LISTA DE VUELOS (Resultados) */
+    /* -------------------------------------- */
+    .vuelos-container {
+        padding: 30px 15px;
+    }
+    
+    #listaVuelos {
+        grid-template-columns: 1fr; /* Una sola columna para los resultados */
+        gap: 20px;
+    }
+
+    .vuelo-item {
+        /* Convertir el card a un diseño simple y centrado */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 15px;
+        text-align: center;
+    }
+    
+    .vuelo-item button {
+        margin-top: 10px;
+        width: 80%; /* Botón de reservar más ancho */
+    }
+
+
+    /* -------------------------------------- */
+    /* 4. MODALES (Reserva, Pago, etc.) */
+    /* -------------------------------------- */
+    .modal-content {
+        width: 95%; /* Ocupar casi todo el ancho del móvil */
+        max-width: none; /* Quitar la restricción de ancho de escritorio */
+        margin: 10px;
+        padding: 20px;
+        max-height: 95vh; /* Asegurar que el modal no se salga de la pantalla */
+    }
+    
+    .modal-reserva h3 {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+    
+    /* Detalle del vuelo dentro del modal (se apila) */
+    .modal-reserva .vuelo-detalle {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 1rem;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+    }
+
+    /* Card de clase de asiento (se apila) */
+    .modal-reserva .clase-asiento-card {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+    }
+    
+    .modal-reserva .clase-selector {
+        flex-direction: column; /* Apilar los selectores de clase y asiento */
+        gap: 15px;
+    }
+    
+    .modal-reserva .btn-reservar {
+        width: 100%; /* Botón de reserva a ancho completo */
+        margin-top: 20px;
+        padding: 15px;
+    }
+
+    /* -------------------------------------- */
+    /* 5. Footer (Asegurar que las secciones se apilen) */
+    /* -------------------------------------- */
+    .footer-content {
+        grid-template-columns: 1fr; 
+        gap: 30px;
+        padding: 0 15px;
+    }
+}
 /* ============================================================
    UTILIDADES
    ============================================================ */
@@ -2545,6 +2681,7 @@ tbody tr:hover {
    FIN DEL CSS
 
    ============================================================ */
+
 
 
 
