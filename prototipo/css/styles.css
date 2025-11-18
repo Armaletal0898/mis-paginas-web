@@ -2055,6 +2055,127 @@ tbody tr:hover {
   }
 }
 
+
+
+/* =============================================================
+   RESPONSIVE INDEX
+   ============================================================= */
+
+@media (max-width: 768px) {
+    
+    /* -------------------------------------- */
+    /* 1. HEADER y LOGO */
+    /* -------------------------------------- */
+    .header {
+        flex-direction: column;
+        align-items: center;
+        padding: 15px 20px;
+        gap: 15px;
+    }
+
+    .header .logo {
+        flex-direction: column;
+        text-align: center;
+        /* Ajustar el tamaño del logo para móviles */
+        font-size: 1.5rem !important; 
+    }
+    
+    .header .logo img {
+        height: 35px; /* Icono más pequeño */
+    }
+
+    /* Ocultar el texto "Mas Que Volar Te Protegemos" en pantallas pequeñas */
+    .header .logo span {
+        display: none; 
+    }
+
+    .header .nav {
+        /* Los botones de navegación también en columna o distribuidos */
+        width: 100%;
+        justify-content: space-around;
+        gap: 10px;
+    }
+
+    /* Asegurar que los botones no sean demasiado grandes */
+    .header .nav button,
+    .header .nav .nombre-usuario {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+
+    /* -------------------------------------- */
+    /* 2. SECCIÓN HERO / BÚSQUEDA */
+    /* -------------------------------------- */
+    .hero-home {
+        padding: 60px 20px;
+    }
+
+    .hero-home h1 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+    /* Estilos del formulario de búsqueda */
+    .form-busqueda {
+        flex-direction: column; /* Apilar los inputs verticalmente */
+        gap: 15px;
+        padding: 20px;
+    }
+    
+    .form-busqueda input, 
+    .form-busqueda button {
+        width: 100%; /* Ocupar todo el ancho disponible */
+        font-size: 1rem;
+    }
+    
+    /* Ocultar el selector de moneda para simplificar la UI móvil (opcional) */
+    #btnMoneda {
+        order: 5; /* Mover el botón de moneda al final */
+        background-color: var(--secondary);
+        color: var(--primary-dark);
+        font-weight: bold;
+    }
+
+    /* -------------------------------------- */
+    /* 3. LISTA DE VUELOS (RESULTADOS) */
+    /* -------------------------------------- */
+    .vuelos-container {
+        padding: 30px 15px;
+    }
+    
+    #listaVuelos {
+        grid-template-columns: 1fr; /* Una sola columna para los resultados */
+        gap: 20px;
+    }
+
+    .vuelo-item {
+        padding: 20px;
+        text-align: left;
+    }
+
+    /* -------------------------------------- */
+    /* 4. FOOTER */
+    /* -------------------------------------- */
+    .footer-content {
+        /* Cambiar a una columna simple */
+        grid-template-columns: 1fr; 
+        gap: 30px;
+        padding: 0 15px;
+    }
+
+    .footer-section h4 {
+        margin-top: 15px;
+        font-size: 1.2rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        padding-bottom: 5px;
+    }
+
+    .footer-section p {
+        font-size: 0.9rem;
+    }
+}
+
+
 /* ============================================================
    UTILIDADES
    ============================================================ */
@@ -2174,4 +2295,5 @@ tbody tr:hover {
 
 /* ============================================================
    FIN DEL CSS
+
    ============================================================ */
