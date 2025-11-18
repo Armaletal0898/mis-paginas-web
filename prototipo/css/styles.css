@@ -2104,13 +2104,13 @@ tbody tr:hover {
 
 
 /* =============================================================
-   @MEDIA QUERIES - Ajustes para Móviles (Hasta 768px)
+   @MEDIA QUERIES - Ajustes para Móviles (Login y Registro)
    ============================================================= */
 
 @media (max-width: 768px) {
     
     /* -------------------------------------- */
-    /* HEADER (Ajuste para móviles) */
+    /* Ajustes generales del Header en Móvil */
     /* -------------------------------------- */
     .header {
         flex-direction: column;
@@ -2119,22 +2119,26 @@ tbody tr:hover {
         gap: 15px;
     }
 
-    /* Ocultar el eslogan para ahorrar espacio vertical */
+    /* Ocultar el eslogan largo para ahorrar espacio vertical */
     .header .logo span {
         display: none; 
     }
     
     /* -------------------------------------- */
-    /* FORMULARIOS (LOGIN Y REGISTRO) */
+    /* FORMULARIOS (LOGIN y REGISTRO) */
     /* -------------------------------------- */
     .form-box {
-        /* Permite que ocupe casi todo el ancho disponible */
+        /* Ocupar casi todo el ancho disponible para ser prominente */
         max-width: 90%; 
+        /* Reducir los márgenes superior/inferior para aprovechar la pantalla */
         margin: 20px auto; 
         padding: 20px; /* Reducir el padding interno */
-        box-shadow: none !important; /* Eliminar la sombra pesada en móviles */
-        border: 1px solid var(--border-color); /* Usar un borde simple para delimitación */
-        /* Asegurarse de que el formulario cubra el área visible si es corto */
+        
+        /* Eliminar la sombra pesada en móviles y usar un borde sutil */
+        box-shadow: none !important; 
+        border: 1px solid var(--border-color); 
+        
+        /* Asegurarse de que el formulario no imponga una altura mínima si es corto */
         min-height: auto; 
     }
 
@@ -2145,9 +2149,9 @@ tbody tr:hover {
     .form-box input, 
     .form-box select, 
     .form-box button {
-        /* Aumentar el padding para facilitar la interacción táctil */
+        /* Aumentar el padding para facilitar la interacción táctil (usando el dedo) */
         padding: 15px 12px; 
-        font-size: 1.05rem;
+        font-size: 1.05rem; /* Un poco más grande para mejor lectura */
     }
 
     .form-box button {
@@ -2159,7 +2163,8 @@ tbody tr:hover {
 @media (max-width: 480px) {
     .form-box {
         margin: 10px;
-        max-width: calc(100% - 20px); /* Ocupar casi todo el ancho con un pequeño margen */
+        /* Ocupar 100% menos los márgenes de 10px */
+        max-width: calc(100% - 20px); 
     }
 }
 
@@ -2284,4 +2289,5 @@ tbody tr:hover {
    FIN DEL CSS
 
    ============================================================ */
+
 
