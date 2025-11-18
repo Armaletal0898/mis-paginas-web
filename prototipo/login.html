@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>AeroG7</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    .form-box {
+      max-width: 420px;
+      margin: 60px auto;
+      padding: 24px;
+      border-radius: 10px;
+      background: #fff;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    }
+
+    .form-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .form-box input,
+    .form-box button {
+      width: 100%;
+      margin: 8px 0;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+      font-size: 1rem;
+    }
+
+    .form-box button {
+      background: #007bff;
+      color: white;
+      border: 0;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .form-box button:hover {
+      opacity: 0.85;
+    }
+
+    .form-box a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .form-box a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="logo"><a href="index.html"><img src="logo9.png" height="40px">Mas que volar te Protegemos</a></div>
+</header>
+
+<section class="form-box">
+  <h2>Iniciar sesión</h2>
+
+  <form id="formLogin">
+    <input type="email" id="emailInput" placeholder="Correo electrónico" required />
+    <input type="password" id="passwordInput" placeholder="Contraseña" required />
+
+    <button type="submit">Iniciar sesión</button>
+          <!-- 🔹 Botón para volver al inicio -->
+      <div class="extra-links">
+        <a href="index.html" class="btn-secondary">← Volver al inicio</a>
+      </div>
+  </form>
+
+  <p>¿No tienes cuenta? <a href="register.html">Regístrate aquí</a></p>
+  <p>¿Se te olvido la contraseña? <a href="recuperar.html">Recuperala aqui</a></p>
+</section>
+
+<script src="js/app.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('formLogin');
+    if (form) form.addEventListener('submit', login);
+  });
+</script>
+
+</body>
+</html>

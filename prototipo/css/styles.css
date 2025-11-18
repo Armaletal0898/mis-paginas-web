@@ -1,0 +1,2177 @@
+/********************************************
+ * styles-mejorado.css - AeroG7 Sistema de Aerolínea
+ * CSS COMPLETO Y MEJORADO - Compatible con todos los HTMLs
+ * Versión 2.1 - Optimizada
+ ********************************************/
+
+/* ============================================================
+   VARIABLES CSS Y RESET
+   ============================================================ */
+:root {
+  --primary: #003366;
+  --primary-dark: #002244;
+  --secondary: #ffcc00;
+  --light: #f4f6f8;
+  --accent: #007bff;
+  --accent-hover: #0056b3;
+  --success: #28a745;
+  --warning: #ffc107;
+  --danger: #dc3545;
+  --info: #17a2b8;
+  --text-dark: #333;
+  --text-muted: #6c757d;
+  --border-color: #ddd;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 4px 20px rgba(0, 0, 0, 0.15);
+  --transition: all 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  background-color: var(--light);
+  color: var(--text-dark);
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.header {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-lg);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo a {
+  color: white;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  font-size: 1.3rem;
+  transition: var(--transition);
+}
+
+.logo a:hover {
+  transform: scale(1.05);
+}
+
+.logo img {
+  height: 40px;
+  width: auto;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.nav button,
+.nav .btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  color: white;
+  transition: var(--transition);
+  font-size: 0.95rem;
+  text-decoration: none;
+  display: inline-block;
+}
+
+/* ============================================================
+   BOTONES PRINCIPALES
+   ============================================================ */
+#btnLogin {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+}
+
+#btnLogin:hover {
+  background: linear-gradient(135deg, #0056b3, #004085);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+#btnRegistro {
+  background: linear-gradient(135deg, #28a745, #218838);
+}
+
+#btnRegistro:hover {
+  background: linear-gradient(135deg, #1e7e34, #1e7e34);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+#btnContacto {
+  background: linear-gradient(135deg, #1e27ae, #1e27ae);
+}
+
+#btnContacto:hover {
+  background: linear-gradient(135deg, #100f5e, #100f5e);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+#btnRecuperar {
+  background: linear-gradient(135deg, #edd605, #edd605);
+}
+
+#btnRecuperar:hover {
+  background: linear-gradient(135deg, #6b7200, #6b7200);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+#btnLegal {
+  background: linear-gradient(135deg, #fd5800, #fd5800);
+}
+
+#btnLegal:hover {
+  background: linear-gradient(135deg, #7b2b00, #7b2b00);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+#btnDashboard {
+  background: linear-gradient(135deg, #17a2b8, #117a8b);
+}
+
+#btnDashboard:hover {
+  background: linear-gradient(135deg, #117a8b, #0c5460);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(23, 162, 184, 0.3);
+}
+
+#btnLogout {
+  background: linear-gradient(135deg, #dc3545, #c82333);
+}
+
+#btnLogout:hover {
+  background: linear-gradient(135deg, #c82333, #bd2130);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+}
+
+/* ============================================================
+   PÁGINAS DE AUTENTICACIÓN (LOGIN/REGISTER/RECUPERAR)
+   ============================================================ */
+.login-body,
+.support-body,
+body:has(.form-box) {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+/* Ocultar el header en páginas de login */
+body:has(.form-box) .header {
+  background: rgba(0, 51, 102, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.login-card,
+.form-box {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  padding: 50px 40px;
+  max-width: 420px;
+  width: 100%;
+  animation: slideUp 0.5s ease;
+  position: relative;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Icono de avión centrado */
+.login-card::before,
+.form-box::before {
+  content: "✈️";
+  font-size: 4rem;
+  display: block;
+  text-align: center;
+  margin-bottom: 20px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.login-card h2,
+.form-box h2 {
+  color: var(--primary);
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+.subtitle {
+  text-align: center;
+  color: var(--text-muted);
+  margin-bottom: 30px;
+  font-size: 0.9rem;
+}
+
+.login-form,
+.form-box form {
+  margin-bottom: 25px;
+}
+
+.login-form label,
+.form-box label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--text-dark);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Iconos para los labels */
+.login-form label::before,
+.form-box label::before {
+  content: "📧";
+  font-size: 1.1rem;
+}
+
+.login-form label:nth-of-type(2)::before,
+.form-box label:has(+ input[type="password"])::before {
+  content: "🔒";
+}
+
+.login-form input,
+.login-form select,
+.login-form textarea,
+.form-box input,
+.form-box select,
+.form-box textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: var(--transition);
+  margin-bottom: 20px;
+  background: #f9f9f9;
+}
+
+.login-form input:focus,
+.login-form select:focus,
+.login-form textarea:focus,
+.form-box input:focus,
+.form-box select:focus,
+.form-box textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1);
+  background: white;
+}
+
+.login-form input::placeholder,
+.form-box input::placeholder {
+  color: #999;
+  font-size: 0.95rem;
+}
+
+.login-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+  text-transform: none;
+  letter-spacing: 0.3px;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(0, 123, 255, 0.5);
+  background: linear-gradient(135deg, #0056b3, #004085);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  display: inline-block;
+  padding: 12px 24px;
+  background: white;
+  color: var(--accent);
+  border: 2px solid var(--accent);
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+  text-align: center;
+}
+
+.btn-secondary:hover {
+  background: var(--accent);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+/* Enlace "Volver al inicio" en recuperar contraseña */
+.extra-links {
+  text-align: center;
+  margin-top: 25px;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.extra-links a,
+.link-accent {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.extra-links a:hover,
+.link-accent:hover {
+  text-decoration: underline;
+  color: var(--accent-hover);
+}
+
+/* Separador de secciones */
+.extra-links::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #e0e0e0, transparent);
+  margin-bottom: 20px;
+}
+
+.success-msg {
+  display: none;
+  background: #d4edda;
+  color: #155724;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 15px;
+  text-align: center;
+  font-weight: 600;
+}
+
+
+
+/* ==============================================
+   ESTILOS PARA MENSAJES DE FORMULARIO
+   ============================================== */
+.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: 600;
+}
+
+.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: 600;
+}
+
+/* ============================================================
+   HERO SECTION Y BÚSQUEDA (INDEX)
+   ============================================================ */
+
+.hero {
+  background: linear-gradient(135deg, #003366 0%, #0066cc 100%);
+  color: white;
+  padding: 80px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,165.3C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+  background-size: cover;
+  opacity: 0.3;
+}
+
+/* Sección de Búsqueda Mejorada */
+.busqueda {
+  padding: 60px 20px;
+  text-align: center;
+  background: white;
+  margin: 40px auto;
+  max-width: 1200px;
+  border-radius: 20px;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.busqueda::before {
+  content: "✈️";
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 4rem;
+  opacity: 0.1;
+  animation: float 3s ease-in-out infinite;
+}
+
+.busqueda h2 {
+  color: var(--primary);
+  margin-bottom: 40px;
+  font-size: 2.5rem;
+  font-weight: 700;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.busqueda h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--secondary));
+  border-radius: 2px;
+}
+
+.form-busqueda {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px;
+  background: #f8f9fa;
+  border-radius: 15px;
+  box-shadow: inset 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.form-busqueda input {
+  padding: 18px 20px;
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  font-size: 1.1rem;
+  transition: var(--transition);
+  background: white;
+  font-weight: 500;
+}
+
+.form-busqueda input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.form-busqueda input::placeholder {
+  color: #999;
+  font-weight: 400;
+}
+
+/* Sección de Vuelos Disponibles */
+section:has(#listaVuelos) {
+  padding: 60px 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+section:has(#listaVuelos) h2 {
+  color: var(--primary);
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+section:has(#listaVuelos) h2::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--secondary));
+  border-radius: 2px;
+}
+
+/* Contenedor del botón de moneda */
+section:has(#listaVuelos) > div:first-of-type {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+  gap: 15px;
+}
+
+/* Botón de Cambio de Moneda Mejorado */
+#btnMoneda {
+  background: linear-gradient(135deg, var(--secondary), #ffd700);
+  color: var(--primary);
+  padding: 14px 30px;
+  border-radius: 30px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 1.05rem;
+  box-shadow: 0 4px 15px rgba(255, 204, 0, 0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#btnMoneda::before {
+  content: "💱";
+  font-size: 1.3rem;
+}
+
+#btnMoneda:hover {
+  background: linear-gradient(135deg, #ffd700, #ffaa00);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(255, 204, 0, 0.5);
+}
+
+#btnMoneda:active {
+  transform: translateY(-1px);
+}
+
+/* Grid de Vuelos Mejorado - MÚLTIPLES FILAS CON BORDES */
+.contenedor-vuelos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 30px;
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Tarjetas de Vuelo - DISEÑO CON BORDES DEFINIDOS */
+.vuelo-card {
+  background: white;
+  border-radius: 12px;
+  overflow: visible;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: var(--transition);
+  border: 1.5px solid #d0d0d0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 20px;
+}
+
+.vuelo-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+  border-color: var(--accent);
+}
+
+/* Header del vuelo - ID */
+.vuelo-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0;
+  background: transparent;
+  border: none;
+  margin-bottom: 12px;
+}
+
+.vuelo-id {
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--text-dark);
+  display: block;
+  letter-spacing: 0.3px;
+}
+
+/* Ruta del vuelo - Origen → Destino */
+.vuelo-route {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0;
+  gap: 8px;
+  background: transparent;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.route-item {
+  display: inline;
+  flex: none;
+}
+
+.route-icon {
+  display: none;
+}
+
+.route-info {
+  display: inline;
+}
+
+.route-code {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-dark);
+  display: inline;
+}
+
+.route-city {
+  display: none;
+}
+
+.route-arrow {
+  font-size: 1rem;
+  color: var(--text-dark);
+  animation: none;
+  flex-shrink: 0;
+  display: inline;
+}
+
+/* Detalles del vuelo - Fecha y Hora */
+.vuelo-details {
+  padding: 0;
+  background: transparent;
+  border: none;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.detail-item {
+  display: inline;
+  align-items: center;
+  gap: 0;
+  color: var(--text-dark);
+  font-size: 0.95rem;
+  margin-bottom: 0;
+  margin-right: 5px;
+}
+
+.detail-icon {
+  display: none;
+}
+
+/* Footer del vuelo - Precio y Botón */
+.vuelo-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+  background: transparent;
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.vuelo-price {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.vuelo-price::before {
+  content: "USD";
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  font-weight: 700;
+  margin-right: 4px;
+}
+
+/* Botón Reservar - ESTILO SIMPLE CON BORDE */
+.btn-reservar {
+  background: white;
+  color: var(--text-dark);
+  border: 1.5px solid #333;
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 0.9rem;
+  box-shadow: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  white-space: nowrap;
+}
+
+.btn-reservar::before {
+  content: "";
+  display: none;
+}
+
+.btn-reservar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background: #f5f5f5;
+  border-color: #000;
+}
+
+.btn-reservar:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Estados sin resultados */
+.no-results {
+  text-align: center;
+  padding: 80px 20px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+  margin: 40px auto;
+  max-width: 600px;
+}
+
+.no-results-icon {
+  font-size: 6rem;
+  margin-bottom: 25px;
+  opacity: 0.3;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.5;
+  }
+}
+
+.no-results h3 {
+  color: var(--text-dark);
+  margin-bottom: 15px;
+  font-size: 2rem;
+}
+
+.no-results p {
+  color: var(--text-muted);
+  font-size: 1.2rem;
+}
+
+
+
+
+/* ============================================================
+   MODALES (MODAL RESERVA)
+   ============================================================ */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(3px);
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 40px;
+  border-radius: 20px;
+  max-width: 90%;
+  width: 650px;
+  box-shadow: 0 10px 50px rgba(0,0,0,0.3);
+  position: relative;
+  animation: modalFadeIn 0.3s ease-out;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modal-content h3 {
+  color: var(--primary);
+  margin-bottom: 25px;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.modal-content h3::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--secondary));
+  border-radius: 2px;
+}
+
+.modal-content p {
+  color: var(--text-dark);
+  margin-bottom: 20px;
+  line-height: 1.6;
+  font-size: 1.05rem;
+}
+
+.modal-content label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: var(--primary);
+  font-size: 1rem;
+}
+
+.modal-content input[type="number"],
+.modal-content input[type="text"] {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: var(--transition);
+  margin-bottom: 20px;
+  background: #f9f9f9;
+}
+
+.modal-content input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1);
+  background: white;
+}
+
+/* Contenedor de pasajeros */
+#pasajerosContainer {
+  max-height: 400px;
+  overflow-y: auto;
+  margin: 25px 0;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 15px;
+}
+
+.pasajero-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  border: 2px solid var(--border-color);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: var(--transition);
+}
+
+.pasajero-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.1);
+}
+
+.pasajero-card h4 {
+  color: var(--primary);
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pasajero-card h4::before {
+  content: "👤";
+  font-size: 1.3rem;
+}
+
+/* Botones del modal */
+.modal-content button {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: 10px;
+}
+
+.modal-content button:first-of-type {
+  background: linear-gradient(135deg, var(--success), #218838);
+  color: white;
+  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+}
+
+.modal-content button:first-of-type:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 25px rgba(40, 167, 69, 0.5);
+}
+
+.modal-content button:last-of-type {
+  background: white;
+  color: var(--text-muted);
+  border: 2px solid var(--border-color);
+}
+
+.modal-content button:last-of-type:hover {
+  background: #f8f9fa;
+  border-color: var(--text-muted);
+  transform: translateY(-2px);
+}
+
+/* Scrollbar personalizado para el modal */
+.modal-content::-webkit-scrollbar,
+#pasajerosContainer::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track,
+#pasajerosContainer::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb,
+#pasajerosContainer::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 10px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover,
+#pasajerosContainer::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-hover);
+}
+
+
+
+/* ============================================================
+   DASHBOARD
+   ============================================================ */
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+  border-bottom: 2px solid var(--border-color);
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  padding: 12px 24px;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: var(--transition);
+  font-size: 1rem;
+}
+
+.tab-btn:hover {
+  color: var(--accent);
+}
+
+.tab-btn.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.form-vuelo {
+  background: #f8f9fa;
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  align-items: end;
+}
+
+.form-vuelo input {
+  padding: 12px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.btn-vuelo {
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-vuelo:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+}
+
+/* ============================================================
+   TABLAS
+   ============================================================ */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+thead {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+}
+
+th {
+  padding: 15px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+td {
+  padding: 15px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+tbody tr:hover {
+  background: #f8f9fa;
+}
+
+.btn-guardar {
+  background: linear-gradient(135deg, var(--success), #218838);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-guardar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+}
+
+.btn-cancel {
+  background: var(--text-muted);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-cancel:hover {
+  background: #5a6268;
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   HISTORIAL DE RESERVAS
+   ============================================================ */
+
+#panelUsuario {
+  /* ancho máximo para el contenido principal del historial */
+  max-width: 1000px; /* Ajusta este valor al ancho deseado */
+  margin: 40px auto; /* Centra el panel en la página */
+  padding: 40px; /* padding interno */
+  background: white; /* fondo blanco para que se vea como tarjeta principal */
+  border-radius: 15px; 
+  box-shadow: var(--shadow-lg); 
+}
+
+/* botón principal "Buscar vuelos" */
+.btn-ir-vuelos {
+  display: block;
+  margin: 20px auto; 
+}
+
+/* Centra los títulos del historial */
+#panelUsuario h2 {
+    text-align: center;
+}
+
+
+
+
+.tabs-historial {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+  justify-content: center;
+  
+}
+
+.tab-historial-btn {
+  padding: 12px 24px;
+  cursor: pointer;
+  background: #e9ecef;
+  border-radius: 25px;
+  color: var(--text-dark);
+  font-weight: 600;
+  transition: var(--transition);
+  border: 2px solid transparent;
+  margin: 20px auto;
+}
+
+.tab-historial-btn:hover {
+  background: #dee2e6;
+}
+
+.tab-historial-btn.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+  
+  
+}
+
+.btn-ir-vuelos {
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 1.1rem;
+  display: inline-block; /* O 'block' si no quieres los íconos centrados */
+  align-items: center;
+  gap: 10px;
+  /* 'inline-block' lo centra dentro del div con text-align: center */
+  margin: 20px auto; 
+}
+
+.btn-ir-vuelos:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
+  
+}
+
+
+
+
+
+/* ============================================================
+   HISTORIAL DE RESERVAS 
+   ============================================================ */
+
+
+.reserva-item {
+  background: white;
+  padding: 30px ; /* Aumentamos el padding para un look más premium */
+  margin-bottom: 25px; 
+  border-radius: 18px; /* Bordes suaves y modernos */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada y elegante */
+  border: none; /* Quitamos el borde para un look más flotante */
+  transition: var(--transition);
+  position: relative; 
+  
+}
+
+.reserva-item:hover {
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15); 
+  transform: translateY(-4px); /* Efecto de levantamiento más notorio */
+}
+
+/* Contenedor Flex para la información del vuelo y el total */
+.reserva-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Alinea arriba el texto */
+    margin-bottom: 20px;
+}
+
+/* Encabezado del vuelo (Vuelo: ALX101) */
+.reserva-item strong {
+  font-weight: 800; /* Más audaz */
+  font-size: 1.6rem; 
+  color: var(--primary); 
+  display: block;
+  margin-bottom: 15px;
+  /* La línea de separación la movemos al contenedor de detalles */
+  border-bottom: 1px solid var(--border-color); 
+  padding-bottom: 12px;
+}
+
+/* Estilo para los detalles del vuelo (SDQ - PUJ, Fecha) */
+.reserva-item p {
+  font-size: 1.1rem;
+  color: var(--text-dark);
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+/* Estilo para el total (DOP 7875) */
+.reserva-item .total {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--primary-dark); /* Usamos el azul oscuro para darle más seriedad que el rojo */
+  margin: 0; /* Limpiamos el margen si usamos el contenedor flex */
+  padding-left: 20px; /* Separación visual del texto */
+  white-space: nowrap; /* Evita que el total se rompa */
+}
+
+.reserva-item .total span {
+    font-size: 0.7em;
+    font-weight: 600;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Contenedor de botones (Pagar, Cancelar) */
+.reserva-item .acciones-reserva {
+  display: flex;
+  justify-content: flex-end; /* Alineamos los botones a la derecha */
+  gap: 15px;
+  margin-top: 25px;
+  border-top: 1px dashed var(--border-color); /* Separación visual elegante */
+  padding-top: 15px;
+}
+
+/* Botones dentro de la reserva (Pagar/Cancelar) */
+.reserva-item .btn-pagar,
+.reserva-item .btn-cancelar {
+  padding: 10px 20px; /* Más ancho */
+  border-radius: 30px; /* Completamente redondeado */
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Estilo de pago */
+.reserva-item .btn-pagar {
+  background: linear-gradient(135deg, var(--success), #42a047); /* Degradado suave */
+  box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+  color: white;
+}
+
+.reserva-item .btn-pagar:hover {
+  background: linear-gradient(135deg, #42a047, var(--success));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(76, 175, 80, 0.4);
+}
+
+/* Estilo de cancelación */
+.reserva-item .btn-cancelar {
+  background: white;
+  border: 2px solid var(--danger); /* Borde de color de peligro */
+  color: var(--danger);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.reserva-item .btn-cancelar:hover {
+  background: var(--danger);
+  color: white;
+  transform: translateY(-2px);
+}
+
+
+/* ============================================================
+   FAQ Y CONTACTO (contacto.html)
+   ============================================================ */
+.faq-section,
+.contact-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+.section-title {
+  color: var(--primary);
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 40px;
+  font-weight: 700;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--secondary));
+  border-radius: 2px;
+}
+
+/* FAQ Accordion Styles */
+.faq-list {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.faq-item {
+  background: white;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  border: 2px solid transparent;
+  overflow: hidden;
+}
+
+.faq-item:hover {
+  box-shadow: var(--shadow-lg);
+  border-color: var(--accent);
+  transform: translateY(-3px);
+}
+
+.faq-item[open] {
+  border-color: var(--accent);
+  box-shadow: 0 4px 20px rgba(0, 123, 255, 0.15);
+}
+
+.faq-question {
+  padding: 20px 25px;
+  font-weight: 600;
+  color: var(--primary);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: var(--transition);
+  user-select: none;
+  font-size: 1.1rem;
+}
+
+.faq-question:hover {
+  background: #f8f9fa;
+  color: var(--accent);
+}
+
+/* Icono de flecha personalizado */
+.faq-question::after {
+  content: "▼";
+  color: var(--accent);
+  font-size: 0.9rem;
+  transition: transform 0.3s ease;
+}
+
+.faq-item[open] .faq-question::after {
+  transform: rotate(180deg);
+}
+
+/* Ocultar el marcador por defecto del summary */
+.faq-question::-webkit-details-marker {
+  display: none;
+}
+
+.faq-answer {
+  padding: 0 25px 25px 25px;
+  color: var(--text-dark);
+  line-height: 1.8;
+  border-top: 1px solid var(--border-color);
+  animation: fadeIn 0.3s ease;
+  font-size: 1rem;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Contact Section Grid */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.contact-info .card,
+.contact-form .card {
+  background: white;
+  padding: 35px;
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  border: 2px solid transparent;
+  height: 100%;
+}
+
+.contact-info .card:hover,
+.contact-form .card:hover {
+  box-shadow: var(--shadow-lg);
+  border-color: var(--accent);
+  transform: translateY(-5px);
+}
+
+.contact-info h3,
+.contact-form h3 {
+  color: var(--primary);
+  margin-bottom: 25px;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+/* Contact Details */
+.contact-detail {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 25px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  transition: var(--transition);
+}
+
+.contact-detail:hover {
+  background: #e9ecef;
+  transform: translateX(5px);
+}
+
+.contact-icon {
+  font-size: 2rem;
+  min-width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-detail strong {
+  display: block;
+  color: var(--primary);
+  margin-bottom: 5px;
+  font-size: 1rem;
+}
+
+.contact-detail p {
+  color: var(--text-dark);
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Contact Form */
+.form-group-contact {
+  margin-bottom: 20px;
+}
+
+.form-group-contact input,
+.form-group-contact textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: var(--transition);
+  font-family: inherit;
+  background: #f9f9f9;
+}
+
+.form-group-contact input:focus,
+.form-group-contact textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1);
+  background: white;
+}
+
+.form-group-contact textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+
+.form-group-contact input::placeholder,
+.form-group-contact textarea::placeholder {
+  color: #999;
+  font-size: 0.95rem;
+}
+
+/* Botón de enviar mensaje */
+.contact-form .btn-reservar {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.contact-form .btn-reservar:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 25px rgba(0, 123, 255, 0.5);
+  background: linear-gradient(135deg, var(--accent-hover), var(--primary));
+}
+
+.contact-form .btn-reservar:active {
+  transform: translateY(-1px);
+}
+
+/* Responsive para FAQ y Contacto */
+@media (max-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .faq-question {
+    font-size: 1rem;
+    padding: 15px 20px;
+  }
+
+  .faq-answer {
+    padding: 0 20px 20px 20px;
+    font-size: 0.95rem;
+  }
+
+  .contact-info .card,
+  .contact-form .card {
+    padding: 25px;
+  }
+
+  .contact-detail {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .contact-icon {
+    min-width: auto;
+  }
+}
+
+/* =============================================================
+   ESTILOS PARA legal.html (Páginas Legales: Términos, Privacidad, Cookies)
+   ============================================================= */
+
+/* 1. Contenedor principal de la página */
+.legal-page-container {
+    padding: 40px 20px;
+    /* Usamos --light para un fondo limpio y sin distracciones */
+    background-color: var(--light); 
+    /* Asegura que la tarjeta esté centrada y el footer abajo */
+    min-height: calc(100vh - 120px); 
+    display: flex;
+    justify-content: center; 
+    align-items: flex-start; /* Alinear el contenido al inicio de la página */
+}
+
+/* 2. Tarjeta principal del contenido (El cuerpo del documento legal) */
+.legal-card {
+    background-color: white;
+    border-radius: 10px; /* Bordes suaves */
+    box-shadow: var(--shadow-lg); /* Una sombra destacada para el documento */
+    padding: 40px;
+    max-width: 950px; /* Ancho amplio para mejor lectura */
+    width: 100%;
+    margin: 20px 0; 
+    color: var(--text-dark);
+}
+
+/* 3. Estilos de Tipografía */
+.legal-card h1 {
+    color: var(--primary); /* Título principal en color corporativo */
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    /* Línea de separación sutil */
+    border-bottom: 3px solid var(--secondary); 
+    padding-bottom: 15px;
+}
+
+.legal-content section {
+    margin-bottom: 35px;
+    padding-bottom: 20px;
+}
+
+.legal-content h2 {
+    color: var(--primary-dark); /* Un color oscuro para los títulos de sección */
+    font-size: 1.8rem;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.legal-content h3 {
+    color: var(--text-dark);
+    font-size: 1.3rem;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    /* Usa un borde de acento a la izquierda para estructura */
+    border-left: 3px solid var(--secondary); 
+    padding-left: 10px;
+}
+
+.legal-content p {
+    line-height: 1.75; /* Mejor espaciado para lectura cómoda */
+    margin-bottom: 15px;
+    font-size: 1.05rem;
+    color: var(--text-dark);
+}
+
+.legal-content ul {
+    list-style-type: disc;
+    margin-left: 30px;
+    margin-bottom: 20px;
+}
+
+.legal-content a {
+    color: var(--accent); /* Color de enlace */
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.legal-content a:hover {
+    text-decoration: underline;
+    color: var(--accent-hover);
+}
+
+/* 4. Estilos para el Selector de Documentos interno */
+.legal-selector {
+    padding-top: 30px;
+    margin-top: 30px;
+    border-top: 1px solid var(--border-color); /* Separador visual */
+}
+
+.legal-selector p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+}
+
+.btn-legal-nav {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: var(--secondary); 
+    color: var(--primary) !important; /* Texto primario sobre el fondo secundario */
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 700;
+    transition: var(--transition);
+    border: 2px solid var(--secondary);
+    box-shadow: var(--shadow);
+}
+
+.btn-legal-nav:hover {
+    background-color: var(--primary); /* Invertir colores al pasar el ratón */
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* =============================================================
+   Estilos de Header para la consistencia del botón
+   ============================================================= */
+.header .nav {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Espacio entre los botones/elementos de navegación */
+}
+
+.btn-logout {
+    background-color: var(--danger) !important;
+    color: white !important;
+    border: none !important;
+    padding: 8px 15px !important;
+    border-radius: 20px !important; 
+    font-weight: bold !important;
+    cursor: pointer !important;
+    transition: var(--transition); 
+    margin-left: 15px !important;
+    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.2) !important; 
+    text-decoration: none !important;
+    line-height: 1; 
+}
+
+.btn-logout:hover {
+    background-color: #bd2130 !important; /* Un rojo más oscuro */
+    box-shadow: 0 6px 12px rgba(220, 53, 69, 0.3) !important;
+    transform: translateY(-1px); 
+}
+
+/* ============================================================
+   SOPORTE
+   ============================================================ */
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.hero.card {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 50px rgba(0,0,0,0.2);
+  max-width: 800px;
+  width: 100%;
+}
+
+.hero h1 {
+  color: var(--primary);
+  margin-bottom: 15px;
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+.hero .small {
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.support-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 10px;
+}
+
+.tab-panel {
+  padding: 20px 0;
+}
+
+.support-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.support-item i {
+  font-size: 2rem;
+  color: var(--accent);
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  padding: 60px 40px 20px;
+  margin-top: auto;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto 40px;
+}
+
+.footer-section h4 {
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+  color: var(--secondary);
+}
+
+.footer-section p {
+  opacity: 0.9;
+  line-height: 1.8;
+}
+
+.footer-section ul {
+  list-style: none;
+}
+
+.footer-section li {
+  margin-bottom: 10px;
+}
+
+.footer-section a {
+  color: rgba(255,255,255,0.8);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.footer-section a:hover {
+  color: white;
+  padding-left: 5px;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.7);
+}
+
+.socials {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.socials a {
+  display: inline-flex;
+  width: 40px;
+  height: 40px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.socials a:hover {
+  background: rgba(255,255,255,0.2);
+  transform: translateY(-3px);
+}
+
+/* ============================================================
+   USER INFO
+   ============================================================ */
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+#nombreUsuario {
+  color: white;
+  font-weight: 600;
+  padding: 6px 12px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.nombre-usuario {
+  color: var(--secondary);
+  font-weight: bold;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+  .header {
+    padding: 15px 20px;
+  }
+
+  .nav {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .form-busqueda {
+    grid-template-columns: 1fr;
+  }
+
+  .contenedor-vuelos-grid,
+  .vuelos-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-vuelo {
+    grid-template-columns: 1fr;
+  }
+
+  .login-card,
+  .form-box {
+    padding: 30px 20px;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-content {
+    width: 95%;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 10px 15px;
+  }
+
+  .logo img {
+    height: 30px;
+  }
+
+  .hero h1 {
+    font-size: 1.5rem;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 12px;
+    font-size: 1rem;
+  }
+}
+
+/* ============================================================
+   UTILIDADES
+   ============================================================ */
+.text-center {
+  text-align: center;
+}
+
+.mt-3 {
+  margin-top: 20px;
+}
+
+.mb-3 {
+  margin-bottom: 20px;
+}
+
+/* ============================================================
+   SCROLL PERSONALIZADO
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-hover);
+}
+
+
+
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  padding: 60px 40px 20px;
+  margin-top: auto;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto 40px;
+}
+
+.footer-section h4 {
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+  color: var(--secondary);
+}
+
+.footer-section p {
+  opacity: 0.9;
+  line-height: 1.8;
+}
+
+.footer-section ul {
+  list-style: none;
+}
+
+.footer-section li {
+  margin-bottom: 10px;
+}
+
+.footer-section a {
+  color: rgba(255,255,255,0.8);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.footer-section a:hover {
+  color: white;
+  padding-left: 5px;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.7);
+}
+
+.socials {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.socials a {
+  display: inline-flex;
+  width: 40px;
+  height: 40px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.socials a:hover {
+  background: rgba(255,255,255,0.2);
+  transform: translateY(-3px);
+}
+
+/* ============================================================
+   FIN DEL CSS
+   ============================================================ */

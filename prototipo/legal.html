@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title id="pageTitle">AeroG7 - Documentos Legales</title>
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+   <header class="header">
+  <div class="logo"><a href="index.html"><img src="logo9.png" height="40px">Mas que volar te Protegemos</a></div>
+
+  <nav class="nav">
+    <button onclick="location.href='index.html'" id="btnRegistro">Volver al Inicio</button>
+    <button onclick="location.href='contacto.html'" id="btnContacto">contacto</button>
+    <button onclick="location.href='recuperar.html'" id="btnRecuperar">recuperar</button>
+    <span id="nombreUsuario" class="nombre-usuario"></span>
+    <button onclick="location.href='dashboard.html'" id="btnDashboard" style="display:none;">Mi Panel</button>
+    <button onclick="logout()" id="btnLogout" style="display:none;">Cerrar sesión</button>
+  </nav>
+</header>
+
+    <main class="legal-page-container">
+        <div class="legal-card">
+            <h1 id="legalTitle">Cargando Documento...</h1> 
+
+            <div class="legal-content" id="legalContent">
+                <p style="text-align: center;">Por favor, seleccione un documento legal.</p>
+            </div>
+            
+            <div class="legal-selector" style="text-align: center; margin-top: 30px;">
+                <p>O navega a:</p>
+                <a href="legal.html?page=terminos" class="btn-legal-nav">Términos y Condiciones</a>
+                <a href="legal.html?page=privacidad" class="btn-legal-nav">Política de Privacidad</a>
+                <a href="legal.html?page=cookies" class="btn-legal-nav">Política de Cookies</a>
+            </div>
+            
+        </div>
+    </main>
+
+   <footer class="footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>AeroG7</h4>
+            <p style="font-size: 0.9rem;">Tu viaje comienza aquí.</p>
+        </div>
+        <div class="footer-section">
+            <h4>Enlaces Rápidos</h4>
+            <ul>
+                <li><a href="index.html">Buscar Vuelos</a></li>
+                <li><a href="dashboard.html">Mi Cuenta / Dashboard</a></li>
+                <li><a href="contacto.html">FAQ y Contacto</a></li>
+            </ul>
+        </div>
+        
+</footer>
+
+    <script src="js/app.js"></script>
+    
+    <script>
+        // Función para obtener parámetros de la URL
+        function obtenerParametroURL(nombre) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(nombre);
+        }
+
+        // Función con todo el contenido
+        function obtenerContenidoLegal(pagina) {
+            switch (pagina) {
+                case 'terminos':
+                    return {
+                        title: 'Términos y Condiciones',
+                        content: `
+                            <section>
+                                <h2>1. Aceptación de los Términos</h2>
+                                <p>Al acceder y utilizar los servicios de AeroG7, usted acepta estar sujeto a los presentes Términos y Condiciones. Estos constituyen un acuerdo legal vinculante entre usted y AeroG7.</p>
+                            </section>
+                            <section>
+                                <h2>2. Uso de la Plataforma</h2>
+                                <h3>2.1. Registro de Cuenta</h3>
+                                <p>Usted es responsable de mantener la confidencialidad de su contraseña y de todas las actividades que ocurran bajo su cuenta.</p>
+                                <h3>2.2. Conducta del Usuario</h3>
+                                <p>Se compromete a utilizar la plataforma de manera legal y ética, sin realizar actividades que puedan dañar, deshabilitar o sobrecargar los servicios de AeroG7.</p>
+                            </section>
+                            <section>
+                                <h2>3. Reservas y Pagos</h2>
+                                <p>Todas las reservas de vuelos están sujetas a disponibilidad y a las condiciones específicas de cada aerolínea. Los precios están sujetos a cambios sin previo aviso hasta que la reserva sea confirmada y pagada. AeroG7 no es responsable por cambios en los horarios de vuelos.</p>
+                            </section>
+                            <section>
+                                <h2>4. Ley Aplicable</h2>
+                                <p>Estos Términos y Condiciones se rigen e interpretan de acuerdo con las leyes de la República Dominicana.</p>
+                            </section>
+                        `
+                    };
+                case 'privacidad':
+                    return {
+                        title: 'Política de Privacidad',
+                        content: `
+                            <section>
+                                <h2>1. Información que Recopilamos</h2>
+                                <h3>1.1. Información Personal</h3>
+                                <p>Recopilamos información que usted nos proporciona directamente, como nombre, dirección de correo electrónico, información de pago y preferencias de viaje.</p>
+                            </section>
+                            <section>
+                                <h2>2. Cómo Utilizamos la Información</h2>
+                                <p>Utilizamos la información para: procesar sus reservas, personalizar su experiencia, mejorar nuestros servicios y comunicarnos con usted.</p>
+                            </section>
+                            <section>
+                                <h2>3. Compartir Información</h2>
+                                <p>No vendemos ni alquilamos su información personal. La compartimos con aerolíneas y proveedores de servicios de viaje para completar sus reservas y con autoridades legales cuando es requerido.</p>
+                            </section>
+                            <section>
+                                <h2>4. Seguridad de la Información</h2>
+                                <p>Implementamos medidas de seguridad técnicas y organizativas para proteger su información.</p>
+                            </section>
+                        `
+                    };
+                case 'cookies':
+                    return {
+                        title: 'Política de Cookies',
+                        content: `
+                            <section>
+                                <h2>1. ¿Qué son las Cookies?</h2>
+                                <p>Las cookies son pequeños archivos de texto que se almacenan en su dispositivo para recordar su navegador o dispositivo y almacenar información sobre sus preferencias.</p>
+                            </section>
+                            <section>
+                                <h2>2. ¿Cómo Usamos las Cookies?</h2>
+                                <p>Utilizamos cookies esenciales (para funcionalidad), de rendimiento (para estadísticas anónimas) y de publicidad (para anuncios relevantes).</p>
+                            </section>
+                            <section>
+                                <h2>3. Gestión de Cookies</h2>
+                                <p>Puede configurar su navegador para que le notifique cuando se envía una cookie o para rechazarlas por completo. Deshabilitar las cookies puede afectar la funcionalidad del sitio.</p>
+                            </section>
+                        `
+                    };
+                default:
+                    return {
+                        title: 'Documentos Legales de AeroG7',
+                        content: `<p style="text-align: center; font-size: 1.2rem; margin-top: 50px;">Bienvenido a la sección de documentos legales. Por favor, seleccione un documento para ver su contenido.</p>`
+                    };
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // Llama a la función para actualizar el estado del header (login/logout)
+            if (typeof actualizarEstadoHeader === 'function') {
+                actualizarEstadoHeader();
+            }
+
+            const pagina = obtenerParametroURL('page');
+            const contenidoData = obtenerContenidoLegal(pagina);
+            
+            // Actualiza el título de la página (en la pestaña del navegador)
+            document.getElementById('pageTitle').textContent = `AeroG7 - ${contenidoData.title}`;
+
+            // Actualiza el título H1 y el contenido principal
+            document.getElementById('legalTitle').textContent = contenidoData.title;
+            document.getElementById('legalContent').innerHTML = contenidoData.content;
+        });
+    </script>
+</body>
+</html>
