@@ -417,7 +417,7 @@ body:has(.form-box) .header {
   font-weight: 600;
 }
 
-  
+
 
     .form-box {
       max-width: 420px;
@@ -465,6 +465,29 @@ body:has(.form-box) .header {
       text-decoration: underline;
     }
   
+
+     .form-box { 
+      max-width:420px; 
+      margin:40px auto; 
+      padding:24px; 
+      border-radius:10px; 
+      background:#fff; 
+      box-shadow:0 6px 20px rgba(0,0,0,0.08); 
+    }
+
+    .form-box input, .form-box select, .form-box button { 
+      width:100%; 
+      margin:8px 0; 
+      padding:10px; 
+      border-radius:6px; 
+      border:1px solid #ddd; 
+    }
+
+    .form-box button { 
+      background:#007bff; 
+      color:white; 
+      border:0; 
+      cursor:pointer; }
 
 /* ==============================================
    ESTILOS PARA MENSAJES DE FORMULARIO
@@ -1151,6 +1174,34 @@ section:has(#listaVuelos) > div:first-of-type {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
 }
+
+/* =============================================================
+   AJUSTE DE CONTENEDOR PRINCIPAL DEL DASHBOARD
+   Aplica a la sección #panelAdmin
+   ============================================================= */
+
+#panelAdmin {
+    /* Define el ancho máximo para evitar que se vea demasiado estirado en monitores grandes */
+    max-width: 1200px; 
+    /* Centra el contenedor en la pantalla */
+    margin: 0 auto; 
+    /* Asegura un padding interno para que no toque los bordes */
+    padding: 40px 20px; 
+    /* El display:none lo maneja app.js, pero este ajuste es clave */
+}
+
+/* Opcional: Centrar el contenido de las pestañas si no usan grid o flex ya centrado */
+#tabVuelos, #tabUsuarios {
+    max-width: 1000px; /* Ancho máximo para el contenido interno */
+    margin: 0 auto; /* Centrar el contenido dentro del contenedor principal */
+}
+
+/* Modificación si tienes un contenedor de pestañas (tabs) que no ocupa el 100% */
+.tabs {
+    max-width: 1000px; 
+    margin: 0 auto 30px;
+}
+
 
 /* ============================================================
    TABLAS
@@ -2104,6 +2155,127 @@ tbody tr:hover {
 
 
 /* =============================================================
+   RESPONSIVE INDEX
+   ============================================================= */
+
+@media (max-width: 768px) {
+    
+    /* -------------------------------------- */
+    /* 1. HEADER y LOGO */
+    /* -------------------------------------- */
+    .header {
+        flex-direction: column;
+        align-items: center;
+        padding: 15px 20px;
+        gap: 15px;
+    }
+
+    .header .logo {
+        flex-direction: column;
+        text-align: center;
+        /* Ajustar el tamaño del logo para móviles */
+        font-size: 1.5rem !important; 
+    }
+    
+    .header .logo img {
+        height: 35px; /* Icono más pequeño */
+    }
+
+    /* Ocultar el texto "Mas Que Volar Te Protegemos" en pantallas pequeñas */
+    .header .logo span {
+        display: none; 
+    }
+
+    .header .nav {
+        /* Los botones de navegación también en columna o distribuidos */
+        width: 100%;
+        justify-content: space-around;
+        gap: 10px;
+    }
+
+    /* Asegurar que los botones no sean demasiado grandes */
+    .header .nav button,
+    .header .nav .nombre-usuario {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+
+    /* -------------------------------------- */
+    /* 2. SECCIÓN HERO / BÚSQUEDA */
+    /* -------------------------------------- */
+    .hero-home {
+        padding: 60px 20px;
+    }
+
+    .hero-home h1 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+    /* Estilos del formulario de búsqueda */
+    .form-busqueda {
+        flex-direction: column; /* Apilar los inputs verticalmente */
+        gap: 15px;
+        padding: 20px;
+    }
+    
+    .form-busqueda input, 
+    .form-busqueda button {
+        width: 100%; /* Ocupar todo el ancho disponible */
+        font-size: 1rem;
+    }
+    
+    /* Ocultar el selector de moneda para simplificar la UI móvil (opcional) */
+    #btnMoneda {
+        order: 5; /* Mover el botón de moneda al final */
+        background-color: var(--secondary);
+        color: var(--primary-dark);
+        font-weight: bold;
+    }
+
+    /* -------------------------------------- */
+    /* 3. LISTA DE VUELOS (RESULTADOS) */
+    /* -------------------------------------- */
+    .vuelos-container {
+        padding: 30px 15px;
+    }
+    
+    #listaVuelos {
+        grid-template-columns: 1fr; /* Una sola columna para los resultados */
+        gap: 20px;
+    }
+
+    .vuelo-item {
+        padding: 20px;
+        text-align: left;
+    }
+
+    /* -------------------------------------- */
+    /* 4. FOOTER */
+    /* -------------------------------------- */
+    .footer-content {
+        /* Cambiar a una columna simple */
+        grid-template-columns: 1fr; 
+        gap: 30px;
+        padding: 0 15px;
+    }
+
+    .footer-section h4 {
+        margin-top: 15px;
+        font-size: 1.2rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        padding-bottom: 5px;
+    }
+
+    .footer-section p {
+        font-size: 0.9rem;
+    }
+}
+
+
+
+
+/* =============================================================
    @MEDIA QUERIES - Ajustes para Móviles (Login y Registro)
    ============================================================= */
 
@@ -2165,260 +2337,6 @@ tbody tr:hover {
         margin: 10px;
         /* Ocupar 100% menos los márgenes de 10px */
         max-width: calc(100% - 20px); 
-    }
-}
-
-
-
-/* =============================================================
-   @MEDIA QUERIES - Ajustes para Móviles (Dashboard - max-width: 768px)
-   ============================================================= */
-
-@media (max-width: 768px) {
-    
-    /* -------------------------------------- */
-    /* 1. Header y User Info */
-    /* -------------------------------------- */
-    .header {
-        flex-direction: column;
-        align-items: center;
-        padding: 15px 20px;
-        gap: 15px;
-    }
-
-    /* Ocultar eslogan y centrar user-info */
-    .header .logo span {
-        display: none; 
-    }
-    .user-info {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        align-items: center;
-    }
-    .user-info button {
-        width: 100%; /* Botón de cerrar sesión a ancho completo */
-        max-width: 200px;
-    }
-    
-    /* -------------------------------------- */
-    /* 2. Pestañas (Tabs) */
-    /* -------------------------------------- */
-    .tabs {
-        flex-direction: column; /* Apilar los botones de las pestañas */
-        gap: 10px;
-    }
-    .tab-btn {
-        width: 100%; /* Botones de pestaña a ancho completo */
-        font-size: 1rem;
-        padding: 12px;
-    }
-
-    /* -------------------------------------- */
-    /* 3. Formulario de Creación/Edición de Vuelos */
-    /* -------------------------------------- */
-    .form-vuelo, .form-edicion-vuelo {
-        /* Convertir de grid a una sola columna para la inserción de datos */
-        grid-template-columns: 1fr; 
-        gap: 15px;
-        padding: 15px;
-        border: 1px solid var(--border-color);
-        border-radius: 8px;
-    }
-    .form-vuelo input, 
-    .form-vuelo select, 
-    .form-vuelo button {
-        padding: 12px; /* Aumentar el área táctil */
-    }
-    
-    /* -------------------------------------- */
-    /* 4. Listas/Tablas (Conversión a Cards) */
-    /* -------------------------------------- */
-    
-    /* Ocultar la fila de encabezados que no funciona en móvil */
-    .lista-vuelos-admin .header-row,
-    .lista-usuarios .header-row,
-    .lista-reservas-user .header-row {
-        display: none; 
-    }
-
-    /* Estilo de los elementos de lista como "cards" */
-    .vuelo-item-admin, 
-    .usuario-item, 
-    .reserva-item {
-        display: block; /* Convertir de grid/flex a bloque */
-        margin-bottom: 15px;
-        padding: 15px;
-        border: 1px solid var(--border-color);
-        border-radius: 8px;
-        box-shadow: var(--shadow);
-    }
-
-    /* Reordenar los elementos internos del card */
-    .vuelo-item-admin > div, 
-    .usuario-item > div, 
-    .reserva-item > div {
-        display: flex;
-        flex-direction: column; /* Apilar la información verticalmente */
-        align-items: flex-start;
-        padding: 5px 0;
-        border-bottom: 1px dashed var(--border-color);
-        margin-bottom: 5px;
-        font-size: 0.95rem;
-    }
-    
-    /* Botones de acción (Editar/Eliminar/Ver) a ancho completo */
-    .vuelo-item-admin button, 
-    .usuario-item button, 
-    .reserva-item button {
-        width: 100%;
-        margin-top: 10px;
-    }
-    
-    /* -------------------------------------- */
-    /* 5. Footer (ya cubierto, pero se reitera para coherencia) */
-    /* -------------------------------------- */
-    .footer-content {
-        grid-template-columns: 1fr; 
-        gap: 30px;
-        padding: 0 15px;
-    }
-}
-
-/* =============================================================
-   @MEDIA QUERIES - Ajustes para Móviles (aplicacion.html)
-   ============================================================= */
-
-@media (max-width: 768px) {
-    
-    /* -------------------------------------- */
-    /* 1. HEADER Y NAVEGACIÓN */
-    /* -------------------------------------- */
-    .header {
-        flex-direction: column;
-        align-items: center;
-        padding: 15px 20px;
-        gap: 15px;
-    }
-
-    /* Ocultar el eslogan largo para ahorrar espacio vertical */
-    .header .logo span {
-        display: none; 
-    }
-    
-    .header .nav {
-        width: 100%;
-        justify-content: space-around;
-        gap: 5px;
-        flex-wrap: wrap; /* Permite que los botones salten de línea si hay muchos */
-    }
-    
-    .header .nav button, 
-    .header .nav .nombre-usuario {
-        padding: 8px 10px;
-        font-size: 0.85rem;
-    }
-
-    /* -------------------------------------- */
-    /* 2. SECCIÓN BÚSQUEDA */
-    /* -------------------------------------- */
-    .busqueda h2 {
-        font-size: 1.8rem;
-    }
-
-    /* Apilar los inputs de búsqueda verticalmente */
-    .form-busqueda {
-        flex-direction: column; 
-        gap: 15px;
-        padding: 20px;
-    }
-    
-    .form-busqueda input, 
-    .form-busqueda button,
-    .form-busqueda #btnMoneda {
-        width: 100%; /* Ocupar todo el ancho disponible */
-        font-size: 1rem;
-        padding: 12px;
-    }
-    
-    /* -------------------------------------- */
-    /* 3. LISTA DE VUELOS (Resultados) */
-    /* -------------------------------------- */
-    .vuelos-container {
-        padding: 30px 15px;
-    }
-    
-    #listaVuelos {
-        grid-template-columns: 1fr; /* Una sola columna para los resultados */
-        gap: 20px;
-    }
-
-    .vuelo-item {
-        /* Convertir el card a un diseño simple y centrado */
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 15px;
-        text-align: center;
-    }
-    
-    .vuelo-item button {
-        margin-top: 10px;
-        width: 80%; /* Botón de reservar más ancho */
-    }
-
-
-    /* -------------------------------------- */
-    /* 4. MODALES (Reserva, Pago, etc.) */
-    /* -------------------------------------- */
-    .modal-content {
-        width: 95%; /* Ocupar casi todo el ancho del móvil */
-        max-width: none; /* Quitar la restricción de ancho de escritorio */
-        margin: 10px;
-        padding: 20px;
-        max-height: 95vh; /* Asegurar que el modal no se salga de la pantalla */
-    }
-    
-    .modal-reserva h3 {
-        font-size: 1.5rem;
-        text-align: center;
-    }
-    
-    /* Detalle del vuelo dentro del modal (se apila) */
-    .modal-reserva .vuelo-detalle {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-        font-size: 1rem;
-        padding-bottom: 10px;
-        margin-bottom: 10px;
-    }
-
-    /* Card de clase de asiento (se apila) */
-    .modal-reserva .clase-asiento-card {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 15px;
-    }
-    
-    .modal-reserva .clase-selector {
-        flex-direction: column; /* Apilar los selectores de clase y asiento */
-        gap: 15px;
-    }
-    
-    .modal-reserva .btn-reservar {
-        width: 100%; /* Botón de reserva a ancho completo */
-        margin-top: 20px;
-        padding: 15px;
-    }
-
-    /* -------------------------------------- */
-    /* 5. Footer (Asegurar que las secciones se apilen) */
-    /* -------------------------------------- */
-    .footer-content {
-        grid-template-columns: 1fr; 
-        gap: 30px;
-        padding: 0 15px;
     }
 }
 
@@ -2933,6 +2851,144 @@ tbody tr:hover {
     }
 }
 
+
+/* =============================================================
+   @MEDIA QUERIES - Ajustes para Móviles (aplicacion.html)
+   ============================================================= */
+
+@media (max-width: 768px) {
+    
+    /* -------------------------------------- */
+    /* 1. HEADER Y NAVEGACIÓN */
+    /* -------------------------------------- */
+    .header {
+        flex-direction: column;
+        align-items: center;
+        padding: 15px 20px;
+        gap: 15px;
+    }
+
+    /* Ocultar el eslogan largo para ahorrar espacio vertical */
+    .header .logo span {
+        display: none; 
+    }
+    
+    .header .nav {
+        width: 100%;
+        justify-content: space-around;
+        gap: 5px;
+        flex-wrap: wrap; /* Permite que los botones salten de línea si hay muchos */
+    }
+    
+    .header .nav button, 
+    .header .nav .nombre-usuario {
+        padding: 8px 10px;
+        font-size: 0.85rem;
+    }
+
+    /* -------------------------------------- */
+    /* 2. SECCIÓN BÚSQUEDA */
+    /* -------------------------------------- */
+    .busqueda h2 {
+        font-size: 1.8rem;
+    }
+
+    /* Apilar los inputs de búsqueda verticalmente */
+    .form-busqueda {
+        flex-direction: column; 
+        gap: 15px;
+        padding: 20px;
+    }
+    
+    .form-busqueda input, 
+    .form-busqueda button,
+    .form-busqueda #btnMoneda {
+        width: 100%; /* Ocupar todo el ancho disponible */
+        font-size: 1rem;
+        padding: 12px;
+    }
+    
+    /* -------------------------------------- */
+    /* 3. LISTA DE VUELOS (Resultados) */
+    /* -------------------------------------- */
+    .vuelos-container {
+        padding: 30px 15px;
+    }
+    
+    #listaVuelos {
+        grid-template-columns: 1fr; /* Una sola columna para los resultados */
+        gap: 20px;
+    }
+
+    .vuelo-item {
+        /* Convertir el card a un diseño simple y centrado */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 15px;
+        text-align: center;
+    }
+    
+    .vuelo-item button {
+        margin-top: 10px;
+        width: 80%; /* Botón de reservar más ancho */
+    }
+
+
+    /* -------------------------------------- */
+    /* 4. MODALES (Reserva, Pago, etc.) */
+    /* -------------------------------------- */
+    .modal-content {
+        width: 95%; /* Ocupar casi todo el ancho del móvil */
+        max-width: none; /* Quitar la restricción de ancho de escritorio */
+        margin: 10px;
+        padding: 20px;
+        max-height: 95vh; /* Asegurar que el modal no se salga de la pantalla */
+    }
+    
+    .modal-reserva h3 {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+    
+    /* Detalle del vuelo dentro del modal (se apila) */
+    .modal-reserva .vuelo-detalle {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 1rem;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+    }
+
+    /* Card de clase de asiento (se apila) */
+    .modal-reserva .clase-asiento-card {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+    }
+    
+    .modal-reserva .clase-selector {
+        flex-direction: column; /* Apilar los selectores de clase y asiento */
+        gap: 15px;
+    }
+    
+    .modal-reserva .btn-reservar {
+        width: 100%; /* Botón de reserva a ancho completo */
+        margin-top: 20px;
+        padding: 15px;
+    }
+
+    /* -------------------------------------- */
+    /* 5. Footer (Asegurar que las secciones se apilen) */
+    /* -------------------------------------- */
+    .footer-content {
+        grid-template-columns: 1fr; 
+        gap: 30px;
+        padding: 0 15px;
+    }
+}
+
 /* ============================================================
    UTILIDADES
    ============================================================ */
@@ -3052,10 +3108,4 @@ tbody tr:hover {
 
 /* ============================================================
    FIN DEL CSS
-
    ============================================================ */
-
-
-
-
-
