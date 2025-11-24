@@ -1,0 +1,364 @@
+/* =========================================
+   TEMA HACKER PROFESIONAL (Rojo/Negro)
+   ========================================= */
+
+/* Colores base redefinidos */
+:root {
+  --bg-main: #0a0a0a;           /* Negro profundo */
+  --bg-secondary: #121212;      /* Gris muy oscuro */
+  --text-main: #e6e6e6;         /* Blanco humo  */
+  --text-muted: #9e9e9e;        /* Gris medio */
+  
+  /* AQUÍ ESTÁ EL CAMBIO: */
+  --accent-red: #720909;        /* Un rojo más suave, mate y moderno */
+  --accent-dark-red: #4a0f0f;   /* Rojo sangre muy oscuro para bordes discretos */
+}
+body {
+  margin: 0;
+  /* Cambio de tipografía a una monoespaciada para estilo terminal/código */
+  font-family: 'Courier New', Courier, 'Lucida Sans Typewriter', monospace;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+}
+
+/* --- HEADER --- */
+header {
+  background-color: var(--bg-secondary);
+  /* Un borde inferior rojo sutil */
+  border-bottom: 2px solid var(--accent-dark-red);
+  padding: 30px 20px;
+  text-align: center;
+  /* Un ligero efecto de resplandor rojo */
+  box-shadow: 0 2px 10px rgba(255, 23, 68, 0.1);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.2em;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-main);
+}
+
+header p {
+  margin: 10px 0 0;
+  font-size: 1.1em;
+  color: var(--accent-red); /* El subtítulo en rojo */
+  font-weight: bold;
+}
+
+/* --- NAVEGACIÓN --- */
+nav {
+  display: flex;
+  justify-content: center;
+  background-color: #000000;
+  border-bottom: 1px solid var(--accent-dark-red);
+}
+
+nav button {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  padding: 15px 25px;
+  cursor: pointer;
+  font-size: 1em;
+  font-family: inherit; /* Heredar la fuente monoespaciada */
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  border-bottom: 3px solid transparent;
+}
+
+/* Efecto hover y estado activo */
+nav button:hover, nav button.active {
+  color: var(--accent-red);
+  background-color: rgba(255, 23, 68, 0.05); /* Fondo rojo muy sutil */
+  border-bottom: 3px solid var(--accent-red);
+  text-shadow: 0 0 8px rgba(255, 23, 68, 0.6); /* Resplandor de texto */
+}
+
+/* --- SECCIONES PRINCIPALES --- */
+section {
+  display: none;
+  padding: 30px;
+  max-width: 900px;
+  margin: 0 auto;
+  /* Borde sutil estilo terminal para el contenedor principal */
+  border-left: 1px dashed var(--accent-dark-red);
+  border-right: 1px dashed var(--accent-dark-red);
+  min-height: 400px;
+}
+
+section.active {
+  display: block;
+  /* Pequeña animación de entrada */
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+  color: var(--accent-red);
+  border-bottom: 2px solid var(--accent-red);
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* --- EXPERIENCIA --- */
+.item {
+  margin-bottom: 25px;
+  border-left: 3px solid var(--accent-dark-red);
+  padding-left: 15px;
+  transition: border-color 0.3s;
+}
+
+.item:hover {
+    border-left-color: var(--accent-red);
+}
+
+.item h3 {
+  margin: 0 0 5px 0;
+  font-size: 1.3em;
+  color: var(--text-main);
+}
+
+.item p {
+  margin: 5px 0;
+  color: var(--text-muted);
+}
+
+/* --- HABILIDADES --- */
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.skills span {
+  display: inline-block;
+  /* Fondo rojo y texto negro para alto contraste y estilo de etiqueta */
+  background-color: var(--accent-red);
+  color: var(--bg-main);
+  padding: 8px 15px;
+  border-radius: 2px; /* Bordes más cuadrados, menos redondeados */
+  font-size: 0.9em;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: 0 0 5px rgba(255, 23, 68, 0.4);
+  transition: transform 0.2s;
+}
+
+.skills span:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255, 23, 68, 0.7);
+}
+
+
+/* --- GALERÍA DE CERTIFICADOS --- */
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.cert-card {
+  background-color: var(--bg-secondary); /* Fondo oscuro para la tarjeta */
+  border: 1px solid var(--accent-dark-red);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.cert-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-red);
+  /* Resplandor rojo al pasar el mouse */
+  box-shadow: 0 0 15px rgba(255, 23, 68, 0.3);
+}
+
+.cert-img-container {
+  height: 180px;
+  overflow: hidden;
+  background-color: #000; /* Fondo negro detrás de la imagen */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--accent-dark-red);
+}
+
+.cert-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s, opacity 0.3s;
+  opacity: 0.8; /* Imagen ligeramente oscurecida por defecto */
+}
+
+.cert-card:hover .cert-thumb {
+  transform: scale(1.05);
+  opacity: 1; /* Imagen a todo color al hacer hover */
+}
+
+.cert-info {
+  padding: 15px;
+}
+
+.cert-info h3 {
+  font-size: 1.1em;
+  margin: 0 0 10px;
+  color: var(--text-main);
+}
+
+.cert-info .issuer {
+  font-size: 0.9em;
+  color: var(--accent-red); /* La institución emisora en rojo */
+  font-weight: bold;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.cert-info .date {
+  font-size: 0.85em;
+  color: var(--text-muted);
+  margin-top: 5px;
+  font-style: italic;
+}
+
+/* --- MODAL (VISOR DE IMAGEN) --- */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  padding-top: 50px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  /* Fondo negro semi-transparente */
+  background-color: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(5px); /* Efecto de desenfoque en el fondo */
+}
+
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 900px;
+  /* Borde rojo brillante para la imagen modal */
+  border: 2px solid var(--accent-red);
+  box-shadow: 0 0 30px rgba(255, 23, 68, 0.5);
+}
+
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: var(--text-main);
+  padding: 20px 0;
+  height: 150px;
+  font-size: 1.3em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  color: var(--text-muted);
+  font-size: 50px;
+  font-weight: bold;
+  transition: 0.3s;
+  cursor: pointer;
+  z-index: 1010;
+}
+
+.close:hover,
+.close:focus {
+  color: var(--accent-red);
+  text-shadow: 0 0 10px var(--accent-red);
+  text-decoration: none;
+}
+
+/* Animación de zoom al abrir */
+.modal-content, #caption {
+  animation-name: zoom;
+  animation-duration: 0.4s;
+}
+
+@keyframes zoom {
+  from {transform:scale(0.1); opacity: 0;}
+  to {transform:scale(1); opacity: 1;}
+}
+
+/* --- ESTILOS EXTRA --- */
+/* Ocultar elementos no usados del CSS original */
+.certification button,
+.certification p,
+.toggle-btn {
+    display: none;
+}
+
+
+
+/* =========================================
+   RESPONSIVE DESIGN (PARA CELULARES)
+   ========================================= */
+
+@media screen and (max-width: 768px) {
+  
+  /* Ajustar tamaño del título principal */
+  header h1 {
+    font-size: 1.5em; /* Más pequeño para que quepa */
+    letter-spacing: 1px;
+  }
+
+  header p {
+    font-size: 0.9em;
+  }
+
+  /* Ajustar menú de navegación */
+  nav {
+    flex-wrap: wrap; /* Permite que los botones bajen si no caben */
+  }
+
+  nav button {
+    flex: 1 1 50%; /* Los botones ocuparán el 50% del ancho (2 por fila) */
+    padding: 12px 5px;
+    font-size: 0.85em;
+    text-align: center;
+    border-bottom: 1px solid var(--bg-secondary); /* Separación sutil */
+  }
+
+  /* Ajustar padding de las secciones */
+  section {
+    padding: 20px 15px; /* Menos espacio a los lados */
+    min-height: auto;
+  }
+
+  /* Ajustar modal de imágenes */
+  .modal-content {
+    width: 95%; /* Usar casi todo el ancho en celular */
+  }
+  
+  #caption {
+    width: 90%;
+    font-size: 1em;
+    padding: 10px 0;
+  }
+
+  .close {
+    right: 15px;
+    top: 10px;
+    font-size: 40px;
+  }
+}
