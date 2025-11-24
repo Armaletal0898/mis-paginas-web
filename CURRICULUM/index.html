@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV Interactivo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>Jose Armando Villar Almonte</h1>
+  <p>Estudiante de Informática | Ciberseguridad & Redes | Soporte Técnico</p>
+</header>
+
+<nav>
+  <button class="tab-btn active" data-tab="summary">Resumen</button>
+  <button class="tab-btn" data-tab="experience">Experiencia</button>
+  <button class="tab-btn" data-tab="certifications">Certificaciones</button>
+  <button class="tab-btn" data-tab="skills">Habilidades</button>
+ 
+</nav>
+
+<main>
+  <section id="summary" class="active">
+    <h2>Resumen Profesional</h2>
+    <p>Apasionado por la ciberseguridad, Redes y soporte tecnico, con fuerte capacidad
+      de aprendizaje, paciencia para resolver problemas y dedicacion para completar
+      tareas de manera efeciente. Busco desarrollar mis habilidades aplicando soluciones
+      practicas y contribuyendo a la seguridad y buen funcionamiento de sistemas tecnologicos.</p>
+      <br>
+      <br>
+
+      <p>Cel: 809-408-0896</p>
+      <br>
+      <p>Correo: armando0898@gmail.com</p>
+  </section>
+
+  <section id="experience">
+    <h2>Experiencia</h2>
+    <div class="item">
+      <h3>Infraestructura segura – Enfoque en Redes y Soporte</h3>
+      <p> Gestion diaria y aseguramiento de equipos y redes en un entorno
+        educativo, con enfasis en la prevencion y respuesta a problemas de 
+        seguridad de bajo nivel.</p>
+        <br>
+       
+        <p>Administre y asegure redes basicas en plataformas CISCO, realizando 
+          la segmentacion y configuracion de VPNs.
+          <br>
+          <br>
+
+        <p>Resolvi incidencias en Windows y Linux, aplicando politicas de
+          seguridad como la gestion de usuarios y la asignacion de permisos.
+        </p>
+        </p>
+    </div>
+    
+  </section>
+
+  <section id="certifications">
+    <h2>Certificaciones</h2>
+    <p style="margin-bottom: 20px;">Haz clic en los diplomas para verlos en detalle.</p>
+    
+    <div class="cert-grid">
+      <div class="cert-card">
+        <div class="cert-img-container">
+          <img src="Auxiliar en ciberseguridad.png" alt="Fundamentos de la ciberseguridad" class="cert-thumb">
+        </div>
+        <div class="cert-info">
+          <h3>Introduccion a la Seguridad Informatica</h3>
+          <p class="issuer">MACROSEGURIDAD | 310 Horas</p>
+          <p class="date">24 Noviembre 2025</p>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-img-container">
+          <img src="hacking etico.png" alt="Diploma Hacker Ético" class="cert-thumb">
+        </div>
+        <div class="cert-info">
+          <h3>Hacker Etico</h3>
+          <p class="issuer">ITLA | 40 Horas</p>
+          <p class="date">27 Junio 2025</p>
+        </div>        
+        </div>
+     
+
+       <div class="cert-card">
+        <div class="cert-img-container">
+          <img src="Herramientas y tecnicas de ciberseguridad.png" alt="Herrmaientas y tecnicas de ciberseguridad" class="cert-thumb">
+        </div>
+        <div class="cert-info">
+          <h3>Herramientas y tecnicas de Ciberseguridad</h3>
+          <p class="issuer">ITLA | 40 Horas</p>
+          <p class="date">18 Octubre 2025</p>
+        </div>
+        </div>
+
+
+        <div class="cert-card">
+        <div class="cert-img-container">
+          <img src="Introduccion a la seguridad informatica.png" alt="Introduccion a la seguridad informatica" class="cert-thumb">
+        </div>
+        <div class="cert-info">
+          <h3>Introduccion a la Seguridad Informatica</h3>
+          <p class="issuer">ITLA | 40 Horas</p>
+          <p class="date">31 Marzo 2025</p>
+        </div>
+      </div>
+
+
+      <div class="cert-card">
+        <div class="cert-img-container">
+          <img src="Curso de Excel Avanzado.png" alt="Excel Avanzado" class="cert-thumb">
+        </div>
+        <div class="cert-info">
+          <h3>Introduccion a la Seguridad Informatica</h3>
+          <p class="issuer">Universidad Autonoma de Santo Dominigo (UASD) | 30 Horas</p>
+          <p class="date"> Febrero 2025</p>
+        </div>
+      </div>
+        </div>
+
+    </div>
+  </section>
+
+  </main>
+
+<div id="imageModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="img01">
+  <div id="caption"></div>
+</div>
+
+
+
+  <section id="skills">
+    <h2>Habilidades Técnicas</h2>
+    <div class="skills">
+      <span>Trabajo en equipo</span>
+      <span>Rapido aprendizaje</span>
+      <span>Virtualizacion</span>
+      <span>Instalacion de Sistemas Operativos</span>
+      <span>Ensamblado de Computadoras</span>
+      <span>VPN</span>
+      <span>Gestion De Usuarios y aplicacion de politicas de seguridad</span>
+      <span>Adminstra y Asegura Redes Basicas en plataforma CISCO</span>
+    </div>
+  </section>
+
+ 
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
