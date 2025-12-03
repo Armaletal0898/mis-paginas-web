@@ -362,3 +362,38 @@ h2 {
     font-size: 40px;
   }
 }
+
+
+/* --- ESTILOS DE ENLACES DE ACCIÓN (CV y LINKEDIN) --- */
+.action-link {
+    display: inline-block; /* Permite aplicar padding y dimensiones */
+    padding: 10px 20px;
+    margin-top: 10px;
+    text-decoration: none; /* Quitar el subrayado por defecto */
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border: 2px solid var(--accent-orange);
+    color: var(--accent-orange); /* Texto inicial naranja */
+    background-color: transparent;
+    transition: all 0.3s ease;
+    border-radius: 4px; /* Un poco de redondeo */
+}
+
+/* Efecto hover: Invertir colores para hacerlos muy visibles */
+.action-link:hover {
+    background-color: var(--accent-orange);
+    color: var(--bg-main); /* Texto negro sobre fondo naranja */
+    /* Resplandor suave para el efecto "código/terminal" */
+    box-shadow: 0 0 15px rgba(255, 140, 0, 0.7);
+    transform: scale(1.02);
+}
+
+/* Opcional: Iconos sutiles (Si planeas usar Font Awesome o emojis) */
+.action-link.link-pdf::before {
+    content: "📄 "; 
+}
+
+.action-link.link-linkedin::before {
+    content: "🔗 "; 
+} 
