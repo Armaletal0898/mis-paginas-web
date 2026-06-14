@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca Técnica - UnderCode</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/library.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body class="library-body">
+
+    <header>
+        <div class="logo">UNDERCODE // BIBLIOTECA</div>
+        <div class="menu-toggle">☰</div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="cybersecurity.html">Ciberseguridad</a></li>
+                <li><a href="networking.html">Redes</a></li>
+                <li><a href="linux.html">Linux</a></li>
+                <li><a href="windows.html">Windows</a></li>
+                <li><a href="macos.html">MacOS</a></li>
+                <li><a href="labs.html">Labs</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="menu-overlay"></div>
+
+   		<main class="library-container">
+		    <section class="search-center-section">
+		        <h1>TECHNICAL LIBRARY</h1>
+		        <p>Domina los términos clave de la infraestructura y la seguridad informática.</p>
+		        
+		        <div class="main-search-box">
+		            <i class="fas fa-terminal search-bar-icon"></i>
+		            <input type="text" id="librarySearch" placeholder="Filtra global, avanzado o usa los botones (ej. redes: tcp)..." autocomplete="off">
+		        </div>
+		
+		        <div class="category-filters">
+		            <button class="filter-btn active" data-filter="all">
+		                <i class="fas fa-database"></i> Todo
+		            </button>
+		            <button class="filter-btn" data-filter="cyber">
+		                <i class="fas fa-shield-alt"></i> Ciberseguridad
+		            </button>
+		            <button class="filter-btn" data-filter="networking">
+		                <i class="fas fa-network-wired"></i> Redes
+		            </button>
+		            <button class="filter-btn" data-filter="linux">
+		                <i class="fab fa-linux"></i> Linux
+		            </button>
+		            <button class="filter-btn" data-filter="windows">
+		                <i class="fab fa-windows"></i> Windows
+		            </button>
+		            <button class="filter-btn" data-filter="macos">
+		                <i class="fab fa-apple"></i> macOS
+		            </button>
+		        </div>
+		    </section>
+		
+		    <section class="definitions-display-zone">
+		        <div id="libraryResults" class="results-grid">
+		            </div>
+		    </section>
+		</main>
+
+
+
+
+
+
+        <section class="definitions-display-zone">
+            <div id="libraryResults" class="results-grid">
+                </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>UnderCode © 2026 // Database Centralizada de Términos</p>
+    </footer>
+
+    <script src="../js/app.js"></script>
+    <script src="../js/library.js"></script>
+</body>
+</html>

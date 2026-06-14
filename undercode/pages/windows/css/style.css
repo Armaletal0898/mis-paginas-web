@@ -1,0 +1,201 @@
+/* ==========================================================================
+   CONFIGURACIÓN GENERAL Y LAYOUT
+   ========================================================================== */
+.fundamentos-layout {
+    display: flex;
+    max-width: 1600px;
+    margin: auto;
+    padding: 40px 20px;
+    gap: 30px;
+}
+
+/* ==========================================================================
+   SIDEBAR TIPO ACORDEÓN DE CURSO
+   ========================================================================== */
+.fundamentos-sidebar {
+    width: 320px;
+    min-width: 320px;
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.sidebar-title {
+    background: #0d0d0d;
+    padding: 15px 20px;
+    font-weight: bold;
+    color: #a4161a;
+    border-bottom: 1px solid #222;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+.course-module {
+    border-bottom: 1px solid #1f1f1f;
+}
+
+.module-header {
+    background: #161616;
+    padding: 14px 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    color: #fff;
+    transition: background 0.3s;
+    user-select: none;
+}
+
+.module-header:hover {
+    background: #1f1f1f;
+}
+
+.module-header i {
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+/* Estado abierto del acordeón */
+.course-module.open .module-header {
+    background: #1a1a1a;
+    color: #a4161a;
+}
+
+.course-module.open .module-header i {
+    transform: rotate(180deg);
+}
+
+/* Subtemas ocultos por defecto */
+.module-subtopics {
+    max-height: 0;
+    overflow: hidden;
+    background: #0d0d0d;
+    transition: max-height 0.3s ease-out;
+}
+
+.course-module.open .module-subtopics {
+    max-height: 500px; /* Suficiente espacio para los links */
+}
+
+.module-subtopics a {
+    display: block;
+    padding: 12px 25px;
+    color: #999;
+    text-decoration: none;
+    font-size: 0.9rem;
+    border-left: 3px solid transparent;
+    transition: 0.2s;
+}
+
+.module-subtopics a:hover {
+    color: #fff;
+    background: #141414;
+}
+
+/* Enlace activo/seleccionado */
+.module-subtopics a.active {
+    color: #fff;
+    background: #1a1a1a;
+    border-left-color: #a4161a;
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   MANEJO DE SECCIONES DINÁMICAS (OCULTAR / MOSTRAR)
+   ========================================================================== */
+.content-section {
+    display: none; /* Oculta el tema si no está activo */
+}
+
+.content-section.active {
+    display: block; /* Muestra el tema activo */
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   CONTENIDO PRINCIPAL (.topic-section)
+   ========================================================================== */
+.fundamentos-content {
+    flex: 1;
+}
+
+.topic-section {
+    background: #111;
+    border: 1px solid #222;
+    padding: 40px;
+    border-radius: 10px;
+    transition: .3s;
+}
+
+.topic-section:hover {
+    border-color: #a4161a;
+    box-shadow: 0 0 20px rgba(164, 22, 26, .2);
+}
+
+.topic-section h2 {
+    color: #a4161a;
+    margin-bottom: 25px;
+    font-size: 2.2rem;
+    border-bottom: 1px solid #222;
+    padding-bottom: 12px;
+}
+
+.topic-section p {
+    color: #d8d8d8;
+    line-height: 1.9;
+    font-size: 1.05rem;
+    margin-bottom: 20px;
+}
+
+.topic-section ul {
+    padding-left: 25px;
+}
+
+.topic-section li {
+    margin-bottom: 12px;
+    color: #d8d8d8;
+    font-size: 1.05rem;
+}
+
+/* ==========================================================================
+   DISEÑO RESPONSIVO (PC, TABLETS Y MÓVILES)
+   ========================================================================== */
+@media (max-width: 1024px) {
+    .fundamentos-layout {
+        flex-direction: column;
+        padding: 20px 15px;
+    }
+
+    .fundamentos-sidebar {
+        width: 100%;
+        min-width: 100%;
+        position: relative;
+        top: 0;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .topic-section {
+        padding: 25px;
+    }
+
+    .topic-section h2 {
+        font-size: 1.7rem;
+    }
+
+    .topic-section p, .topic-section li {
+        font-size: 0.95rem;
+    }
+}

@@ -1,0 +1,323 @@
+/* ========================================================
+   SECCIÓN DE LA BIBLIOTECA TÉCNICA - ESTILOS UNDERCODE
+======================================================== */
+.library-body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.library-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Inicia centrado */
+    padding: 60px 20px;
+    transition: justify-content 0.5s ease;
+}
+
+.search-center-section {
+    text-align: center;
+    max-width: 700px;
+    width: 100%;
+    margin-bottom: 40px;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.search-center-section h1 {
+    font-size: 2.8rem;
+    color: #ffffff;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+.search-center-section p {
+    color: #888888;
+    font-size: 1rem;
+    margin-bottom: 30px;
+}
+
+/* Caja de búsqueda central con estética de terminal */
+.main-search-box {
+    position: relative;
+    width: 100%;
+    background-color: #0c0c0c;
+    border: 2px solid #1a1a1a;
+    border-radius: 8px;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.main-search-box:focus-within {
+    border-color: #ff0000;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+}
+
+.search-bar-icon {
+    color: #ff0000;
+    font-size: 1.2rem;
+    margin-right: 15px;
+}
+
+.main-search-box input {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 1.1rem;
+    width: 100%;
+    outline: none;
+    font-family: monospace;
+}
+
+.main-search-box input::placeholder {
+    color: #444444;
+}
+
+/* Área de resultados y cuadrícula */
+.definitions-display-zone {
+    width: 100%;
+    max-width: 1000px;
+    margin-top: 20px;
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+/* Tarjeta de definición con animación de entrada */
+.def-card {
+    background-color: #0c0c0c;
+    border: 1px solid #1a1a1a;
+    border-radius: 6px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(40px); /* Inicia abajo para la animación */
+    animation: entradaDefinicion 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.def-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background-color: #ff0000;
+}
+
+/* Categorías por colores lógicos de UnderCode */
+.def-card.cyber::before { background-color: #ff0000; }
+.def-card.networking::before { background-color: #00cccc; }
+.def-card.os::before { background-color: #9933ff; }
+
+.def-card h3 {
+    color: #ffffff;
+    font-size: 1.3rem;
+    font-family: monospace;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.def-tag {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background-color: #161616;
+    color: #888888;
+}
+
+.def-card .es-title {
+    color: #ff0000;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Cambiar el color del sub-título en español según categoría */
+.def-card.networking .es-title { color: #00cccc; }
+.def-card.os .es-title { color: #9933ff; }
+
+.def-card p {
+    color: #cccccc;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Animación Clave de Entrada */
+@keyframes entradaDefinicion {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+
+
+/* ========================================================
+   TARJETAS DE FILTRO RÁPIDO - BIBLIOTECA
+======================================================== */
+.category-filters {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+    flex-wrap: wrap; /* Permite que se acomoden si no caben en una fila */
+}
+
+.filter-btn {
+    background-color: #0c0c0c;
+    border: 1px solid #1a1a1a;
+    color: #888888;
+    padding: 10px 18px;
+    font-size: 0.9rem;
+    font-family: monospace;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.filter-btn i {
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+/* Efecto Hover general */
+.filter-btn:hover {
+    color: #ffffff;
+    border-color: #444444;
+    background-color: #121212;
+}
+
+/* ESTADOS ACTIVOS PERSONALIZADOS POR COLOR DE MÓDULO */
+.filter-btn[data-filter="all"].active {
+    border-color: #ffffff;
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.filter-btn[data-filter="cyber"].active {
+    border-color: #ff0000;
+    color: #ff0000;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+}
+
+.filter-btn[data-filter="networking"].active {
+    border-color: #00cccc;
+    color: #00cccc;
+    box-shadow: 0 0 10px rgba(0, 204, 204, 0.2);
+}
+
+/* Agrupamos Linux, Windows y macOS bajo la lógica visual de 'os' */
+.filter-btn[data-filter="linux"].active,
+.filter-btn[data-filter="windows"].active,
+.filter-btn[data-filter="macos"].active {
+    border-color: #9933ff;
+    color: #9933ff;
+    box-shadow: 0 0 10px rgba(153, 51, 255, 0.2);
+}
+
+/* Ajuste sutil para móviles */
+@media screen and (max-width: 768px) {
+    .category-filters {
+        gap: 8px;
+        margin-top: 15px;
+    }
+    .filter-btn {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
+}
+
+
+
+
+/* ========================================================
+   RESPONSIVE DESIGN - OPTIMIZACIÓN PARA MÓVILES (<= 768px)
+======================================================== */
+@media screen and (max-width: 768px) {
+    
+    .library-container {
+        padding: 40px 15px; /* Reducimos el espacio superior para aprovechar la pantalla */
+        justify-content: flex-start; /* Evita que el contenido choque si el teclado virtual se abre */
+    }
+
+    .search-center-section {
+        margin-bottom: 25px;
+    }
+
+    .search-center-section h1 {
+        font-size: 2rem; /* Reducimos el título para que no haga saltos de línea extraños */
+        letter-spacing: 1px;
+    }
+
+    .search-center-section p {
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+        padding: 0 5px;
+    }
+
+    /* Ajustes en la barra de búsqueda para que no se sienta gigante en el teléfono */
+    .main-search-box {
+        padding: 12px 15px;
+    }
+
+    .search-bar-icon {
+        font-size: 1rem;
+        margin-right: 10px;
+    }
+
+    .main-search-box input {
+        font-size: 0.95rem;
+    }
+
+    /* Forzamos a que las tarjetas ocupen todo el ancho disponible en móviles */
+    .results-grid {
+        grid-template-columns: 1fr; 
+        gap: 15px; /* Espaciado más compacto entre definiciones */
+    }
+
+    /* Optimizamos el espacio interno de las tarjetas */
+    .def-card {
+        padding: 16px;
+    }
+
+    .def-card h3 {
+        font-size: 1.15rem;
+        flex-wrap: wrap; /* Si el término en inglés es muy largo, la etiqueta baja limpiamente */
+        gap: 8px;
+    }
+
+    .def-tag {
+        font-size: 0.65rem;
+        padding: 1px 6px;
+    }
+
+    .def-card .es-title {
+        font-size: 0.8rem;
+        margin-bottom: 10px;
+    }
+
+    .def-card p {
+        font-size: 0.88rem;
+        line-height: 1.4;
+    }
+}

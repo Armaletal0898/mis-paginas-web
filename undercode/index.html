@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UnderCode</title>
+    <link rel="stylesheet" href="css/style.css?v=1.1">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">UNDERCODE</div>
+
+        <div class="menu-toggle">☰</div>
+
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="pages/cybersecurity.html">Ciberseguridad</a></li>
+                <li><a href="pages/networking.html">Redes</a></li>
+                <li><a href="pages/linux.html">Linux</a></li>
+                <li><a href="pages/windows.html">Windows</a></li>
+                <li><a href="pages/macos.html">MacOS</a></li>
+                <li><a href="pages/library.html" class="nav-highlight"><i class="fas fa-book-open"></i> Biblioteca</a></li>
+                <li><a href="pages/labs.html">Labs</a></li>
+            </ul>
+        </nav>
+
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="globalSearch" placeholder="Buscar temas...">
+            <div id="searchResults"></div>
+        </div>
+    </header>
+
+    <div id="menu-overlay"></div>
+
+    <section class="hero">
+        <h1>UNDERCODE</h1>
+        <p>Aprende Ciberseguridad, Redes y Sistemas Operativos desde cero hasta nivel profesional. Tambien puedes acceder a nuestra biblioteca de conocimiento.</p>
+        <a href="#categories" class="btn">Comenzar</a>
+    </section>
+
+    <section class="stats">
+        <div class="stat-box">
+            <h2 class="counter" data-target="120">0</h2>
+            <p>Cursos</p>
+        </div>
+        <div class="stat-box">
+            <h2 class="counter" data-target="80">0</h2>
+            <p>Laboratorios</p>
+        </div>
+        <div class="stat-box">
+            <h2 class="counter" data-target="450">0</h2>
+            <p>Temas</p>
+        </div>
+        <div class="stat-box">
+            <h2 class="counter" data-target="35">0</h2>
+            <p>Rutas de Aprendizaje</p>
+        </div>
+    </section>
+
+    <section id="categories" class="categories">
+        <div class="card">
+            <i class="fas fa-shield-halved"></i>
+            <h3>Ciberseguridad</h3>
+            <a href="pages/cybersecurity.html">Entrar</a>
+        </div>
+
+        <div class="card">
+            <i class="fas fa-network-wired"></i>
+            <h3>Redes</h3>
+            <a href="pages/networking.html">Entrar</a>
+        </div>
+
+        <div class="card">
+            <i class="fab fa-linux"></i>
+            <h3>Linux</h3>
+            <a href="pages/linux.html">Entrar</a>
+        </div>
+
+        <div class="card">
+            <i class="fab fa-windows"></i>
+            <h3>Windows</h3>
+            <a href="pages/windows.html">Entrar</a>
+        </div>
+
+        <div class="card">
+            <i class="fab fa-apple"></i>
+            <h3>MacOS</h3>
+            <a href="pages/macos.html">Entrar</a>
+        </div>
+
+        <div class="card library-card-highlight">
+                <i class="fas fa-book-bookmark"></i>
+                <h3>Biblioteca</h3>
+                <a href="pages/library.html">Entrar</a>
+        </div>
+
+        <div class="card">
+            <i class="fas fa-flask"></i>
+            <h3>Laboratorios</h3>
+            <a href="pages/labs.html">Entrar</a>
+        </div>
+    </section>
+
+    <section class="terminal-section">
+        <section class="roadmap">
+            <h2>Ruta de Aprendizaje Recomendada</h2>
+            <div class="roadmap-container">
+                <div class="roadmap-card">
+                    <i class="fas fa-server"></i>
+                    <h3>1. Fundamentos de TI</h3>
+                </div>
+                <div class="roadmap-card">
+                    <i class="fas fa-network-wired"></i>
+                    <h3>2. Redes</h3>
+                </div>
+                <div class="roadmap-card">
+                    <i class="fas fa-desktop"></i>
+                    <h3>3. Sistemas Operativos</h3>
+                </div>
+                <div class="roadmap-card">
+                    <i class="fas fa-lock"></i>
+                    <h3>4. Seguridad</h3>
+                </div>
+                <div class="roadmap-card">
+                    <i class="fas fa-laptop-code"></i>
+                    <h3>5. Administracion de Sistemas</h3>
+                </div>
+                <div class="roadmap-card">
+                    <i class="fas fa-bug"></i>
+                    <h3>6. Ciberseguridad</h3>
+                </div>
+                <div class="roadmap-card">
+                    <i class="fas fa-terminal"></i>
+                    <h3>7. Pentesting</h3>
+                </div>
+                <div class="roadmap-card">
+                    <i class="fas fa-cogs"></i>
+                    <h3>8. Especializacion</h3>
+                </div>
+            </div>
+        </section>
+
+        <h2>Sobre UnderCode</h2>
+        <div class="terminal">
+            <p>UnderCode es una plataforma educativa diseñada para aprender:</p>
+            <br>
+            <p>✔ Ciberseguridad</p>
+            <p>✔ Redes</p>
+            <p>✔ Linux</p>
+            <p>✔ Windows</p>
+            <p>✔ macOS</p>
+            <p>✔ Active Directory</p>
+            <p>✔ Ethical Hacking</p>
+            <p>✔ Cloud Security</p>
+            <p>✔ Certificaciones Internacionales</p>
+            <br>
+            <p>Todo organizado por rutas de aprendizaje y laboratorios prácticos.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>UnderCode © 2026</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+
+</html>
