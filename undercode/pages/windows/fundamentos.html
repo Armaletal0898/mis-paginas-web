@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundamentos de Windows | UnderCode</title>
+    <link rel="stylesheet" href="../../css/style.css?v=1.1">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">UNDERCODE</div>
+        <div class="menu-toggle">☰</div>
+        <nav>
+            <ul>
+                <li><a href="../../index.html">Inicio</a></li>
+                <li><a href="../cybersecurity.html">Ciberseguridad</a></li>
+                <li><a href="../networking.html">Redes</a></li>
+                <li><a href="../linux.html">Linux</a></li>
+                <li><a href="../windows.html">Windows</a></li>
+                <li><a href="../macos.html">MacOS</a></li>
+                <li><a href="../labs.html">Labs</a></li>
+            </ul>
+        </nav>
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="globalSearch" placeholder="Buscar temas...">
+            <div id="searchResults"></div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Fundamentos de Windows</h1>
+        <p>Ruta de aprendizaje técnica para dominar la arquitectura interna de Windows, administración del Registro y automatización mediante PowerShell.</p>
+    </section>
+
+    <section class="fundamentos-layout">
+
+        <aside class="fundamentos-sidebar">
+            <div class="sidebar-title">Contenido del Curso</div>
+            
+            <div class="course-module">
+                <div class="module-header">
+                    <span>Arquitectura e Internals</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="module-subtopics">
+                    <a href="#win-architecture" class="nav-target active" data-target="win-architecture">Arquitectura del Sistema (NT)</a>
+                    <a href="#win-registry" class="nav-target" data-target="win-registry">El Registro de Windows</a>
+                    <a href="#win-filesystem" class="nav-target" data-target="win-filesystem">Sistemas de Archivos (NTFS)</a>
+                </div>
+            </div>
+
+            <div class="course-module">
+                <div class="module-header">
+                    <span>Línea de Comandos (CLI)</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="module-subtopics">
+                    <a href="#win-cmd" class="nav-target" data-target="win-cmd">Consola CMD Tradicional</a>
+                    <a href="#win-powershell" class="nav-target" data-target="win-powershell">PowerShell Avanzado</a>
+                </div>
+            </div>
+
+            <div class="course-module">
+                <div class="module-header">
+                    <span>Seguridad y Permisos</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="module-subtopics">
+                    <a href="#win-auth" class="nav-target" data-target="win-auth">Autenticación (SAM y AD)</a>
+                    <a href="#win-permissions" class="nav-target" data-target="win-permissions">Permisos NTFS e ICACLS</a>
+                </div>
+            </div>
+
+            <div class="course-module">
+                <div class="module-header">
+                    <span>Administración del Sistema</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="module-subtopics">
+                    <a href="#win-processes" class="nav-target" data-target="win-processes">Procesos y Servicios</a>
+                    <a href="#win-events" class="nav-target" data-target="win-events">Visor de Eventos y Auditoría</a>
+                </div>
+            </div>
+
+        </aside>
+
+        <div class="fundamentos-content">
+
+            <div class="content-section active" id="win-architecture">
+                <div class="topic-section">
+                    <h2>Arquitectura Interna de Windows (Kernel NT)</h2>
+                    <p>Los sistemas operativos modernos de Microsoft (Windows 10, 11 y Windows Server) se construyen sobre la evolución del diseño de la arquitectura **Windows NT**. Es un sistema de arquitectura híbrida enfocado en la modularidad y la robustez técnica.</p>
+                    <p>Al igual que otros sistemas avanzados, divide de manera rígida la ejecución del software en dos modos de operación lógicos para garantizar la protección del hardware:</p>
+                    
+                    <div class="markdown-block">
+                        <h4>Anatomía de Modos de Ejecución</h4>
+                        <ul>
+                            <li><strong>Modo Usuario (User Mode):</strong> Las aplicaciones comunes (navegadores, editores de código, malware de espacio de usuario) se ejecutan aquí. No tienen acceso directo al hardware físico ni a la memoria central. Si una aplicación falla en User Mode, se cierra de forma aislada sin comprometer el sistema completo.</li>
+                            <li><strong>Modo Kernel (Kernel Mode):</strong> Reservado para el núcleo central del sistema operativo, el subsistema gráfico ejecutivo y los controladores de bajo nivel (Drivers). El código en Kernel Mode tiene privilegios irrestrictos sobre la CPU y la memoria. Un fallo o vulnerabilidad explotada en este modo provoca un colapso crítico del sistema, conocido como **BSOD (Blue Screen of Death)**.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section" id="win-registry">
+                <div class="topic-section">
+                    <h2>El Registro de Windows</h2>
+                    <p>El **Registro de Windows** es una base de datos jerárquica centralizada fundamental donde el sistema operativo guarda todas las configuraciones de hardware, opciones del software de terceros, controladores de dispositivos, preferencias de usuario y parámetros de seguridad críticos.</p>
+                    <p>Es una pieza clave en auditorías y ciberseguridad, ya que los atacantes lo utilizan frecuentemente para inyectar técnicas de **Persistencia** (para arrancar malware de forma invisible junto con el sistema operativo).</p>
+
+                    <h3>Las Cinco Colmenas Principales (Hives)</h3>
+                    <ul>
+                        <li><code>HKEY_CLASSES_ROOT (HKCR):</code> Gestiona las asociaciones de extensiones de archivos (ej: qué programa abre un archivo `.pdf`) y componentes OLE/COM.</li>
+                        <li><code>HKEY_CURRENT_USER (HKCU):</code> Almacena la configuración específica del perfil del usuario que mantiene la sesión activa en ese instante (fondos de pantalla, configuraciones locales).</li>
+                        <li><code>HKEY_LOCAL_MACHINE (HKLM):</code> La colmena más crítica. Contiene las configuraciones globales de hardware y del sistema operativo aplicables a todos los usuarios de la máquina (subllaves `SYSTEM`, `SAM`, `SECURITY`, `SOFTWARE`).</li>
+                        <li><code>HKEY_USERS (HKU):</code> Aloja de forma individualizada los perfiles de todos los usuarios configurados localmente en la máquina.</li>
+                        <li><code>HKEY_CURRENT_CONFIG (HKCC):</code> Mapea datos temporales sobre el perfil de hardware utilizado por el sistema durante el arranque actual.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-section" id="win-filesystem">
+                <div class="topic-section">
+                    <h2>Sistemas de Archivos y Estructura de Directorios</h2>
+                    <p>Windows organiza el almacenamiento físico dividiéndolo en volúmenes lógicos denotados por letras (<code>C:</code>, <code>D:</code>). El estándar industrial nativo para discos del sistema es **NTFS (New Technology File System)**, el cual ofrece capacidades avanzadas de seguridad corporativa en comparación con el antiguo formato FAT32.</p>
+                    
+                    <h3>Características Avanzadas de NTFS</h3>
+                    <ul>
+                        <li><strong>Listas de Control de Acceso (ACLs):</strong> Permiten definir permisos hiperespecíficos por usuario o por grupos de Active Directory para cada archivo o carpeta.</li>
+                        <li><strong>Cifrado EFS (Encrypting File System):</strong> Cifrado nativo a nivel de archivo basado en la cuenta de usuario.</li>
+                        <li><strong>Journaling (Transaccional):</strong> Registra los cambios de archivos antes de escribirlos para evitar la corrupción de datos en caso de un apagón repentino.</li>
+                        <li><strong>Alternate Data Streams (ADS):</strong> Característica que permite bifurcar metadatos ocultos dentro de un mismo archivo (frecuentemente explotado por ciberatacantes para ocultar código malicioso dentro de imágenes o archivos de texto legítimos).</li>
+                    </ul>
+
+                    <h3>Directorios Críticos del Sistema</h3>
+                    <ul>
+                        <li><code>C:\Windows\System32:</code> El directorio más sagrado. Contiene las librerías dinámicas del sistema (<code>.dll</code>), los controladores del Kernel y las herramientas ejecutables del sistema (<code>cmd.exe</code>, <code>taskmgr.exe</code>).</li>
+                        <li><code>C:\Users\[Usuario]\AppData:</code> Carpeta oculta donde las aplicaciones guardan configuraciones locales. Se divide en <code>Local</code>, <code>LocalLow</code> y <code>Roaming</code>.</li>
+                        <li><code>C:\Windows\SysWOW64:</code> Reservado en arquitecturas de 64 bits para almacenar los binarios y librerías compatibles con aplicaciones heredadas de 32 bits.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-section" id="win-cmd">
+                <div class="topic-section">
+                    <h2>Consola de Comandos Tradicional (CMD / Command Prompt)</h2>
+                    <p>Heredada directamente de la arquitectura de MS-DOS, el **CMD** es el intérprete de comandos clásico de Windows. Aunque ha sido superado por PowerShell, sigue siendo vital en entornos corporativos para administración básica y scripting automatizado `.bat` de bajo impacto.</p>
+                    
+                    <h3>Comandos Esenciales de CMD</h3>
+                    <ul>
+                        <li><code>dir</code>: Lista el contenido del directorio actual (equivalente a `ls` en Linux).</li>
+                        <li><code>cd [ruta]</code>: Cambia de directorio. A diferencia de Linux, para cambiar de unidad física se debe escribir la letra directamente (ej: <code>D:</code>).</li>
+                        <li><code>type [archivo]</code>: Muestra el contenido de un archivo de texto directamente en la terminal (equivalente a `cat` en Linux).</li>
+                        <li><code>mkdir [nombre]</code> y <code>rmdir /s /q [nombre]</code>: Creación de directorios y eliminación forzada/silenciosa de árboles de carpetas completos.</li>
+                        <li><code>copy</code> y <code>move</code>: Duplica o traslada archivos dentro del almacenamiento local.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-section" id="win-powershell">
+                <div class="topic-section">
+                    <h2>PowerShell Avanzado y Automatización</h2>
+                    <p>**PowerShell** es un motor de automatización de tareas y un marco de scripting de última generación muy superior al CMD tradicional. A diferencia de la terminal de Linux o CMD (que procesan puro texto plano), PowerShell se basa en la programación **Orientada a Objetos** construida sobre la arquitectura **.NET** de Microsoft.</p>
+                    <p>Esto significa que el output de un comando no es texto, sino un objeto estructurado que contiene propiedades, métodos y tipados de datos manipulables.</p>
+
+                    <h3>Estructura Cmdlet (Verbo-Sustantivo)</h3>
+                    <p>Los comandos nativos de PowerShell se denominan **Cmdlets** y siguen una sintaxis estricta y predecible de un verbo de acción y un sustantivo operativo:</p>
+                    <ul>
+                        <li><code>Get-Service</code>: Obtiene el listado de todos los servicios del sistema y su estado actual.</li>
+                        <li><code>Start-Service -Name "wuauserv"</code>: Inicia un servicio específico (en este ejemplo, Windows Update).</li>
+                        <li><code>Get-Process | Where-Object {$_.CPU -gt 50}</code>: Captura los procesos en vivo y, mediante una **Tubería de Objetos**, filtra en tiempo real aquellos cuyo consumo de CPU supere el 50%.</li>
+                        <li><code>Get-Content [archivo]</code>: Lee y extrae el contenido estructurado de un archivo de texto o log.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-section" id="win-auth">
+                <div class="topic-section">
+                    <h2>Mecanismos de Autenticación, Cuentas y Active Directory</h2>
+                    <p>Windows maneja de forma diferenciada la seguridad y autenticación dependiendo de si el entorno es una máquina aislada o una red corporativa masiva.</p>
+                    
+                    <h3>Autenticación Local: La Base de Datos SAM</h3>
+                    <p>En estaciones locales, las credenciales de usuarios no se guardan en texto plano, sino cifradas dentro del archivo **SAM (Security Accounts Manager)** ubicado de forma protegida en <code>C:\Windows\System32\config\SAM</code>.</p>
+                    <ul>
+                        <li>La SAM está bloqueada por el Kernel en tiempo de ejecución. Almacena hashes criptográficos conocidos como **NTLM hashes** para validar la identidad de los usuarios locales.</li>
+                        <li><strong>Administrador Local (Administrator):</strong> La cuenta con control absoluto local de la máquina. Su identificador de seguridad (SID) termina siempre de forma fija en la extensión relativa **-500**.</li>
+                    </ul>
+
+                    <h3>Autenticación Corporativa: Active Directory (AD) y Kerberos</h3>
+                    <p>En redes empresariales, la seguridad local se centraliza mediante **Active Directory**. Las cuentas se administran desde un servidor centralizado conocido como **Controlador de Dominio (Domain Controller)** y el protocolo estándar para la autenticación segura ya no es NTLM, sino **Kerberos** (basado en un sistema de tickets criptográficos de tiempo confidencial).</p>
+                </div>
+            </div>
+
+            <div class="content-section" id="win-permissions">
+                <div class="topic-section">
+                    <h2>Permisos NTFS y Gestión mediante ICACLS</h2>
+                    <p>En Windows, los permisos sobre archivos y carpetas NTFS se evalúan mediante estructuras complejas conocidas como **DACL (Discretionary Access Control List)**, compuestas por múltiples entradas llamadas **ACE (Access Control Entries)**.</p>
+                    
+                    <h3>Tipos Principales de Permisos NTFS</h3>
+                    <ul>
+                        <li><strong>Full Control (Control Total):</strong> Permite leer, escribir, modificar, ejecutar, borrar el archivo y, críticamente, cambiar los permisos de seguridad y tomar posesión (Ownership) del elemento.</li>
+                        <li><strong>Modify (Modificar):</strong> Permite ver y editar los datos internos, además de eliminar el archivo, pero prohíbe la alteración de las directivas de seguridad.</li>
+                        <li><strong>Read & Execute / Read / Write:</strong> Permisos segmentados para la visualización de datos, inyección de nuevas líneas y ejecución de binarios.</li>
+                    </ul>
+
+                    <h3>Herramienta Administrativa Avanzada: ICACLS</h3>
+                    <p>Para auditar o modificar los permisos NTFS de forma masiva desde la consola corporativa (CMD o PowerShell), se utiliza el comando **ICACLS**:</p>
+                    <ul>
+                        <li><code>icacls "C:\Compartido"</code>: Muestra de forma detallada las cuentas de usuarios y grupos que tienen acceso a la carpeta junto con sus respectivos flags de herencia.</li>
+                        <li><code>icacls "C:\Archivo.txt" /grant Jose:F</code>: Otorga permiso de control total (F = Full Control) explícito al usuario local "Jose".</li>
+                        <li><code>icacls "C:\Archivo.txt" /deny Invitado:M</code>: Deniega de forma explícita el permiso de modificación (M = Modify) a la cuenta de Invitados. <strong>Nota técnica de Windows:</strong> Las denegaciones explícitas siempre ganan prioridad sobre los permisos otorgados por herencia.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-section" id="win-processes">
+                <div class="topic-section">
+                    <h2>Gestión de Procesos, Servicios y el Proceso lsass.exe</h2>
+                    <p>En Windows, un proceso es una instancia en ejecución que cuenta con su propio espacio virtual de memoria direccionada. Los procesos en segundo plano que no interactúan con el escritorio gráfico del usuario se conocen como **Servicios** (equivalentes a los *daemons* de Linux).</p>
+                    
+                    <h3>Procesos del Sistema Críticos (Core Processes)</h3>
+                    <p>Identificar anomalías en los procesos nativos es crucial para detectar intrusiones de ciberseguridad avanzada. Los procesos legítimos obligatorios del sistema incluyen:</p>
+                    <ul>
+                        <li><code>system:</code> Proceso de Kernel que corre en un PID fijo (generalmente PID 4). Ejecuta hilos en modo Kernel.</li>
+                        <li><code>smss.exe</code> (Session Manager Subsystem): El primer proceso en modo usuario. Se encarga de iniciar las sesiones del sistema operativo.</li>
+                        <li><code>svchost.exe</code> (Service Host Process): Un proceso contenedor genérico que Windows utiliza para ejecutar múltiples servicios del sistema desde librerías dinámicas (DLLs). Es normal ver docenas de instancias de `svchost.exe` corriendo en paralelo.</li>
+                        <li><code>lsass.exe</code> (Local Security Authority Subsystem Service): El proceso encargado de verificar las contraseñas de los usuarios, generar tokens de acceso y aplicar las políticas de seguridad locales. <strong>Alerta de Ciberseguridad:</strong> Los atacantes avanzados intentan volcar la memoria de este proceso (`lsass.exe`) mediante herramientas como Mimikatz para extraer hashes NTLM o contraseñas en texto plano residentes en caché.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-section" id="win-events">
+                <div class="topic-section">
+                    <h2>Visor de Eventos de Windows (Event Viewer)</h2>
+                    <p>Windows registra de forma exhaustiva la actividad del sistema, errores de aplicaciones, advertencias de hardware e inicios de sesión a través de los **Event Logs**. Estos se almacenan internamente en archivos estructurados con extensión binaria <code>.evtx</code>.</p>
+                    
+                    <h3>Los Tres Canales Principales de Eventos</h3>
+                    <ul>
+                        <li><strong>Application (Aplicación):</strong> Registra eventos, fallas catastróficas y reportes generados por el software instalado por terceros o componentes del framework local.</li>
+                        <li><strong>System (Sistema):</strong> Almacena mensajes emitidos directamente por el Kernel NT de Windows, controladores de hardware, fallos de red globales y alertas de parches de actualización.</li>
+                        <li><strong>Security (Seguridad):</strong> El canal más importante para auditoría forense informática. Registra los intentos de inicio de sesión (exitosos y fallidos), cambios en los privilegios de los usuarios y auditorías de acceso a objetos del sistema de archivos.</li>
+                    </ul>
+
+                    <h3>Identificadores de Eventos Críticos (Event IDs)</h3>
+                    <p>En auditorías de seguridad, existen identificadores numéricos universales (**Event IDs**) que un especialista de TI debe monitorizar de inmediato para cazar intrusiones:</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Event ID</th>
+                                <th>Significado Técnico</th>
+                                <th>Contexto de Monitoreo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>4624</code></td>
+                                <td>Inicio de sesión exitoso (Anclado al tipo de inicio: interactivo, red, servicio).</td>
+                                <td>Comprobar quién y desde qué IP remota ingresó a la máquina.</td>
+                            </tr>
+                            <tr>
+                                <td><code>4625</code></td>
+                                <td>Intento de inicio de sesión fallido.</td>
+                                <td>Vital para detectar ataques de fuerza bruta automatizados en tiempo real.</td>
+                            </tr>
+                            <tr>
+                                <td><code>4720</code></td>
+                                <td>Una nueva cuenta de usuario local fue creada en el sistema.</td>
+                                <td>Alerta máxima ante la posible creación de un usuario backdoor por persistencia de malware.</td>
+                            </tr>
+                            <tr>
+                                <td><code>4672</code></td>
+                                <td>Inicios de sesión con privilegios especiales (Asignación de derechos de Administrador).</td>
+                                <td>Rastrea la elevación de privilegios de cuentas comprometidas.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>UnderCode © 2026</p>
+    </footer>
+
+    <script src="../../js/app.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

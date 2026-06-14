@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundamentos de macOS | UnderCode</title>
+    <link rel="stylesheet" href="../../css/style.css?v=1.1">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">UNDERCODE</div>
+        <div class="menu-toggle">☰</div>
+        <nav>
+            <ul>
+                <li><a href="../../index.html">Inicio</a></li>
+                <li><a href="../cybersecurity.html">Ciberseguridad</a></li>
+                <li><a href="../networking.html">Redes</a></li>
+                <li><a href="../linux.html">Linux</a></li>
+                <li><a href="../windows.html">Windows</a></li>
+                <li><a href="../macos.html">MacOS</a></li>
+                <li><a href="../labs.html">Labs</a></li>
+            </ul>
+        </nav>
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="globalSearch" placeholder="Buscar temas...">
+            <div id="searchResults"></div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Fundamentos de macOS</h1>
+        <p>Ruta de aprendizaje profesional para comprender la arquitectura Unix integrada de Apple, el sistema de archivos APFS y la seguridad interna del sistema.</p>
+    </section>
+
+    <section class="fundamentos-layout">
+
+        <aside class="fundamentos-sidebar">
+            <div class="sidebar-title">Contenido del Curso</div>
+            
+            <div class="course-module">
+                <div class="module-header">
+                    <span>Arquitectura Core (Darwin)</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="module-subtopics">
+                    <a href="#macos-architecture" class="nav-target active" data-target="macos-architecture">El Núcleo Darwin y Kernel XNU</a>
+                    <a href="#macos-filesystem" class="nav-target" data-target="macos-filesystem">Sistema de Archivos APFS</a>
+                </div>
+            </div>
+
+            <div class="course-module">
+                <div class="module-header">
+                    <span>La Terminal y Entorno Zsh</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="module-subtopics">
+                    <a href="#macos-cli" class="nav-target" data-target="macos-cli">Terminal y Comandos macOS</a>
+                    <a href="#macos-pkg" class="nav-target" data-target="macos-pkg">Gestión de Paquetes (Homebrew)</a>
+                </div>
+            </div>
+
+            <div class="course-module">
+                <div class="module-header">
+                    <span>Seguridad y Privacidad Avanzada</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="module-subtopics">
+                    <a href="#macos-sip" class="nav-target" data-target="macos-sip">SIP, Gatekeeper y XProtect</a>
+                    <a href="#macos-tcc" class="nav-target" data-target="macos-tcc">Privacidad (TCC) y Llavero</a>
+                </div>
+            </div>
+
+            <div class="course-module">
+                <div class="module-header">
+                    <span>Diagnóstico y Operaciones</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="module-subtopics">
+                    <a href="#macos-processes" class="nav-target" data-target="macos-processes">Procesos Base y Launchd</a>
+                    <a href="#macos-logs" class="nav-target" data-target="macos-logs">Unified Logging System</a>
+                </div>
+            </div>
+
+        </aside>
+
+        <div class="fundamentos-content">
+
+            <div class="content-section active" id="macos-architecture">
+                <div class="topic-section">
+                    <h2>Arquitectura de macOS: El Subsistema Darwin y Kernel XNU</h2>
+                    <p>Aunque macOS presenta una interfaz gráfica estilizada (Aqua), por debajo es un sistema operativo robusto con certificación oficial **UNIX**. La base de código abierto sobre la que se construye macOS se denomina **Darwin**.</p>
+                    <p>El corazón de Darwin es el núcleo **XNU** (*X is Not Unix*), un motor de arquitectura de **Kernel Híbrido** diseñado por Apple que fusiona de forma compacta dos tecnologías fundamentales de bajo nivel:</p>
+                    
+                    <div class="markdown-block">
+                        <h4>Componentes del Kernel XNU</h4>
+                        <ul>
+                            <li><strong>Mach:</strong> Un microkernel encargado de las operaciones más críticas y primitivas, como la gestión de hilos de ejecución, la abstracción de la memoria virtual y la comunicación segura entre procesos (IPC).</li>
+                            <li><strong>BSD (Berkeley Software Distribution):</strong> Capa basada en Unix que se ejecuta sobre Mach. Aporta el modelo de seguridad tradicional POSIX (usuarios y permisos), la pila de red TCP/IP local, el sistema de archivos virtual (VFS) y la traducción de llamadas al sistema (System Calls).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section" id="macos-filesystem">
+                <div class="topic-section">
+                    <h2>Apple File System (APFS) y Jerarquía Unix</h2>
+                    <p>El estándar de almacenamiento moderno para dispositivos de Apple es **APFS**, optimizado específicamente para unidades de estado sólido (SSD) y arquitecturas de almacenamiento flash.</p>
+                    
+                    <h3>Características Críticas de APFS</h3>
+                    <ul>
+                        <li><strong>Clonación Instantánea (Clones):</strong> Permite duplicar archivos o directorios de forma inmediata sin consumir espacio adicional en el disco; el sistema solo escribe datos nuevos cuando uno de los dos archivos es modificado (Copy-on-Write).</li>
+                        <li><strong>Instantáneas (Snapshots):</strong> Captura el estado del sistema de archivos en un punto exacto del tiempo de forma sutil, permitiendo revertir actualizaciones fallidas del sistema operativo.</li>
+                        <li><strong>Contenedores Compartidos:</strong> Varios volúmenes lógicos de APFS pueden compartir dinámicamente el mismo espacio libre en una piscina de almacenamiento físico sin necesidad de particionado rígido.</li>
+                        <li><strong>SSV (Signed System Volume):</strong> A partir de versiones modernas, el volumen del sistema operativo está completamente aislado en una partición de **Solo Lectura** firmada criptográficamente por Apple. Ni siquiera el usuario root puede alterar estos archivos binarios de forma directa en caliente.</li>
+                    </ul>
+
+                    <h3>Estructura de Directorios Específica</h3>
+                    <p>macOS hereda la estructura de directorios oculta de Unix (<code>/bin</code>, <code>/sbin</code>, <code>/private/etc</code>, <code>/var</code>), pero añade capas superiores visibles para la administración del usuario:</p>
+                    <ul>
+                        <li><code>/Applications:</code> Almacena los paquetes de aplicaciones instalados (ficheros con extensión <code>.app</code> que en realidad son directorios estructurados denominados *Bundles*).</li>
+                        <li><code>/Users:</code> Directorio equivalente al `/home` de Linux, donde residen los perfiles de los usuarios locales.</li>
+                        <li><code>/Library</code> y <code>~/Library:</code> Directorios de soporte del sistema y del usuario respectivamente, donde se alojan cachés, preferencias locales (ficheros <code>.plist</code>) y configuraciones de apps.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-section" id="macos-cli">
+                <div class="topic-section">
+                    <h2>La Terminal y el Entorno de Consola Zsh</h2>
+                    <p>A partir de macOS Catalina, el intérprete de comandos por defecto de la terminal dejó de ser Bash y migró hacia **Zsh (Z Shell)** debido a licencias de software, operando bajo los estándares modernos de Unix.</p>
+                    <p>La gran mayoría de comandos de navegación de Linux funcionan de forma idéntica en macOS (<code>ls</code>, <code>cd</code>, <code>pwd</code>, <code>grep</code>), pero el sistema operativo incluye herramientas de administración hiperespecíficas para controlar el hardware y la configuración de Apple:</p>
+
+                    <h3>Comandos Exclusivos de macOS</h3>
+                    <ul>
+                        <li><code>diskutil:</code> Herramienta potente de línea de comandos para administrar, verificar, verificar permisos, borrar o redimensionar particiones de discos físicos y contenedores APFS.</li>
+                        <li><code>networksetup:</code> Permite configurar de manera íntegra parámetros de red locales, direccionamiento IP estático, proxies y DNS de todas las interfaces físicas o de red virtual.</li>
+                        <li><code>softwareupdate:</code> Administra la descarga e instalación de parches del sistema operativo y actualizaciones de seguridad críticas directamente desde los servidores de Apple.</li>
+                        <li><code>open:</code> Comando versátil que abre archivos, directorios o URLs utilizando la aplicación predeterminada del entorno gráfico Aqua (ej: <code>open .</code> abre la ubicación actual en el gestor visual Finder).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-section" id="macos-pkg">
+                <div class="topic-section">
+                    <h2>Gestión de Paquetes con Homebrew</h2>
+                    <p>A diferencia de Linux (con APT o DNF), macOS no incluye de forma nativa un gestor de paquetes por línea de comandos para software open-source. La comunidad técnica estandarizó el uso de **Homebrew** (conocido simplemente como `brew`) para resolver esta necesidad operativa.</p>
+                    
+                    <h3>Comandos Fundamentales de Homebrew</h3>
+                    <ul>
+                        <li><code>brew update:</code> Sincroniza e indexa la base de datos de fórmulas locales con los repositorios centrales de Homebrew.</li>
+                        <li><code>brew install [fórmula]:</code> Descarga, compila o instala herramientas de consola tradicionales (ej: <code>brew install nmap wget tshark</code>).</li>
+                        <li><code>brew install --cask [aplicación]:</code> Extensión avanzada que permite instalar aplicaciones completas con entorno gráfico directamente (ej: <code>brew install --cask anydesk wireshark</code>), automatizando la descarga del archivo `.dmg` y su despliegue en la carpeta de aplicaciones.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-section" id="macos-sip">
+                <div class="topic-section">
+                    <h2>Mecanismos de Seguridad: SIP, Gatekeeper y XProtect</h2>
+                    <p>La arquitectura de seguridad de macOS es una de las más estrictas del mercado de consumo masivo, aplicando múltiples capas de defensa automatizadas a nivel de Kernel y de espacio de usuario.</p>
+                    
+                    <h3>Las Tres Columnas de Protección Defensiva</h3>
+                    <ul>
+                        <li><strong>SIP (System Integrity Protection):</strong> Tecnología a nivel de Kernel que restringe de forma radical la capacidad del usuario **root** (superusuario) para modificar directorios críticos del sistema (como <code>/System</code>, <code>/bin</code>, <code>/sbin</code>). Esto detiene en seco la inyección de Rootkits o malware persistente que intente alterar binarios nativos del sistema.</li>
+                        <li><strong>Gatekeeper:</strong> Submodulo de seguridad que intercepta la ejecución de cualquier software descargado de internet. Obliga a que las aplicaciones cumplan tres condiciones: estar firmadas digitalmente por un desarrollador aprobado por Apple, haber sido revisadas mediante un proceso automatizado de escaneo de malware de Apple (**Notarización**) y contar con el permiso explícito del usuario.</li>
+                        <li><strong>XProtect:</strong> El motor antivirus integrado nativo y silencioso de macOS. Basado en firmas de YARA, se actualiza automáticamente en segundo plano para escanear y bloquear la ejecución de binarios que coincidan con firmas de malware documentado.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-section" id="macos-tcc">
+                <div class="topic-section">
+                    <h2>Privacidad (TCC) y Arquitectura del Llavero</h2>
+                    <p>El control de acceso a los datos de usuario en macOS va más allá del clásico esquema de permisos de archivos Unix.</p>
+                    
+                    <h3>El Subsistema TCC (Transparency, Consent, and Control)</h3>
+                    <p>Incluso si una aplicación se ejecuta con privilegios elevados o permisos de lectura tradicionales, el sistema operativo bloquea el acceso a hardware y datos personales sensibles a menos que el usuario lo apruebe explícitamente en una ventana emergente gráfica.</p>
+                    <ul>
+                        <li>TCC gestiona el acceso a la <strong>Cámara</strong>, <strong>Micrófono</strong>, <strong>Grabación de Pantalla</strong>, carpetas como <strong>Descargas/Documentos</strong>, y el acceso completo al disco duro (Full Disk Access).</li>
+                        <li>TCC almacena estas reglas en bases de datos protegidas por SIP (<code>com.apple.TCC</code>), impidiendo que un malware altere sus propios permisos por línea de comandos de manera silenciosa.</li>
+                    </ul>
+
+                    <h3>El Sistema del Llavero (Keychain)</h3>
+                    <p>Es el subsistema seguro de almacenamiento de secretos de macOS. Guarda de forma cifrada mediante algoritmos robustos de grado militar (AES) las contraseñas de redes Wi-Fi, llaves criptográficas SSH, certificados digitales y credenciales de usuario de aplicaciones, aislando estos datos del espacio de memoria de procesos ordinarios.</p>
+                </div>
+            </div>
+
+            <div class="content-section" id="macos-processes">
+                <div class="topic-section">
+                    <h2>Gestión de Procesos y el Demonio Launchd</h2>
+                    <p>Al arrancar la arquitectura del Kernel XNU, este inicializa el primer proceso en el espacio de usuario (User Space), el cual posee siempre el PID 1: **launchd**.</p>
+                    <p>`launchd` reemplaza por completo a los antiguos sistemas de inicialización Unix System V y BSD init, actuando como el gestor maestro de servicios, daemons y agentes en segundo plano.</p>
+
+                    <h3>Daemons vs Agents en la Arquitectura de macOS</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Característica Técnica</th>
+                                <th>Launch Daemons</th>
+                                <th>Launch Agents</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Contexto de Ejecución</strong></td>
+                                <td>Se ejecutan en segundo plano a nivel global del sistema, independientemente de si hay un usuario con sesión activa.</td>
+                                <td>Se ejecutan estrictamente en el contexto de la sesión del usuario que ha iniciado sesión gráfica.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Privilegios</strong></td>
+                                <td>Frecuentemente corren con privilegios elevados del superusuario (root).</td>
+                                <td>Corren con los privilegios limitados del usuario actual de la sesión.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ubicación de Archivos (.plist)</strong></td>
+                                <td><code>/Library/LaunchDaemons</code></td>
+                                <td><code>/Library/LaunchAgents</code> o <code>~/Library/LaunchAgents</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="content-section" id="macos-logs">
+                <div class="topic-section">
+                    <h2>El Sistema Unificado de Logs (Unified Logging System)</h2>
+                    <p>En versiones antiguas de macOS y sistemas clásicos Unix, los logs se escribían como líneas de texto plano en archivos individuales dentro de `/var/log`. Los sistemas modernos de Apple implementan el **Unified Logging System**, que centraliza todos los mensajes del sistema y de apps en un formato binario comprimido de alta eficiencia dentro de <code>/var/db/diagnostics</code>.</p>
+                    <p>Debido a que estos archivos ya no son texto plano, es imposible leerlos con herramientas como `cat` o `less`. Se requiere el uso del comando especializado de telemetría forense **log**:</p>
+
+                    <h3>Comandos de Auditoría Forense de Logs</h3>
+                    <ul>
+                        <li><code>log stream:</code> Vuelca en la pantalla de la terminal todos los logs generados por el Kernel, hardware y aplicaciones en tiempo real (equivalente a un `tail -f`).</li>
+                        <li><code>log stream --predicate 'process == "sshd"'</code>: Aplica filtros avanzados (Predicados) para capturar en tiempo real eventos generados únicamente por un proceso específico (en este ejemplo, el demonio de conexiones remotas SSH).</li>
+                        <li><code>log show --output syslog --hours 2</code>: Extrae y traduce los eventos binarios ocurridos en las últimas 2 horas de funcionamiento de la máquina, formateándolos con la sintaxis clásica y legible de registros estándar Syslog.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>UnderCode © 2026</p>
+    </footer>
+
+    <script src="../../js/app.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
