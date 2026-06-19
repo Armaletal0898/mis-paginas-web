@@ -165,10 +165,6 @@
     }
 }
 
-
-
-
-
 /* ========================================================
    TARJETAS DE FILTRO RÁPIDO - BIBLIOTECA
 ======================================================== */
@@ -177,7 +173,7 @@
     justify-content: center;
     gap: 12px;
     margin-top: 20px;
-    flex-wrap: wrap; /* Permite que se acomoden si no caben en una fila */
+    flex-wrap: wrap;
 }
 
 .filter-btn {
@@ -200,7 +196,6 @@
     transition: color 0.3s ease;
 }
 
-/* Efecto Hover general */
 .filter-btn:hover {
     color: #ffffff;
     border-color: #444444;
@@ -226,7 +221,6 @@
     box-shadow: 0 0 10px rgba(0, 204, 204, 0.2);
 }
 
-/* Agrupamos Linux, Windows y macOS bajo la lógica visual de 'os' */
 .filter-btn[data-filter="linux"].active,
 .filter-btn[data-filter="windows"].active,
 .filter-btn[data-filter="macos"].active {
@@ -235,89 +229,203 @@
     box-shadow: 0 0 10px rgba(153, 51, 255, 0.2);
 }
 
-/* Ajuste sutil para móviles */
-@media screen and (max-width: 768px) {
-    .category-filters {
-        gap: 8px;
-        margin-top: 15px;
-    }
-    .filter-btn {
-        padding: 8px 12px;
-        font-size: 0.8rem;
-    }
+/* ========================================================
+   UNDERCODE - INTERFAZ DEL MODAL DE EJEMPLOS PRÁCTICOS
+======================================================== */
+
+/* Indicador visual para las tarjetas con clics activos */
+.def-card.interactiva {
+    cursor: pointer !important;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
+.def-card.interactiva:hover {
+    transform: translateY(-4px);
+    border-color: #ff0000 !important;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.3) !important;
+}
 
+/* Prompt visual inferior */
+.click-prompt {
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: #00ffcc;
+    margin-top: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
 
+/* Capa fija absoluta (Overlay) - SISTEMA FLOTANTE CORREGIDO CON COBERTURA TOTAL */
+.uc-modal-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(5, 5, 5, 0.95) !important; /* Fondo de seguridad UnderCode */
+    backdrop-filter: blur(8px) !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    z-index: 999999 !important; /* Corta por encima del footer y del layout */
+    animation: fadeInUC 0.25s ease forwards;
+}
+
+/* Contenedor central flotante - OPTIMIZADO CON CONTROL VERTICAL */
+.uc-modal-card {
+    background: #0d0d0d !important;
+    border: 1px solid #222222 !important;
+    border-top: 3px solid #ff0000 !important;
+    width: 90%;
+    max-width: 650px;
+    max-height: 85vh; /* Evita desbordamiento en ventanas reducidas */
+    display: flex;
+    flex-direction: column;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.9);
+}
+
+.uc-modal-header {
+    background: #141414;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #222;
+}
+
+.uc-modal-header h2 {
+    color: #ffffff !important;
+    font-family: monospace;
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.uc-modal-close {
+    color: #555555;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.uc-modal-close:hover {
+    color: #ff0000;
+}
+
+.uc-modal-body {
+    padding: 20px;
+    max-height: 70vh;
+    overflow-y: auto;
+    text-align: left !important;
+}
+
+.uc-modal-target-desc {
+    color: #aaaaaa !important;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.uc-modal-body h3 {
+    color: #00ffcc !important;
+    font-family: monospace;
+    font-size: 1rem;
+    margin-bottom: 12px;
+}
+
+.uc-modal-example-item {
+    background: #111111 !important;
+    border-left: 3px solid #00ffcc !important;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 0 4px 4px 0;
+    color: #e0e0e0 !important;
+    font-size: 0.9rem;
+    text-align: left !important;
+}
+
+.uc-modal-example-item code {
+    display: block;
+    background: #000000 !important;
+    color: #ff3333 !important;
+    padding: 10px;
+    margin: 8px 0;
+    font-family: monospace;
+    border-radius: 4px;
+    border: 1px solid #1a1a1a;
+    overflow-x: auto;
+}
+
+/* Animaciones estructurales */
+@keyframes fadeInUC {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.animate-modal {
+    animation: slideUpUC 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUpUC {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.uc-modal-overlay.fade-out {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
 
 /* ========================================================
-   RESPONSIVE DESIGN - OPTIMIZACIÓN PARA MÓVILES (<= 768px)
+   BLOQUE RESPONSIVE ÚNICO Y CORREGIDO
 ======================================================== */
 @media screen and (max-width: 768px) {
-    
+    /* Ajustes del contenedor principal */
     .library-container {
-        padding: 40px 15px; /* Reducimos el espacio superior para aprovechar la pantalla */
-        justify-content: flex-start; /* Evita que el contenido choque si el teclado virtual se abre */
+        padding: 20px 10px;
+        justify-content: flex-start;
     }
 
-    .search-center-section {
-        margin-bottom: 25px;
+    /* Ajustes del Modal */
+    .uc-modal-card {
+        width: 95% !important;
+        max-width: 95% !important;
+        max-height: 80vh !important;
+        margin: 10px auto;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden; /* Controla que nada sobresalga del modal */
     }
 
-    .search-center-section h1 {
-        font-size: 2rem; /* Reducimos el título para que no haga saltos de línea extraños */
-        letter-spacing: 1px;
+    .uc-modal-body {
+        padding: 15px;
+        overflow-y: auto; /* Habilita el scroll interno en móviles */
+        flex: 1;
     }
 
-    .search-center-section p {
-        font-size: 0.9rem;
-        margin-bottom: 20px;
-        padding: 0 5px;
+    /* Ajuste de los bloques de código para no romper el layout */
+    .uc-modal-example-item code {
+        white-space: pre-wrap;
+        word-break: break-all;
+        display: block;
+        max-width: 100%;
     }
 
-    /* Ajustes en la barra de búsqueda para que no se sienta gigante en el teléfono */
-    .main-search-box {
-        padding: 12px 15px;
-    }
-
-    .search-bar-icon {
-        font-size: 1rem;
-        margin-right: 10px;
-    }
-
-    .main-search-box input {
-        font-size: 0.95rem;
-    }
-
-    /* Forzamos a que las tarjetas ocupen todo el ancho disponible en móviles */
+    /* Ajustes generales de otros elementos para móviles */
     .results-grid {
         grid-template-columns: 1fr; 
-        gap: 15px; /* Espaciado más compacto entre definiciones */
+        gap: 15px;
+        width: 100%;
     }
-
-    /* Optimizamos el espacio interno de las tarjetas */
-    .def-card {
-        padding: 16px;
-    }
-
-    .def-card h3 {
-        font-size: 1.15rem;
-        flex-wrap: wrap; /* Si el término en inglés es muy largo, la etiqueta baja limpiamente */
-        gap: 8px;
-    }
-
-    .def-tag {
-        font-size: 0.65rem;
-        padding: 1px 6px;
-    }
-
-    .def-card .es-title {
-        font-size: 0.8rem;
-        margin-bottom: 10px;
-    }
-
-    .def-card p {
-        font-size: 0.88rem;
-        line-height: 1.4;
+    
+    .search-center-section h1 {
+        font-size: 1.8rem;
     }
 }
+

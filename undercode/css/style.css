@@ -27,7 +27,7 @@ body {
 }
 
 /* ========================================
-   HEADER & LOGO
+   HEADER & NAVEGACIÓN GLOBAL (CORREGIDO)
 ======================================== */
 header {
     position: sticky;
@@ -36,7 +36,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 50px;
+    padding: 20px 40px; /* Reducido levemente para dar más área de trabajo horizontal */
     background: rgba(0, 0, 0, .85);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid #111;
@@ -47,18 +47,26 @@ header {
     font-weight: 700;
     color: #a4161a;
     text-shadow: 0 0 10px #a4161a;
+    flex-shrink: 0; /* Evita que el logo se deforme si se reduce el espacio */
+}
+
+nav {
+    margin-left: auto; /* Empuja de manera fluida el menú y el buscador hacia la derecha */
 }
 
 nav ul {
     display: flex;
     list-style: none;
-    gap: 25px;
+    gap: 20px; /* Espaciado óptimo para acomodar la nueva Biblioteca */
+    align-items: center;
 }
 
 nav a {
     text-decoration: none;
     color: white;
     transition: .3s;
+    font-size: 0.95rem;
+    white-space: nowrap; /* Evita que los textos largos salten de línea */
 }
 
 nav a:hover {
@@ -73,16 +81,26 @@ nav a:hover {
     user-select: none;
 }
 
+/* Destacar el botón de la biblioteca en el menú de navegación */
+.nav-highlight {
+    color: #00cccc !important; /* Tono cian eléctrico para diferenciarlo */
+    font-weight: 600;
+}
+
+.nav-highlight i {
+    margin-right: 5px;
+}
+
 /* ========================================
-   BUSCADOR GLOBAL (ESCRITORIO / PC)
+   BUSCADOR GLOBAL (CORREGIDO)
 ======================================== */
 .search-container {
     position: relative;
     display: flex;
     align-items: center;
-    max-width: 450px;
-    width: 100%;
-    margin-left: 20px;
+    flex: 1; /* Permite que la caja se adapte dinámicamente */
+    max-width: 320px; /* Ancho máximo estilizado para mantener simetría */
+    margin-left: 25px;
 }
 
 .search-icon {
@@ -92,16 +110,16 @@ nav a:hover {
     font-size: 1.1rem;
     transition: color 0.3s ease;
     pointer-events: none;
-    display: block; /* Visible por defecto en PC */
+    display: block;
 }
 
 #globalSearch {
     width: 100%;
-    padding: 12px 15px 12px 45px; /* Espacio izquierdo para el icono */
+    padding: 10px 15px 10px 45px;
     background: #050505;
     color: #fff;
     font-family: 'Poppins', sans-serif;
-    font-size: 1rem;
+    font-size: 0.95rem;
     border: 1px solid #222;
     border-radius: 4px;
     outline: none;
@@ -279,6 +297,16 @@ nav a:hover {
     text-decoration: none;
 }
 
+/* Tarjeta especial para destacar la Biblioteca en el catálogo principal */
+.library-card-highlight:hover {
+    border-color: #00cccc !important;
+    box-shadow: 0 0 10px #00cccc, 0 0 25px #00cccc !important;
+}
+
+.library-card-highlight i {
+    color: #00cccc !important;
+}
+
 /* ========================================
    TERMINAL INTERACTIVA
 ======================================== */
@@ -387,7 +415,7 @@ nav a:hover {
 }
 
 /* ========================================
-   COMPONENTES COMPLEMENTARIOS (CERTIFICACIONES, TABLAS, PROGRESS)
+   COMPONENTES COMPLEMENTARIOS
 ======================================== */
 .cert-grid {
     display: grid;
@@ -582,132 +610,6 @@ footer {
 }
 
 /* ========================================
-   BLOQUE RESPONSIVE TOTAL UNIFICADO (≤ 768px)
-======================================== */
-#menu-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, .6);
-    opacity: 0;
-    visibility: hidden;
-    transition: .3s;
-    z-index: 998;
-}
-
-#menu-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-@media(max-width: 768px) {
-    /* ESTRUCTURA DEL HEADER MOBILE */
-    header {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px 20px;
-    }
-
-    .logo {
-        flex: 1;
-        font-size: 1.3rem;
-    }
-
-    .menu-toggle {
-        display: block;
-        margin-left: auto;
-        font-size: 2rem;
-        color: #a4161a;
-        cursor: pointer;
-        user-select: none;
-        z-index: 1001;
-    }
-
-    /* NAVEGACIÓN (SIDEBAR LATERAL MÓVIL) */
-    nav {
-        position: fixed;
-        top: 0;
-        left: -280px;
-        width: 280px;
-        height: 100vh;
-        background: #0d0d0d;
-        border-right: 1px solid #222;
-        transition: left .35s ease;
-        z-index: 999;
-        padding-top: 80px;
-    }
-
-    nav.active {
-        left: 0;
-    }
-
-    nav ul {
-        flex-direction: column;
-        gap: 0;
-    }
-
-    nav li {
-        width: 100%;
-    }
-
-    nav a {
-        display: block;
-        padding: 18px 25px;
-        border-bottom: 1px solid #1f1f1f;
-    }
-
-    nav a:hover {
-        background: #161616;
-    }
-
-    /* BUSCADOR GLOBAL EN DISPOSITIVOS MÓVILES */
-    .search-container {
-        width: 100%;
-        max-width: 100%;
-        margin-left: 0;
-        margin-top: 15px;
-        order: 3; /* Pasa a la línea inferior del menú hamburguesa */
-    }
-
-    .search-icon {
-        display: none !important; /* Oculta la lupa por completo en pantallas táctiles */
-    }
-
-    #globalSearch {
-        width: 100%;
-        padding: 12px 15px !important; /* Alinea simétricamente el texto al quitar la lupa */
-    }
-
-    #searchResults {
-        width: 100%;
-        left: 0;
-        top: 52px; 
-    }
-
-    /* ELEMENTOS DE CONTENIDO RESPONSIVO */
-    .hero h1 {
-        font-size: 2.8rem;
-    }
-
-    .terminal {
-        padding: 15px;
-    }
-
-    .cert-grid,
-    .domain-grid,
-    .categories,
-    .roadmap {
-        padding: 20px;
-    }
-}
-
-
-
-/* ========================================
    SECCIÓN INTRODUCCIÓN DESTACADA (BANNER)
 ======================================== */
 .intro-module {
@@ -764,7 +666,6 @@ footer {
     line-height: 1.6;
 }
 
-/* Botón único de acción */
 .btn-intro {
     display: flex;
     align-items: center;
@@ -797,8 +698,251 @@ footer {
     transform: translateX(5px);
 }
 
-/* Adaptación para pantallas móviles (Móviles y Tablets) */
-@media (max-width: 768px) {
+/* --- ANIMACIÓN DE LA BARRA DE NAVEGACIÓN (Escritorio) --- */
+header nav ul li a {
+    position: relative;
+    display: inline-block;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+header nav ul li a:hover {
+    color: #ff0000;
+    transform: translateY(-2px);
+}
+
+header nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #ff0000;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+header nav ul li a:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+/* ========================================
+   BLOQUE RESPONSIVE TOTAL UNIFICADO (≤ 768px)
+======================================== */
+#menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+#menu-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+@media(max-width: 768px) {
+    /* ESTRUCTURA DEL HEADER MOBILE (REDISEÑADO CON FLEX-DIRECTION) */
+    header {
+        display: flex;
+        flex-direction: column; /* Cambia a columna para separar la barra superior del buscador */
+        align-items: stretch;
+        padding: 15px 20px;
+        gap: 15px; /* Espaciado simétrico entre filas */
+    }
+
+    /* Fila superior artificial para contener Logo y Hamburguesa en los extremos */
+    header::before {
+        content: none;
+    }
+
+    /* Forzamos a que el Logo y el botón compartan la primera línea solos */
+    .logo {
+        display: inline-block;
+        font-size: 1.3rem;
+        order: 1;
+    }
+
+    .menu-toggle {
+        display: block;
+        margin-left: auto;
+        font-size: 1.8rem;
+        color: #a4161a;
+        cursor: pointer;
+        user-select: none;
+        z-index: 1001;
+        order: 2;
+        /* Sacamos el botón flotando a la derecha en la fila superior */
+        position: absolute;
+        right: 20px;
+        top: 15px;
+    }
+
+    /* NAVEGACIÓN (SIDEBAR LATERAL MÓVIL OPTIMIZADO PARA TARJETAS Y SCROLL) */
+    header nav {
+        position: fixed;
+        top: 0;
+        right: -100%; 
+        width: 85%; /* Espacio horizontal perfecto */
+        height: 100vh;
+        background-color: rgba(5, 5, 5, 0.98); /* Fondo oscuro premium */
+        border-left: 2px solid #a4161a;
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.8);
+        z-index: 1000;
+        transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1); 
+        display: flex;
+        align-items: flex-start; /* CORRECCIÓN: Alineación al inicio para permitir el scroll natural */
+        justify-content: center;
+        margin-left: 0; 
+        padding: 80px 20px 40px 20px; /* Más espacio arriba para que el botón de cerrar 'X' no tape las tarjetas */
+        overflow-y: auto; /* CORRECCIÓN: Activa el scroll vertical si el contenido supera la pantalla */
+    }
+
+    header nav.active {
+        right: 0; 
+    }
+
+    /* TRANSFORMACIÓN A CUADRÍCULA (GRID) DE 2 COLUMNAS */
+    nav ul {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr); /* 2 mini tarjetas por fila */
+        gap: 12px; /* Espaciado limpio entre tarjetas */
+        width: 100%;
+        max-width: 400px; /* Asegura simetría */
+        flex-direction: unset; 
+    }
+
+    nav li {
+        width: 100%;
+    }
+
+    /* ESTILO DE MINI TARJETAS INTERACTIVAS COMPACTAS */
+    nav a {
+        display: flex !important;
+        flex-direction: column; /* Estructura vertical (icono arriba, texto abajo) */
+        align-items: center;
+        justify-content: center;
+        min-height: 75px; /* CORRECCIÓN: Altura reducida para evitar cajas gigantestas */
+        padding: 12px 8px !important; /* Padding optimizado */
+        background: #111111; 
+        border: 1px solid #222222; 
+        border-radius: 8px; 
+        text-align: center;
+        font-size: 0.85rem !important; /* CORRECCIÓN: Tipografía compacta para evitar cortes feos */
+        line-height: 1.2; /* Ajuste de línea más cerrado */
+        font-weight: 500;
+        color: #ffffff;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        word-break: break-word; /* Rompe palabras largas ordenadamente */
+        white-space: normal !important;
+        border-bottom: unset; 
+    }
+
+    /* FEEDBACK VISUAL PREMIUM AL SELECCIONAR O HACER HOVER */
+    nav a:hover, nav a:active {
+        background: rgba(164, 22, 26, 0.12); 
+        border-color: #a4161a; 
+        color: #fff;
+        box-shadow: 0 0 15px rgba(164, 22, 26, 0.35);
+        transform: translateY(-2px); 
+    }
+
+    /* Ajuste de iconos opcionales dentro de las mini tarjetas */
+    nav a i {
+        font-size: 1.2rem;
+        margin-bottom: 6px; 
+        margin-right: 0 !important; 
+    }
+
+    /* Ocultar barra de scroll interna estéticamente en Webkit si se desea */
+    header nav::-webkit-scrollbar {
+        width: 4px;
+    }
+    header nav::-webkit-scrollbar-thumb {
+        background: rgba(164, 22, 26, 0.4);
+        border-radius: 2px;
+    }
+
+    /* Animación secuencial (Staggered) para el menú móvil */
+    header nav ul li {
+        opacity: 0;
+        transform: translateX(50px);
+        transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    header nav.active ul li {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    header nav.active ul li:nth-child(1) { transition-delay: 0.05s; }
+    header nav.active ul li:nth-child(2) { transition-delay: 0.1s; }
+    header nav.active ul li:nth-child(3) { transition-delay: 0.15s; }
+    header nav.active ul li:nth-child(4) { transition-delay: 0.2s; }
+    header nav.active ul li:nth-child(5) { transition-delay: 0.25s; }
+    header nav.active ul li:nth-child(6) { transition-delay: 0.3s; }
+    header nav.active ul li:nth-child(7) { transition-delay: 0.35s; }
+    header nav.active ul li:nth-child(8) { transition-delay: 0.4s; }
+
+    /* BUSCADOR GLOBAL EN DISPOSITIVOS MÓVILES */
+    .search-container {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0;
+        margin-top: 10px; 
+        order: 3; 
+        clear: both;
+    }
+
+    .search-icon {
+        display: none !important; 
+    }
+
+    #globalSearch {
+        width: 100%;
+        padding: 12px 15px !important;
+    }
+
+    #searchResults {
+        width: 100%;
+        left: 0;
+        top: 52px; 
+    }
+
+    /* CONTROL DE TIPOGRAFÍA RESPONSIVE */
+    .hero h1 {
+        font-size: 2.2rem; 
+        word-wrap: break-word; 
+        overflow-wrap: break-word;
+    }
+
+    .terminal-section h2,
+    .roadmap h2,
+    h1, h2 {
+        font-size: 2.0rem !important;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+    /* ELEMENTOS DE CONTENIDO RESPONSIVO */
+    .terminal {
+        padding: 15px;
+    }
+
+    .cert-grid,
+    .domain-grid,
+    .categories,
+    .roadmap,
     .intro-module {
         padding: 0 20px;
         margin: 20px auto;
@@ -828,119 +972,13 @@ footer {
     }
 }
 
-
-
-
-/* --- ANIMACIÓN DE LA BARRA DE NAVEGACIÓN (Escritorio) --- */
-header nav ul li a {
-    position: relative;
-    display: inline-block;
-    transition: color 0.3s ease, transform 0.2s ease;
-}
-
-/* Efecto Hover sutil para los enlaces del menú */
-header nav ul li a:hover {
-    color: #ff0000; /* Rojo característico de UnderCode */
-    transform: translateY(-2px); /* Pequeño salto flotante hacia arriba */
-}
-
-/* Subrayado expansivo dinámico (Efecto premium) */
-header nav ul li a::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    transform: scaleX(0);
-    height: 2px;
-    bottom: -5px;
-    left: 0;
-    background-color: #ff0000;
-    transform-origin: bottom right;
-    transition: transform 0.25s ease-out;
-}
-
-header nav ul li a:hover::after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-}
-
-
-/* --- ANIMACIÓN PARA EL MENÚ RESPONSIVO (Móvil) --- */
-@media (max-width: 768px) {
-    header nav {
-        position: fixed;
-        top: 0;
-        right: -100%; /* Escondido por completo a la derecha */
-        width: 70%;
-        height: 100vh;
-        background-color: rgba(10, 10, 10, 0.98); /* Fondo oscuro hacker */
-        border-left: 2px solid #ff0000;
-        box-shadow: -10px 0 20px rgba(0, 0, 0, 0.5);
-        z-index: 1000;
-        
-        /* Aquí ocurre la magia de la transición suave */
-        transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1); 
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    /* Clase activa que inyectará JavaScript */
-    header nav.active {
-        right: 0; /* Entra elegantemente deslizándose */
-    }
-
-    /* Animación secuencial (Staggered) para los enlaces del menú móvil */
-    header nav ul li {
-        opacity: 0;
-        transform: translateX(50px);
-        transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-
-    header nav.active ul li {
-        opacity: 1;
-        transform: translateX(0);
-    }
-
-    /* Retardo de entrada individual para que aparezcan uno tras otro */
-    header nav.active ul li:nth-child(1) { transition-delay: 0.1s; }
-    header nav.active ul li:nth-child(2) { transition-delay: 0.15s; }
-    header nav.active ul li:nth-child(3) { transition-delay: 0.2s; }
-    header nav.active ul li:nth-child(4) { transition-delay: 0.25s; }
-    header nav.active ul li:nth-child(5) { transition-delay: 0.3s; }
-    header nav.active ul li:nth-child(6) { transition-delay: 0.35s; }
-    header nav.active ul li:nth-child(7) { transition-delay: 0.4s; }
-}
-
-/* --- ANIMACIÓN DEL OVERLAY (Capa de fondo difuminada) --- */
-#menu-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(4px); /* Difumina el fondo de la landing page */
-    z-index: 999;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.4s ease;
-}
-
-#menu-overlay.active {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-
 /* ========================================================
    ANIMACIÓN DEL HERO CON ENTRADA SUAVE Y CONTROLADA
 ======================================================== */
-
-/* 1. Mantenemos los fotogramas de la animación intactos */
 @keyframes entradaSuave {
     from {
         opacity: 0;
-        transform: translateY(40px); /* Un poco más de desplazamiento para notar la fluidez */
+        transform: translateY(40px);
     }
     to {
         opacity: 1;
@@ -948,24 +986,21 @@ header nav ul li a:hover::after {
     }
 }
 
-/* 2. Aplicamos la animación base a los tres elementos principales */
 .hero h1,
 .hero p,
 .hero .btn {
-    opacity: 0; /* Inician ocultos de forma segura */
-    /* Subimos la duración a 1.4s para suavizar la velocidad de la transición */
+    opacity: 0;
     animation: entradaSuave 1.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
-/* 3. Espaciado de tiempos (Delays) más marcado para el efecto cascada */
 .hero h1 {
-    animation-delay: 0.2s; /* "UNDERCODE" aparece primero */
+    animation-delay: 0.2s;
 }
 
 .hero p {
-    animation-delay: 0.6s; /* La descripción le sigue de forma pausada */
+    animation-delay: 0.6s;
 }
 
 .hero .btn {
-    animation-delay: 1.0s; /* El botón corona la entrada al final */
+    animation-delay: 1.0s;
 }
