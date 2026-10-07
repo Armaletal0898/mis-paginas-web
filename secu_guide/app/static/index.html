@@ -1,26 +1,177 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>SecuGuide - Asistente Tecnológico Preventivo</title>
-	<!-- Enlace al archivo CSS externo -->
-	<link rel="stylesheet" href="/static/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecuGuide - Tu Asistente Digital de Seguridad y Soporte</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <header>
+        <div class="logo">
+            <i class="fa-solid fa-shield-cat"></i>
+            <span>SecuGuide</span>
+        </div>
+        <nav>
+            <a href="#herramienta">Contraseñas</a>
+            <a href="#glosario">Glosario Amigable</a>
+            <a href="#soporte">Soluciones (Troubleshooting)</a>
+        </nav>
+    </header>
 
-	<header class="main-header">
-		<div class="header-content">
-			<h1>SecuGuide</h1>
-			<p>Tu escudo y guia rápida ante dudas de tecnología antes  de llamar al técnico.</p>
-		</div>
-	</header>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Tu escudo digital y guía de soporte sin complicaciones</h1>
+            <p>Aprende a protegerte en internet, entiende términos técnicos explicados de forma sencilla y soluciona problemas cotidianos de impresoras y redes antes de llamar al técnico.</p>
+        </div>
+    </section>
 
-	<main class="continer">
-		<!-- Sección de Estado del Sistema -->
-		<section class="card">
-			<h2>Estado del Asistente</h2>
-			<p>Verifica si los servicios de orientación están activos.</p>
-			<button id="btn-health" class="btn-primary">Verificar Conexión</button>
-			<div id="health-result" class="result-box"></div>
-		</section>
+    <main class="container">
+        
+        <!-- SECCIÓN 1: Validador y Generador de Contraseñas -->
+        <section id="herramienta" class="card-section">
+            <h2><i class="fa-solid fa-key"></i> Validador y Generador de Contraseñas Seguras</h2>
+            <p>Comprueba qué tan segura es tu contraseña actual o genera una clave impenetrable en segundos.</p>
+            
+            <div class="pwd-tool-grid">
+                <div class="pwd-box">
+                    <h3>Evalúa tu contraseña</h3>
+                    <input type="password" id="userPassword" placeholder="Escribe tu contraseña aquí..." />
+                    <div id="pwdResult" class="pwd-feedback hidden">
+                        <p id="pwdStrengthText"><strong>Nivel:</strong> <span></span></p>
+                        <p id="pwdDescText"></p>
+                        <ul id="pwdSuggestions"></ul>
+                    </div>
+                </div>
+
+                <div class="pwd-box">
+                    <h3>Generador automático</h3>
+                    <p>¿No se te ocurre ninguna clave segura? Crea una al instante.</p>
+                    <div class="gen-output">
+                        <input type="text" id="generatedPassword" readonly placeholder="Haz clic en generar..." />
+                        <button id="btnGenerate" class="btn-primary">Generar Clave</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: Glosario de Ciberseguridad e Informática -->
+        <section id="glosario" class="card-section">
+            <h2><i class="fa-solid fa-book-open"></i> Glosario Digital para Todos</h2>
+            <p>Términos técnicos explicados con peras y manzanas, sin rodeos.</p>
+            
+            <input type="text" id="glossarySearch" placeholder="Busca un término (ej. Phishing, Firewall, VPN...)" class="search-input">
+
+            <div class="glossary-grid" id="glossaryContainer">
+                <div class="glossary-card" data-term="phishing">
+                    <h3>Phishing (Suplantación)</h3>
+                    <p><strong>¿Qué es?</strong> Correos o mensajes falsos que se hacen pasar por tu banco o empresas conocidas para robar tus datos.</p>
+                    <p class="tip">💡 <em>Consejo:</em> Nunca hagas clic en enlaces extraños ni des tus claves por mensaje.</p>
+                </div>
+                <div class="glossary-card" data-term="malware">
+                    <h3>Malware (Virus informáticos)</h3>
+                    <p><strong>¿Qué es?</strong> Programas maliciosos diseñados para dañar tu computadora o espiar lo que haces.</p>
+                    <p class="tip">💡 <em>Consejo:</em> Usa siempre un antivirus actualizado y descarga programas solo de páginas oficiales.</p>
+                </div>
+                <div class="glossary-card" data-term="vpn">
+                    <h3>VPN (Red Privada Virtual)</h3>
+                    <p><strong>¿Qué es?</strong> Una herramienta que oculta tu ubicación y cifra tu conexión cuando usas Wi-Fi público en cafeterías o aeropuertos.</p>
+                    <p class="tip">💡 <em>Consejo:</em> Úsala siempre que te conectes a redes públicas abiertas.</p>
+                </div>
+                <div class="glossary-card" data-term="ransomware">
+                    <h3>Ransomware (Secuestro de datos)</h3>
+                    <p><strong>¿Qué es?</strong> Un virus malvado que bloquea todos tus archivos y te pide dinero (rescate) para recuperarlos.</p>
+                    <p class="tip">💡 <em>Consejo:</em> Haz copias de seguridad regulares de tus fotos y documentos importantes en la nube.</p>
+                </div>
+                <div class="glossary-card" data-term="firewall">
+                    <h3>Firewall (Cortafuegos)</h3>
+                    <p><strong>¿Qué es?</strong> Un guardia de seguridad virtual en tu computadora que decide qué conexiones de internet son seguras y cuáles bloquear.</p>
+                    <p class="tip">💡 <em>Consejo:</em> Déjalo siempre encendido; viene integrado en Windows y Mac.</p>
+                </div>
+                <div class="glossary-card" data-term="cookie">
+                    <h3>Cookies (Galletas web)</h3>
+                    <p><strong>¿Qué es?</strong> Pequeños archivos que las páginas guardan en tu navegador para recordar tus preferencias o carritos de compra.</p>
+                    <p class="tip">💡 <em>Consejo:</em> Límpialas de vez en cuando si notas que tu navegador va lento.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: Centro de Solución de Problemas (Troubleshooting) -->
+        <section id="soporte" class="card-section">
+            <h2><i class="fa-solid fa-wrench"></i> Centro de Ayuda (Troubleshooting Rápido)</h2>
+            <p>Soluciones sencillas paso a paso para resolver los dolores de cabeza más comunes antes de llamar al técnico.</p>
+
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab(event, 'printers')">🖨️ Impresoras</button>
+                <button class="tab-btn" onclick="switchTab(event, 'networks')">🌐 Redes e Internet</button>
+                <button class="tab-btn" onclick="switchTab(event, 'attacks')">🛡️ Seguridad Básica</button>
+            </div>
+
+            <!-- Panel Impresoras -->
+            <div id="printers" class="tab-content active">
+                <h3>Soluciones para Impresoras</h3>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <h4>1. La impresora no imprime y se acumulan documentos</h4>
+                        <p><strong>Qué hacer:</strong> Ve a Configuración > Dispositivos > Impresoras, abre la cola de impresión y borra todos los documentos trabados. Reinicia la impresora y listo.</p>
+                    </div>
+                    <div class="step-card">
+                        <h4>2. La impresora Wi-Fi dice "Sin conexión"</h4>
+                        <p><strong>Qué hacer:</strong> Apaga la impresora, espera 10 segundos y enciéndela. Asegúrate de que esté conectada a la misma red Wi-Fi que tu computadora.</p>
+                    </div>
+                    <div class="step-card">
+                        <h4>3. Papel atascado</h4>
+                        <p><strong>Qué hacer:</strong> Abre las bandejas posteriores y delanteras con suavidad. Tira del papel siguiendo la dirección natural de salida para evitar romperlo por la mitad.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel Redes -->
+            <div id="networks" class="tab-content">
+                <h3>Soluciones para Redes e Internet</h3>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <h4>1. El internet va muy lento o se corta</h4>
+                        <p><strong>Qué hacer:</strong> Aplica la regla de oro: desconecta tu módem/router de la corriente durante 30 segundos y vuelve a conectarlo para limpiar la memoria caché del aparato.</p>
+                    </div>
+                    <div class="step-card">
+                        <h4>2. La computadora dice "Sin acceso a internet"</h4>
+                        <p><strong>Qué hacer:</strong> Haz clic derecho en el icono de Wi-Fi en la esquina de tu pantalla y selecciona "Solucionar problemas". Windows suele reparar el adaptador automáticamente.</p>
+                    </div>
+                    <div class="step-card">
+                        <h4>3. No me puedo conectar al Wi-Fi de la casa</h4>
+                        <p><strong>Qué hacer:</strong> Olvida la red en la configuración de tu dispositivo y vuelve a escribir la contraseña cuidadosamente verificando mayúsculas y minúsculas.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel Ataques y Seguridad -->
+            <div id="attacks" class="tab-content">
+                <h3>Prevención de Ataques Comunes</h3>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <h4>1. Creo que hice clic en un enlace falso de phishing</h4>
+                        <p><strong>Qué hacer:</strong> Desconecta el equipo de internet de inmediato (apaga el Wi-Fi o quita el cable de red). Cambia las contraseñas de tus cuentas principales desde otro dispositivo seguro.</p>
+                    </div>
+                    <div class="step-card">
+                        <h4>2. Ventanas emergentes extrañas en el navegador</h4>
+                        <p><strong>Qué hacer:</strong> Cierra el navegador desde el Administrador de tareas (Ctrl + Shift + Esc). Revisa las extensiones instaladas y elimina las que no reconozcas.</p>
+                    </div>
+                    <div class="step-card">
+                        <h4>3. Alguien quiere hackear mis cuentas (intentos de acceso)</h4>
+                        <p><strong>Qué hacer:</strong> Activa inmediatamente la **Verificación en dos pasos (2FA)** en tu correo y redes sociales. Así, aunque sepan tu contraseña, necesitarán tu teléfono para entrar.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 SecuGuide. Tu compañero digital confiable para la seguridad y el soporte técnico diario.</p>
+    </footer>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

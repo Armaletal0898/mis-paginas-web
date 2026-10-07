@@ -1,83 +1,85 @@
-#!/usr/env/python3
-#-*- coding: utf-8 -*-
-
 from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 import os
+import random
+import string
 
-app = FastAPI(
-    title="SecuGuide Backend",
-    description="API para el asistente de soporte tecnológico preventivo",
-    version="1.0.0"
-)
+app = FastAPI(title="SecuGuide - Asistente Digital de Seguridad y Soporte")
 
-# Configuración de rutas estáticas para separar HTML, CSS y JS
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-STATIC_DIR = os.path.join(BASE_DIR, "static")
-
-
-# Montar la carpeta static para que el navegador pueda acceder a los CSS y JS
-app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
-
-
-# Modelo de datos para recibir consultas de contraseñas desde el Fronted
-class PasswordCheckRequest(BaseModel):
+class PasswordCheck(BaseModel):
     password: str
 
+# Montar archivos estáticos
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
-# Ruta principal: Devuelve el archivo HTML principal
 @app.get("/")
-async def serve_index():
-    index_file = os.path.join(STATIC_DIR, "index.html")
-    if os.path.exists(index_file):
-        return FileResponse(index_file)
-    raise HTTPException(status_code=404, detail="Página principal no encontrada")
+def read_index():
+    index_path = os.path.join("static", "index.html")
+    if os.path.exists(index_path):
+        return FileResponse(index_path)
+    raise HTTPException(status_code=404, detail="index.html not found")
 
-
-
-# Endpoint de la API para verificar el estado del sistema (Salud del Servidor)
-@app.get("/api/v1/health")
-async def health_check():
-    return {
-        "status": "online",
-        "system": "SecuGuide API",
-        "message": "El sistema opera con total normalidad para el usuario."
-    }
-
-
-
-
-# Endpoint funcional de ejemplo: Evaluación básica de contraseñas (RF-04)
-@app.post("api/v1/evaluar-password")
-async def evaluate_password(data: PasswordCheckRequest):
+@app.post("/api/validate-password")
+def validate_password(data: PasswordCheck):
     pwd = data.password
     score = 0
-    feedback = ̣[]
+    feedback = []
 
     if len(pwd) >= 8:
         score += 1
     else:
         feedback.append("Usa al menos 8 caracteres.")
 
-    if any(char.isupper() for char in pwd) and any(char.islower() for char in pwd):
+    if len(pwd) >= 12:
+        score += 1
+
+    if any(c.isupper() for c in pwd) and any(c.islower() for c in pwd):
         score += 1
     else:
         feedback.append("Combina letras mayúsculas y minúsculas.")
 
-    if any(char.isdigit() for char in pwd):
+    if any(c.isdigit() for c in pwd):
         score += 1
     else:
-        feedback.append("Incluy al menos un número.")
+        feedback.append("Agrega al menos un número.")
 
-    secure_level = "Débil"
-    if score == 2:
-        secure_level = "Moderada"
-    elif score >= 3:
-        secure_level = "Fuerte"
+    if any(c in string.punctuation for c in pwd):
+        score += 1
+    else:
+        feedback.append("Incluye símbolos especiales (ej. @, #, $, !).")
+
+    # Determinar nivel amigable
+    if score <= 2:
+        strength = "Débil ❌"
+        description = "Es fácil de adivinar por programas maliciosos."
+    elif score <= 4:
+        strength = "Buena ⚠️"
+        description = "Es decente, pero puede mejorar con símbolos o más longitud."
+    else:
+        strength = "¡Excelente y Segura! 🛡️"
+        description = "Muy difícil de descifrar. ¡Felicitaciones!"
 
     return {
-        "nivel": secure_level,
-        "recomendaciones": feedback if feedback else ["¡Excelente contraseña! Es segura."]
+        "strength": strength,
+        "description": description,
+        "suggestions": feedback
     }
+
+@app.get("/api/generate-password")
+def generate_password():
+    length = 14
+    chars = string.ascii_letters + string.digits + "!@#$%^&*"
+    while True:
+        pwd = "".join(random.choice(chars) for _ in range(length))
+        if (any(c.isupper() for c in pwd) and 
+            any(c.islower() for c in pwd) and 
+            any(c.isdigit() for c in pwd) and 
+            any(c in "!@#$%^&*" for c in pwd)):
+            return {"password": pwd}
+
+if __name__ == "__main__":
+    import uvicorn
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run("main:app", host="0.0.0.0", port=port)
